@@ -53,14 +53,8 @@ void scr_startup_handle(ak_msg_t *msg) {
 
 	case AC_DISPLAY_SHOW_LOGO: {
 		APP_DBG_SIG("AC_DISPLAY_SHOW_LOGO\n");
-		SCREEN_TRAN(scr_qrcode_handle, &scr_qrcode);
+		SCREEN_TRAN(scr_pf_gameplay_handle, &scr_pf_gameplay);
 	} break;
-
-	case AC_DISPLAY_SHOW_IDLE: {
-		APP_DBG_SIG("AC_DISPLAY_SHOW_IDLE\n");
-		SCREEN_TRAN(scr_idle_handle, &scr_idle);
-	} break;
-
 	default:
 		break;
 	}
