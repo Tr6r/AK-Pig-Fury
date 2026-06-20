@@ -45,6 +45,7 @@ extern void scr_mng_tran(screen_f target, view_screen_t* scr_obj);
 extern void scr_mng_back();
 extern void scr_mng_contain_screen_none_update_mark();
 extern void scr_mng_dispatch(ak_msg_t* msg);
+extern void scr_mng_invalidate();
 extern screen_f scr_mng_get_current_screen();
 extern view_screen_t* scr_mng_get_current_view_screen();
 

@@ -25,6 +25,7 @@ static view_screen_t* old_view_screen = VIEW_SCREEN_NULL;
 
 static bool screen_render_started = true;
 static uint32_t screen_last_render_ms = 0;
+static bool scr_need_render = true;
 
 static void scr_mng_render_screen() {
 	uint32_t current_ms = sys_ctrl_millis();
@@ -67,7 +68,10 @@ void scr_mng_dispatch(ak_msg_t* msg) {
 	}
 
 	screen_manager->screen(msg);
-	scr_mng_render_screen();
+	if (scr_need_render) {
+		scr_need_render = false;
+		scr_mng_render_screen();
+	}
 }
 
 void scr_mng_tran(screen_f target,  view_screen_t* scr_obj) {
@@ -124,4 +128,8 @@ screen_f scr_mng_get_current_screen() {
 
 view_screen_t* scr_mng_get_current_view_screen() {
 	return view_screen;
+}
+
+void scr_mng_invalidate() {
+	scr_need_render = true;
 }
