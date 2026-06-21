@@ -26,8 +26,9 @@ enum pf_pig_st : uint8_t
 enum pf_atk_st : uint8_t
 {
 	PF_PIG_ATTACK_NONE,
-	PF_PIG_ATTACK_PUNCH_LEFT,
-	PF_PIG_ATTACK_PUNCH_RIGHT,
+	PF_PIG_ATTACK_PUNCH_1,
+	PF_PIG_ATTACK_PUNCH_2,
+	PF_PIG_ATTACK_PUNCH_3,
 	PF_PIG_ATTACK_ST_SQUAT_PUNCH,
 	PF_PIG_ATTACK_ST_JUMP_KICK
 };
@@ -46,7 +47,8 @@ public:
 	void squat();
 	void attack(pf_char_dir dir);
 	void take_damage();
-
+	void render_attack();
+	
 	// getter
 	uint8_t get_hp() { return hp_;}
 	pf_pig_st get_st() { return pig_st_;}
