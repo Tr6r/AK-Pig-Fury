@@ -14,12 +14,14 @@
 #define PIG_HEIGHT 27
 #define PIG_POS_X (LCD_WIDTH - PIG_WIDTH)/2
 #define PIG_POS_Y (LCD_HEIGHT - PIG_HEIGHT)
+#define PIG_UPDATE_STEP_PIXEL 5
+#define PIG_JUMP_MAX_HEIGHT 30
 
 enum pf_pig_st : uint8_t
 {
 	PF_PIG_ST_NONE,
-	PF_PIG_ST_ATK,
 	PF_PIG_ST_JUMP,
+	PF_PIG_ST_FALL,
 	PF_PIG_ST_SQUAT
 };
 
@@ -43,11 +45,11 @@ public:
 	void render() override;
 	void init() override;
 
+	// input
 	void jump();
 	void squat();
 	void attack(pf_char_dir dir);
 	void take_damage();
-	void render_attack();
 	
 	// getter
 	uint8_t get_hp() { return hp_;}
@@ -59,6 +61,12 @@ public:
 	void set_atk_st(pf_atk_st atk_st) { atk_st_ = atk_st;}
 
 private:
+	// output
+	void update_st();
+	void render_st();
+	void update_atk();
+	void render_atk();
+
 	uint8_t hp_;
 	pf_pig_st pig_st_;
 	pf_atk_st atk_st_;

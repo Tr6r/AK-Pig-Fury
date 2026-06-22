@@ -89,10 +89,12 @@ void pf_pig::init() {
 
 void pf_pig::update() {
 	update_atk();
+	update_st();
 }
 
 void pf_pig::render() {
 	render_atk();
+	render_st();
 }
 
 void pf_pig::attack(pf_char_dir dir) {
@@ -127,39 +129,84 @@ void pf_pig::render_atk() {
 	switch (atk_st_) {
 		case PF_PIG_ATTACK_NONE: {
 			if (dir_ == LEFT)
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_idle_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_idle_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_idle_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_idle_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_PUNCH_1: {
 			if (dir_ == LEFT)
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_atk_1_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_1_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_atk_1_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_1_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_PUNCH_2: {
 			if (dir_ == LEFT)
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_atk_2_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_2_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_atk_2_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_2_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_PUNCH_3: {
 			if (dir_ == LEFT)
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_atk_3_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_3_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
-				view_render.drawBitmap(PIG_POS_X, PIG_POS_Y, pig_atk_3_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_3_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		default:
 			break;
 	}
 }
+
 void pf_pig::update_atk() {
 	if (atk_st_ != PF_PIG_ATTACK_NONE) {
 		if (atk_dur_tick_ > 0) atk_dur_tick_--;
 		else atk_st_ = PF_PIG_ATTACK_NONE;
 	}
+}
+
+void pf_pig::update_st()
+{
+	switch (pig_st_)
+	{
+		case PF_PIG_ST_JUMP:
+		{
+			pos_y_ -= PIG_UPDATE_STEP_PIXEL;
+
+			if (pos_y_ <= (PIG_POS_Y - PIG_JUMP_MAX_HEIGHT))
+			{
+				pos_y_ = PIG_POS_Y - PIG_JUMP_MAX_HEIGHT;
+				pig_st_ = PF_PIG_ST_FALL;
+			}
+			break;
+		}
+
+		case PF_PIG_ST_FALL:
+		{
+			pos_y_ += PIG_UPDATE_STEP_PIXEL;
+
+			if (pos_y_ >= PIG_POS_Y)
+			{
+				pos_y_ = PIG_POS_Y;
+				pig_st_ = PF_PIG_ST_NONE;
+			}
+			break;
+		}
+
+		default:
+			break;
+	}
+}
+
+void pf_pig::render_st()
+{
+
+}
+
+void pf_pig::jump()
+{
+	if (pig_st_ == PF_PIG_ST_FALL) return;
+	pig_st_ = PF_PIG_ST_JUMP;
 }
