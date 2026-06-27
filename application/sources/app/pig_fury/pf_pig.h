@@ -43,7 +43,7 @@ public:
 
 	void update() override;
 	void render() override;
-	void init() override;
+	void init(pf_char_dir dir) override;
 
 	// input
 	void jump();

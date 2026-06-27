@@ -24,7 +24,7 @@ void pf_game_update() {
 }
 
 void pig_fury_game::init() {
-	pig_.init();
+	pig_.init(PF_CHAR_DIR_LEFT);
 }
 
 void pig_fury_game::render() {

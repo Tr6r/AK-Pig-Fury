@@ -39,12 +39,12 @@ void scr_pf_gameplay_handle(ak_msg_t *msg) {
 			break;
 		}
 		case AC_DISPLAY_BUTON_UP_PRESSED: {
-			pf_char_dir dir = RIGHT;
+			pf_char_dir dir = PF_CHAR_DIR_RIGHT;
 			task_post_common_msg(AC_TASK_PF_GAME_ID, AC_PF_PIG_ATK, (uint8_t*)&dir, sizeof(dir));
 			break;
 		}
 		case AC_DISPLAY_BUTON_DOWN_PRESSED: {
-			pf_char_dir dir = LEFT;
+			pf_char_dir dir = PF_CHAR_DIR_LEFT;
 			task_post_common_msg(AC_TASK_PF_GAME_ID, AC_PF_PIG_ATK, (uint8_t*)&dir, sizeof(dir));
 			break;
 		}

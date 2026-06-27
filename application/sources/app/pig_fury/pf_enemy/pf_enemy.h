@@ -24,7 +24,7 @@ public:
 
 	virtual void update() override = 0;
 	virtual void render() override = 0;
-	virtual void init() override = 0;
+	virtual void init(pf_char_dir dir) override = 0;
 	virtual void attack() = 0;
 	virtual void take_damage() = 0;
 

@@ -6,8 +6,8 @@
 
 enum pf_char_dir : uint8_t
 {
-	LEFT,
-	RIGHT
+	PF_CHAR_DIR_LEFT,
+	PF_CHAR_DIR_RIGHT
 };
 
 enum pf_char_st : uint8_t
@@ -25,7 +25,7 @@ public:
 
 	virtual void update() = 0;
 	virtual void render() = 0;
-	virtual void init() = 0;
+	virtual void init(pf_char_dir dir) = 0;
 
 	// getter
 	uint8_t get_pos_x() { return pos_x_; }

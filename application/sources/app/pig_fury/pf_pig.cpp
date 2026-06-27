@@ -114,7 +114,7 @@ static const uint8_t pig_kick_left_bitmap[] = {
 	0xa8, 0x08, 0xbf, 0x10, 0xe4, 0xbf, 0xce, 0x03, 0x3f
 };
 
-void pf_pig::init() {
+void pf_pig::init(pf_char_dir dir) {
 	hp_ = MAX_HP;
 	pig_st_ = PF_PIG_ST_NONE;
 	atk_st_ = PF_PIG_ATTACK_NONE;
@@ -124,7 +124,7 @@ void pf_pig::init() {
 	height_ = PIG_HEIGHT;
 	atk_dur_tick_ = 0;
 	char_st_ = PF_CHAR_ST_IDLE;
-	dir_ = RIGHT;
+	dir_ = dir;
 }
 
 void pf_pig::update() {
@@ -174,35 +174,35 @@ void pf_pig::render_atk() {
 	switch (atk_st_) {
 		case PF_PIG_ATTACK_NONE: {
 			if (pig_st_ != PF_PIG_ST_NONE) break;
-			if (dir_ == LEFT)
+			if (dir_ == PF_CHAR_DIR_LEFT)
 				view_render.drawBitmap(pos_x_, pos_y_, pig_idle_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
 				view_render.drawBitmap(pos_x_, pos_y_, pig_idle_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_PUNCH_1: {
-			if (dir_ == LEFT)
+			if (dir_ == PF_CHAR_DIR_LEFT)
 				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_1_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
 				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_1_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_PUNCH_2: {
-			if (dir_ == LEFT)
+			if (dir_ == PF_CHAR_DIR_LEFT)
 				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_2_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
 				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_2_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_PUNCH_3: {
-			if (dir_ == LEFT)
+			if (dir_ == PF_CHAR_DIR_LEFT)
 				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_3_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
 				view_render.drawBitmap(pos_x_, pos_y_, pig_atk_3_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_ST_JUMP_KICK: {
-			if (dir_ == LEFT)
+			if (dir_ == PF_CHAR_DIR_LEFT)
 				view_render.drawBitmap(pos_x_, pos_y_, pig_kick_left_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			else
 				view_render.drawBitmap(pos_x_, pos_y_, pig_kick_right_bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
