@@ -277,3 +277,8 @@ void pf_pig::jump()
 	if (pig_st_ == PF_PIG_ST_FALL) return;
 	pig_st_ = PF_PIG_ST_JUMP;
 }
+
+bool pf_pig::is_attack_hit_frame() {
+	if (atk_st_ != PF_PIG_ATTACK_NONE && atk_dur_tick_ + 3 > PIG_ATK_FRAME_TICK) return true;
+	return false;
+}
