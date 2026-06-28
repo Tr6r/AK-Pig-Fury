@@ -14,6 +14,7 @@ void pf_wolf_basic::init(pf_char_dir dir) {
 }
 
 void pf_wolf_basic::update() {
+	if (hp_ == 0) st_ = PF_ENEMY_ST_DEAD;
 	switch (st_) {
 		case PF_ENEMY_ST_SPAWN:
 		case PF_ENEMY_ST_MOVE: {
@@ -85,5 +86,5 @@ void pf_wolf_basic::attack() {
 }
 
 void pf_wolf_basic::take_damage() {
-
+	hp_ --;
 }

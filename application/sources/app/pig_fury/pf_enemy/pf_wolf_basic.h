@@ -30,7 +30,7 @@ enum pf_wolf_basic_move_st : uint8_t {
 
 class pf_wolf_basic : public pf_enemy {
 public:
-	pf_wolf_basic() = default;
+	pf_wolf_basic() {hp_ = 0; st_ = PF_ENEMY_ST_DEAD;}
 	~pf_wolf_basic() override = default;
 
 	void init(pf_char_dir dir) override;
