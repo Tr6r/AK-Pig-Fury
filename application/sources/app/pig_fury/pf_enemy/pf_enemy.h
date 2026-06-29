@@ -12,6 +12,7 @@ enum pf_enemy_st : uint8_t {
 	PF_ENEMY_ST_MOVE,
 	PF_ENEMY_ST_ATTACK,
 	PF_ENEMY_ST_HIT,
+	PF_ENEMY_ST_KNOCKBACK,
 	PF_ENEMY_ST_DEAD,
 };
 

@@ -24,9 +24,31 @@ void pf_wolf_basic::update() {
 			update_hit();
 			break;
 		}
+		case PF_ENEMY_ST_KNOCKBACK: {
+			update_knockback();
+			break;
+		}
 		default:
 			break;
 	}
+}
+
+void pf_wolf_basic::update_knockback()
+{
+	hit_dur_tick_--;
+	if (hit_dur_tick_ <= 0) {
+		st_ = PF_ENEMY_ST_DEAD;
+		return;
+	}
+	if (hit_dur_tick_ >= PF_WOLF_BASIC_KNOCKBACK_FRAME_TICK/2)
+	{
+		pos_y_ -= 1;
+	}
+	else 
+	{
+		pos_y_ += 1;
+	}
+	pos_x_ += (dir_ == PF_CHAR_DIR_LEFT) ? -1 : 1;
 }
 
 void pf_wolf_basic::update_hit() {
@@ -83,21 +105,30 @@ void pf_wolf_basic::update_move() {
 void pf_wolf_basic::render() {
 	switch (st_)
 	{
-	case PF_ENEMY_ST_MOVE: {
-		render_move();
-		break;
+		case PF_ENEMY_ST_MOVE: {
+			render_move();
+			break;
+		}
+		case PF_ENEMY_ST_HIT: {
+			render_hit();
+			break;
+		}
+		case PF_ENEMY_ST_ATTACK: {
+			render_move();
+			break;
+		}
+		case PF_ENEMY_ST_KNOCKBACK: {
+			render_knockback();
+			break;
+		}
+		default:
+			break;
 	}
-	case PF_ENEMY_ST_HIT: {
-		render_hit();
-		break;
-	}
-	case PF_ENEMY_ST_ATTACK: {
-		render_move();
-		break;
-	}
-	default:
-		break;
-	}
+}
+
+void pf_wolf_basic::render_knockback() {
+	if (dir_ == PF_CHAR_DIR_LEFT) view_render.drawBitmap(pos_x_, pos_y_,wolf_knockback_left, PIG_WIDTH, PIG_HEIGHT, WHITE);
+			else view_render.drawBitmap(pos_x_, pos_y_,wolf_knockback_right, PIG_WIDTH, PIG_HEIGHT, WHITE);
 }
 
 void pf_wolf_basic::render_hit() {
@@ -137,10 +168,14 @@ void pf_wolf_basic::attack() {
 }
 
 void pf_wolf_basic::take_damage() {
-	if (st_ == PF_ENEMY_ST_HIT)
+	if (st_ == PF_ENEMY_ST_HIT || st_ == PF_ENEMY_ST_KNOCKBACK)
 		return;
 	hp_ --;
+	if (hp_ == 0) {
+		hit_dur_tick_ = PF_WOLF_BASIC_KNOCKBACK_FRAME_TICK;
+		st_ = PF_ENEMY_ST_KNOCKBACK;
+		return;
+	}
 	hit_dur_tick_ = PF_WOLF_BASIC_HIT_FRAME_TICK;
-	if (hp_ == 0) st_ = PF_ENEMY_ST_DEAD;
-	else  st_ = PF_ENEMY_ST_HIT;
+	st_ = PF_ENEMY_ST_HIT;
 }
