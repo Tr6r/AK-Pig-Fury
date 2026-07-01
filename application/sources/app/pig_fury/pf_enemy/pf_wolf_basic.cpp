@@ -1,8 +1,14 @@
 #include "pf_wolf_basic.h"
 
 void pf_wolf_basic::init(pf_char_dir dir) {
-	if (dir == PF_CHAR_DIR_LEFT) pos_x_ = PF_WOLF_BASIC_SPAWN_LEFT_X;
-	else pos_x_ = PF_WOLF_BASIC_SPAWN_RIGHT_X;
+	if (dir == PF_CHAR_DIR_LEFT) {
+		pos_x_ = PF_WOLF_BASIC_SPAWN_LEFT_X;
+		hand_pos_x_ = PF_WOLF_BASIC_LEFT_HAND_POS_X;
+	}
+	else {
+		pos_x_ = PF_WOLF_BASIC_SPAWN_RIGHT_X;
+		hand_pos_x_ = PF_WOLF_BASIC_RIGHT_HAND_POS_X;
+	}
 	pos_y_ = PF_WOLF_BASIC_POS_Y; 
 	hp_ = PF_WOLF_BASIC_MAX_HP;
 	st_ = PF_ENEMY_ST_SPAWN;
