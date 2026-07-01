@@ -8,6 +8,7 @@
 
 #include "pf_pig.h"
 #include "pf_enemy.h"
+#include "pf_axe.h"
 
 #define PF_WOLF_BASIC_MAX_HP 3
 #define PF_WOLF_BASIC_WIDTH 18
@@ -66,6 +67,8 @@ private:
 	void render_attack();
 	void render_knockback();
 	void render_dead();
+
+	pf_axe axe_; //temp
 };
 
 static const uint8_t wolf_run_1_left[] = {
