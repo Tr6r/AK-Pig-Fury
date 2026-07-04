@@ -32,8 +32,10 @@ public:
 
 protected:
 	pf_weapon_st st_;
-	uint8_t pos_x_;
-	uint8_t pos_y_;
+	int8_t pos_x_;
+	int8_t pos_y_;
+	uint8_t width_;
+	uint8_t height_;
 	pf_char_dir dir_;
 	uint8_t anim_duration_tick_;
 };
