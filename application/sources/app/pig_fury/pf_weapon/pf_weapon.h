@@ -29,11 +29,13 @@ public:
 	// setter
 	void set_st(pf_weapon_st st) { st_ = st; }
 	void set_dir(pf_char_dir dir) { dir_ = dir; }
+	void set_rotation(uint16_t degree) {rotation_ = degree; }
 
 protected:
 	pf_weapon_st st_;
 	int8_t pos_x_;
 	int8_t pos_y_;
+	uint16_t rotation_;
 	uint8_t width_;
 	uint8_t height_;
 	pf_char_dir dir_;

@@ -107,6 +107,7 @@ void pf_wolf_basic::update_move() {
 				return;
 			}
 			pos_x_ += PF_WOLF_BASIC_UPDATE_STEP_PIXEL;
+			axe_.set_rotation(PF_WOLF_BASIC_MOVE_LEFT_WEAPON_ROTATION);
 			break;
 		}
 		case PF_CHAR_DIR_RIGHT: {
@@ -115,6 +116,7 @@ void pf_wolf_basic::update_move() {
 				return;
 			}
 			pos_x_ -= PF_WOLF_BASIC_UPDATE_STEP_PIXEL;
+			axe_.set_rotation(PF_WOLF_BASIC_MOVE_RIGHT_WEAPON_ROTATION);
 			break;
 		}
 		default:
