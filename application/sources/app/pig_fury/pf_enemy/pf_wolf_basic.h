@@ -14,9 +14,9 @@
 #define PF_WOLF_BASIC_WIDTH 18
 #define PF_WOLF_BASIC_HEIGHT 27
 #define PF_WOLF_BASIC_UPDATE_STEP_PIXEL 2
-#define PF_WOLF_BASIC_SPAWN_LEFT_X 0
+#define PF_WOLF_BASIC_SPAWN_LEFT_X 5
 #define PF_WOLF_BASIC_SPAWN_RIGHT_X (LCD_WIDTH - PF_WOLF_BASIC_WIDTH)
-#define PF_WOLF_BASIC_POS_Y (LCD_HEIGHT - PF_WOLF_BASIC_HEIGHT)
+#define PF_WOLF_BASIC_POS_Y (LCD_HEIGHT - PF_WOLF_BASIC_HEIGHT) 
 #define PF_WOLF_BASIC_MOVE_FRAME_TICK 2
 #define PF_WOLF_BASIC_HIT_FRAME_TICK 6
 #define PF_WOLF_BASIC_LIMITED_MOVE_LEFT ((LCD_WIDTH - PIG_WIDTH)/2 - PF_WOLF_BASIC_WIDTH + 1)
@@ -25,9 +25,12 @@
 #define PF_WOLF_BASIC_LIMITED_KNOCKBACK_Y 5
 #define PF_WOLF_BASIC_KNOCKBACK_FRAME_TICK 10
 #define PF_WOLF_BASIC_DEAD_FRAME_TICK 9
-#define PF_WOLF_BASIC_LEFT_HAND_POS_X (PF_WOLF_BASIC_SPAWN_LEFT_X + 7)
-#define PF_WOLF_BASIC_RIGHT_HAND_POS_X (PF_WOLF_BASIC_SPAWN_RIGHT_X - 7)
-#define PF_WOLF_BASIC_HAND_POS_y (PF_WOLF_BASIC_POS_Y- 11)
+
+// Hand pos
+// Move
+#define PF_WOLF_BASIC_MOVE_LEFT_HAND_OFFSET_X -7
+#define PF_WOLF_BASIC_MOVE_RIGHT_HAND_OFFSET_X 12
+#define PF_WOLF_BASIC_MOVE_HAND_OFFSET_Y 5
 
 enum pf_wolf_basic_move_st : uint8_t {
 	PF_WOLF_BASIC_MOVE_1,
@@ -42,6 +45,7 @@ public:
 	~pf_wolf_basic() override = default;
 
 	void init(pf_char_dir dir) override;
+	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 	void update() override;
 	void render() override;
 	void attack() override;
@@ -67,6 +71,7 @@ private:
 	void render_attack();
 	void render_knockback();
 	void render_dead();
+	void update_weapon();
 
 	pf_axe axe_; //temp
 };

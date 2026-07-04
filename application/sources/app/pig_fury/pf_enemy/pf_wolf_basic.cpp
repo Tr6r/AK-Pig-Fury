@@ -1,14 +1,7 @@
 #include "pf_wolf_basic.h"
 
 void pf_wolf_basic::init(pf_char_dir dir) {
-	if (dir == PF_CHAR_DIR_LEFT) {
-		pos_x_ = PF_WOLF_BASIC_SPAWN_LEFT_X;
-		hand_pos_x_ = PF_WOLF_BASIC_LEFT_HAND_POS_X;
-	}
-	else {
-		pos_x_ = PF_WOLF_BASIC_SPAWN_RIGHT_X;
-		hand_pos_x_ = PF_WOLF_BASIC_RIGHT_HAND_POS_X;
-	}
+	pos_x_ = (dir == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_SPAWN_LEFT_X : PF_WOLF_BASIC_SPAWN_RIGHT_X;
 	pos_y_ = PF_WOLF_BASIC_POS_Y; 
 	hp_ = PF_WOLF_BASIC_MAX_HP;
 	st_ = PF_ENEMY_ST_SPAWN;
@@ -17,12 +10,15 @@ void pf_wolf_basic::init(pf_char_dir dir) {
 	char_st_ = PF_CHAR_ST_IDLE;
 	anim_duration_tick_ = PF_WOLF_BASIC_MOVE_FRAME_TICK;
 	dir_ = dir;
+	axe_.init(dir);
+	update_weapon();
 }
 
 void pf_wolf_basic::update() {
 	anim_duration_tick_--;
 	switch (st_) {
 		case PF_ENEMY_ST_SPAWN:
+			st_ = PF_ENEMY_ST_MOVE;
 		case PF_ENEMY_ST_MOVE: {
 			update_move();
 			break;
@@ -42,6 +38,8 @@ void pf_wolf_basic::update() {
 		default:
 			break;
 	}
+	update_weapon();
+
 }
 
 void pf_wolf_basic::update_dead()
@@ -102,7 +100,6 @@ void pf_wolf_basic::update_hit() {
 
 void pf_wolf_basic::update_move() {
 	update_move_state();
-	st_ = PF_ENEMY_ST_MOVE;
 	switch (dir_) {
 		case PF_CHAR_DIR_LEFT: {
 			if (pos_x_ + PF_WOLF_BASIC_UPDATE_STEP_PIXEL >= PF_WOLF_BASIC_LIMITED_MOVE_LEFT) {
@@ -126,6 +123,7 @@ void pf_wolf_basic::update_move() {
 }
 
 void pf_wolf_basic::render() {
+	axe_.render();
 	switch (st_)
 	{
 		case PF_ENEMY_ST_MOVE: {
@@ -209,4 +207,33 @@ void pf_wolf_basic::take_damage() {
 	}
 	anim_duration_tick_ = PF_WOLF_BASIC_HIT_FRAME_TICK;
 	st_ = PF_ENEMY_ST_HIT;
+}
+
+void pf_wolf_basic::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
+	switch (st_)
+	{
+		case PF_ENEMY_ST_SPAWN:
+		case PF_ENEMY_ST_HIT:
+		case PF_ENEMY_ST_MOVE: {
+			pos_x = pos_x_ + ((dir_ == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_MOVE_LEFT_HAND_OFFSET_X : PF_WOLF_BASIC_MOVE_RIGHT_HAND_OFFSET_X );
+			pos_y = pos_y_ + PF_WOLF_BASIC_MOVE_HAND_OFFSET_Y;
+			break;
+		}
+		case PF_ENEMY_ST_ATTACK: {
+			pos_x = pos_x_ + ((dir_ == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_MOVE_LEFT_HAND_OFFSET_X : PF_WOLF_BASIC_MOVE_RIGHT_HAND_OFFSET_X );
+			pos_y = pos_y_ + PF_WOLF_BASIC_MOVE_HAND_OFFSET_Y;
+			break;
+		}
+		default:
+			break;
+	}
+}
+
+void pf_wolf_basic::update_weapon()
+{
+	int8_t hand_pos_x, hand_pos_y;
+	get_hand_pos(hand_pos_x, hand_pos_y);
+
+	axe_.set_anchor(hand_pos_x, hand_pos_y);
+	axe_.update();
 }
