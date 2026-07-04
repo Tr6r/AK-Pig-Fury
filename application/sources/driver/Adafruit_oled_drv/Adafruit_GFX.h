@@ -23,7 +23,7 @@ class Adafruit_GFX : public Print {
     drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color),
     drawRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color),
     fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color),
-	fillScreen(uint16_t color);
+    fillScreen(uint16_t color);
 
   // These exist only with Adafruit_GFX (no subclass overrides)
   void
@@ -45,6 +45,8 @@ class Adafruit_GFX : public Print {
       int16_t radius, uint16_t color),
     drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
       int16_t w, int16_t h, uint16_t color),
+    drawBitmapRotate(int16_t x, int16_t y, const uint8_t *bitmap,
+    int16_t w, int16_t h, float angle_deg, uint16_t color),
     drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color,
       uint16_t bg, uint8_t size),
     setCursor(int16_t x, int16_t y),

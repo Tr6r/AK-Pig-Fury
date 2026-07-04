@@ -427,6 +427,49 @@ size_t Adafruit_GFX::write(uint8_t c) {
 	return 1;
 }
 
+void Adafruit_GFX::drawBitmapRotate(
+    int16_t x,
+    int16_t y,
+    const uint8_t *bitmap,
+    int16_t w,
+    int16_t h,
+    float angle_deg,
+    uint16_t color)
+{
+    const float rad = angle_deg * 0.01745329251994329577f;
+
+    const float s = sinf(rad);
+    const float c = cosf(rad);
+
+    const int16_t cx = w / 2;
+    const int16_t cy = h / 2;
+
+    const int16_t byteWidth = (w + 7) >> 3;
+
+    for (int16_t sy = 0; sy < h; sy++) {
+
+        const uint8_t *row = bitmap + sy * byteWidth;
+
+        for (int16_t sx = 0; sx < w; sx++) {
+
+            if (!(pgm_read_byte(row + (sx >> 3)) &
+                  (0x80 >> (sx & 7))))
+                continue;
+
+            float dx = (float)(sx - cx);
+            float dy = (float)(sy - cy);
+
+            int16_t rx = (int16_t)lroundf(dx * c - dy * s);
+            int16_t ry = (int16_t)lroundf(dx * s + dy * c);
+
+            drawPixel(
+                x + cx + rx,
+                y + cy + ry,
+                color);
+        }
+    }
+}
+
 // Draw a character
 void Adafruit_GFX::drawChar(int16_t x, int16_t y, unsigned char c,
 			    uint16_t color, uint16_t bg, uint8_t size) {
