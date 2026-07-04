@@ -26,12 +26,10 @@ public:
 	virtual void update() = 0;
 	virtual void render() = 0;
 	virtual void init(pf_char_dir dir) = 0;
-
+	virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) = 0;
 	// getter
 	uint8_t get_pos_x() { return pos_x_; }
 	uint8_t get_pos_y() { return pos_y_; }
-	uint8_t get_hand_pos_x() { return hand_pos_x_; }
-	uint8_t get_hand_pos_y() { return hand_pos_y_; }
 	uint8_t get_width() { return width_; }
 	uint8_t get_height() { return height_; }
 	pf_char_st get_st() { return char_st_; }
@@ -40,8 +38,6 @@ public:
 	// setter
 	void set_pos_x(uint8_t x) { pos_x_ = x; }
 	void set_pos_y(uint8_t y) { pos_y_ = y; }
-	void set_hand_pos_x(uint8_t x) { hand_pos_x_ = x; }
-	void set_hand_pos_y(uint8_t y) { hand_pos_y_ = y; }
 	void set_width(uint8_t w) { width_ = w; }
 	void set_height(uint8_t h) { height_ = h; }
 	void set_st(pf_char_st st) { char_st_ = st; }
@@ -50,8 +46,6 @@ public:
 protected:
 	uint8_t pos_x_;
 	uint8_t pos_y_;
-	uint8_t hand_pos_x_;
-	uint8_t hand_pos_y_;
 	uint8_t width_;
 	uint8_t height_;
 	pf_char_st char_st_;

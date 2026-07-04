@@ -21,7 +21,7 @@ class pf_enemy : public pf_char {
 public:
 	pf_enemy() = default;
 	~pf_enemy() override = default;
-
+    virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override = 0;
 	virtual void update() override = 0;
 	virtual void render() override = 0;
 	virtual void init(pf_char_dir dir) override = 0;

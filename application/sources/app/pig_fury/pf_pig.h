@@ -46,6 +46,7 @@ public:
 	void update() override;
 	void render() override;
 	void init(pf_char_dir dir) override;
+	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 
 	// input
 	void jump();
@@ -57,7 +58,7 @@ public:
 	uint8_t get_hp() { return hp_;}
 	pf_pig_st get_st() { return pig_st_;}
 	pf_atk_st get_atk_st() { return atk_st_;}
-    bool is_attack_hit_frame();
+	bool is_attack_hit_frame();
 
 	// setter
 	void set_st(pf_pig_st st) { pig_st_ = st;}
