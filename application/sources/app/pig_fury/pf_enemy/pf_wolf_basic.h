@@ -55,7 +55,7 @@ public:
 
 	// Helper
 	inline void update_move_state() {
-		anim_duration_tick_ --;
+		if (anim_duration_tick_ > 0) anim_duration_tick_ --;
 		if(anim_duration_tick_ == 0) {
 			move_st_ = static_cast<pf_wolf_basic_move_st>((static_cast<uint8_t>(move_st_) + 1) % 4);
 			anim_duration_tick_ = PF_WOLF_BASIC_MOVE_FRAME_TICK;

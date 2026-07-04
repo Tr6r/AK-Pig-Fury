@@ -30,6 +30,7 @@ public:
 	void set_st(pf_weapon_st st) { st_ = st; }
 	void set_dir(pf_char_dir dir) { dir_ = dir; }
 	void set_rotation(uint16_t degree) {rotation_ = degree; }
+	void set_visible(bool flag) { is_visible_ = flag; }
 
 protected:
 	pf_weapon_st st_;
@@ -39,6 +40,7 @@ protected:
 	uint8_t width_;
 	uint8_t height_;
 	pf_char_dir dir_;
+	bool is_visible_;
 	uint8_t anim_duration_tick_;
 };
 

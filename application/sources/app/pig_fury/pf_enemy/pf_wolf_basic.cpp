@@ -78,6 +78,8 @@ void pf_wolf_basic::update_hit() {
 	{
 		case 0: {
 			st_ = PF_ENEMY_ST_MOVE;
+			anim_duration_tick_ = PF_WOLF_BASIC_MOVE_FRAME_TICK;
+			axe_.set_visible(true);
 			break;
 		}
 		case 3:
@@ -88,10 +90,6 @@ void pf_wolf_basic::update_hit() {
 		case 5:
 		case 4: {
 			pos_y_ = pos_y_ - 2;
-			break; 
-		}
-		default:{
-			st_ = PF_ENEMY_ST_MOVE;
 			break;
 		}
 	}
@@ -209,13 +207,13 @@ void pf_wolf_basic::take_damage() {
 	}
 	anim_duration_tick_ = PF_WOLF_BASIC_HIT_FRAME_TICK;
 	st_ = PF_ENEMY_ST_HIT;
+	axe_.set_visible(false);
 }
 
 void pf_wolf_basic::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 	switch (st_)
 	{
 		case PF_ENEMY_ST_SPAWN:
-		case PF_ENEMY_ST_HIT:
 		case PF_ENEMY_ST_MOVE: {
 			pos_x = pos_x_ + ((dir_ == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_MOVE_LEFT_HAND_OFFSET_X : PF_WOLF_BASIC_MOVE_RIGHT_HAND_OFFSET_X );
 			pos_y = pos_y_ + PF_WOLF_BASIC_MOVE_HAND_OFFSET_Y;

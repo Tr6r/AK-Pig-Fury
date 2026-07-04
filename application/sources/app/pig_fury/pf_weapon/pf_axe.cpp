@@ -2,6 +2,7 @@
 #include "task_display.h"
 
 #include "pf_axe.h"
+#include "pf_wolf_basic.h"
 
 void pf_axe::init(pf_char_dir dir) {
 	st_ = PF_WEAPON_ST_ATTACH;
@@ -11,12 +12,14 @@ void pf_axe::init(pf_char_dir dir) {
 	pos_y_ = 0;
 	rotation_ = 0;
 	dir_ = dir;
+	is_visible_ = true;
 }
 
 void pf_axe::update() {
 }
 
 void pf_axe::render() {
+	if (!is_visible_) return; 
 	switch (st_)
 	{
 		case PF_WEAPON_ST_ATTACH: {
