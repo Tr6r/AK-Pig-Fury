@@ -39,6 +39,7 @@ public:
 protected:
 	uint8_t hp_;
 	uint8_t move_st_;
+	uint8_t atk_st_;
 	uint8_t anim_duration_tick_;
 	pf_enemy_st st_;
 };
