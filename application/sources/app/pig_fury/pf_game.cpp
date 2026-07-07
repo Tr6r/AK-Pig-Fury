@@ -24,20 +24,39 @@ void pf_game_update() {
 }
 
 void pig_fury_game::init() {
-	pig_.init(PF_CHAR_DIR_LEFT);
+	pig_.init();
 	enemy_mng_.init();
-	enemy_mng_.spawn_random_enemy();
+	weapon_mng_.init();
 }
 
 void pig_fury_game::render() {
 	pig_.render();
 	enemy_mng_.render();
+	weapon_mng_.render();
 }
 
 void pig_fury_game::update() {
+	update_spawn();
 	pig_.update();
 	enemy_mng_.update();
+	weapon_mng_.update();
 	check_pig_attack_hit();
+}
+
+void pig_fury_game::update_spawn() {
+	if (!should_spawn())
+		return;
+	pf_enemy *enemy = enemy_mng_.spawn_random_enemy();
+	pf_weapon *weapon = weapon_mng_.spawn_weapon(PF_WEAPON_TYPE_AXE, enemy->get_dir());
+	enemy->set_weapon(weapon);
+}
+
+bool pig_fury_game::should_spawn() {
+	if (enemy_mng_.get_enemy_count() >= PF_GAME_MAX_ENEMY)
+		return false;
+	if (weapon_mng_.get_weapon_count() >= PF_GAME_MAX_WEAPON)
+		return false;
+	return true;
 }
 
 void pig_fury_game::check_pig_attack_hit() {

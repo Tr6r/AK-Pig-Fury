@@ -6,22 +6,27 @@
 
 #include "pf_pig.h"
 #include "pf_enemy_manager.h"
-
+#include "pf_weapon_manager.h"
 class pig_fury_game
 {
 public:
 	pig_fury_game() = default;
 	~pig_fury_game() = default;
+
 	void init();
 	void update();
 	void render();
+
 	void pig_attack(pf_char_dir dir) {pig_.attack(dir);}
 	void pig_jump() {pig_.jump();}
 	void check_pig_attack_hit();
-
+	void update_spawn();
+	bool should_spawn();
+	
 private:
 	pf_pig pig_;
 	pf_enemy_manager enemy_mng_;
+	pf_weapon_manager weapon_mng_;
 };
 
 void pf_game_init();
