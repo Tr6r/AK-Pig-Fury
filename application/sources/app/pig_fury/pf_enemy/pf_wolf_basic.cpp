@@ -109,6 +109,7 @@ void pf_wolf_basic::update_move() {
 		case PF_CHAR_DIR_LEFT: {
 			if (pos_x_ + PF_WOLF_BASIC_UPDATE_STEP_PIXEL >= PF_WOLF_BASIC_LIMITED_MOVE_LEFT) {
 				st_ = PF_ENEMY_ST_ATTACK;
+				atk_st_ = PF_WOLF_BASIC_ATK_1;
 				anim_duration_tick_ = PF_WOLF_BASIC_ATK_COOLDOWN_FRAME_TICK;
 				return;
 			}
@@ -119,6 +120,7 @@ void pf_wolf_basic::update_move() {
 		case PF_CHAR_DIR_RIGHT: {
 			if (pos_x_ - PF_WOLF_BASIC_UPDATE_STEP_PIXEL <= PF_WOLF_BASIC_LIMITED_MOVE_RIGHT) {
 				st_ = PF_ENEMY_ST_ATTACK;
+				atk_st_ = PF_WOLF_BASIC_ATK_1;
 				anim_duration_tick_ = PF_WOLF_BASIC_ATK_COOLDOWN_FRAME_TICK;
 				return;
 			}
@@ -256,20 +258,23 @@ void pf_wolf_basic::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 		case PF_ENEMY_ST_ATTACK: {
 			switch (atk_st_)
 			{
-			case  PF_WOLF_BASIC_ATK_1: {
+			case PF_WOLF_BASIC_ATK_1: {
 				pos_x = pos_x_ + ((dir_ == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_ATK_1_LEFT_HAND_OFFSET_X : PF_WOLF_BASIC_ATK_1_RIGHT_HAND_OFFSET_X );
 				pos_y = pos_y_ + PF_WOLF_BASIC_ATK_1_HAND_OFFSET_Y;
 				axe_.set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PF_WOLF_BASIC_ATK_1_LEFT_WEAPON_ROTATION : PF_WOLF_BASIC_ATK_1_RIGHT_WEAPON_ROTATION));
 				break;
 			}
-			case  PF_WOLF_BASIC_ATK_2: 
-			case  PF_WOLF_BASIC_ATK_4: {
+			case PF_WOLF_BASIC_ATK_2: 
+			case PF_WOLF_BASIC_ATK_4: {
 				pos_x = pos_x_ + ((dir_ == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_ATK_2_LEFT_HAND_OFFSET_X : PF_WOLF_BASIC_ATK_2_RIGHT_HAND_OFFSET_X );
 				pos_y = pos_y_ + PF_WOLF_BASIC_ATK_2_HAND_OFFSET_Y;
 				axe_.set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PF_WOLF_BASIC_ATK_2_LEFT_WEAPON_ROTATION : PF_WOLF_BASIC_ATK_2_RIGHT_WEAPON_ROTATION));
 				break;
 			}
-			case  PF_WOLF_BASIC_ATK_3: {
+			case PF_WOLF_BASIC_ATK_3: {
+				pos_x = pos_x_ + ((dir_ == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_ATK_3_LEFT_HAND_OFFSET_X : PF_WOLF_BASIC_ATK_3_RIGHT_HAND_OFFSET_X );
+				pos_y = pos_y_ + PF_WOLF_BASIC_ATK_3_HAND_OFFSET_Y;
+				axe_.set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PF_WOLF_BASIC_ATK_3_LEFT_WEAPON_ROTATION : PF_WOLF_BASIC_ATK_3_RIGHT_WEAPON_ROTATION));
 				break;
 			}
 			default:
