@@ -8,7 +8,6 @@
 
 #include "pf_pig.h"
 #include "pf_enemy.h"
-#include "pf_axe.h"
 
 #define PF_WOLF_BASIC_MAX_HP 3
 #define PF_WOLF_BASIC_WIDTH 18
@@ -79,8 +78,9 @@ public:
 	pf_wolf_basic() {hp_ = 0; st_ = PF_ENEMY_ST_DEAD;}
 	~pf_wolf_basic() override = default;
 
-	void init(pf_char_dir dir) override;
-	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
+	void init() override;
+	void spawn(pf_char_dir dir) override;
+    void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 	void update() override;
 	void render() override;
 	void attack() override;
@@ -114,8 +114,6 @@ private:
 	void render_knockback();
 	void render_dead();
 	void update_weapon();
-
-	pf_axe axe_; //temp
 };
 
 static const uint8_t wolf_run_1_left[] = {

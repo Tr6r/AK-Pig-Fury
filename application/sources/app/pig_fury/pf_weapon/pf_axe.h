@@ -12,13 +12,10 @@ public:
 	pf_axe() = default;
 	~pf_axe() override = default;
 
-	void init(pf_char_dir dir);
+	void init();
 	void update() override;
 	void render() override;
 	void attack() override;
-
-	// setter
-	void set_anchor(uint8_t x, uint8_t y) { pos_x_ = x; pos_y_ = y; }
 
 private:
 	void update_attach();

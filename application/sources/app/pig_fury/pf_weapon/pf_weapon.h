@@ -6,6 +6,7 @@
 #include "pf_char.h"
 
 enum pf_weapon_st : uint8_t {
+	PF_WEAPON_ST_IDLE,
 	PF_WEAPON_ST_ATTACH,
 	PF_WEAPON_ST_DETACH,
 	PF_WEAPON_ST_FLY,
@@ -19,7 +20,7 @@ public:
 
 	virtual void update() = 0;
 	virtual void render() = 0;
-	virtual void init(pf_char_dir dir) = 0;
+	virtual void init() = 0;
 	virtual void attack() = 0;
 
 	// getter
@@ -31,6 +32,7 @@ public:
 	void set_dir(pf_char_dir dir) { dir_ = dir; }
 	void set_rotation(uint16_t degree) {rotation_ = degree; }
 	void set_visible(bool flag) { is_visible_ = flag; }
+	void set_anchor(uint8_t x, uint8_t y) { pos_x_ = x; pos_y_ = y; }
 
 protected:
 	pf_weapon_st st_;

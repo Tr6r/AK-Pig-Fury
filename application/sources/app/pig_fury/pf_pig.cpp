@@ -114,7 +114,7 @@ static const uint8_t pig_kick_left_bitmap[] = {
 	0xa8, 0x08, 0xbf, 0x10, 0xe4, 0xbf, 0xce, 0x03, 0x3f
 };
 
-void pf_pig::init(pf_char_dir dir) {
+void pf_pig::init() {
 	hp_ = MAX_HP;
 	pig_st_ = PF_PIG_ST_NONE;
 	atk_st_ = PF_PIG_ATTACK_NONE;
@@ -124,7 +124,7 @@ void pf_pig::init(pf_char_dir dir) {
 	height_ = PIG_HEIGHT;
 	atk_dur_tick_ = 0;
 	char_st_ = PF_CHAR_ST_IDLE;
-	dir_ = dir;
+	dir_ = PF_CHAR_DIR_RIGHT;
 }
 
 void pf_pig::update() {

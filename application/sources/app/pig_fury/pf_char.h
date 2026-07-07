@@ -25,7 +25,7 @@ public:
 
 	virtual void update() = 0;
 	virtual void render() = 0;
-	virtual void init(pf_char_dir dir) = 0;
+	virtual void init() = 0;
 	virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) = 0;
 	// getter
 	uint8_t get_pos_x() { return pos_x_; }

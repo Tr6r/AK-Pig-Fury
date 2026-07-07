@@ -6,9 +6,10 @@
 #include "app.h"
 
 #include "pf_char.h"
+#include "pf_weapon.h"
 
 enum pf_enemy_st : uint8_t {
-	PF_ENEMY_ST_SPAWN,
+	PF_ENEMY_ST_IDLE,
 	PF_ENEMY_ST_MOVE,
 	PF_ENEMY_ST_ATTACK,
 	PF_ENEMY_ST_HIT,
@@ -21,10 +22,12 @@ class pf_enemy : public pf_char {
 public:
 	pf_enemy() = default;
 	~pf_enemy() override = default;
-    virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override = 0;
+	virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override = 0;
 	virtual void update() override = 0;
 	virtual void render() override = 0;
-	virtual void init(pf_char_dir dir) override = 0;
+	virtual void init() override = 0;
+
+	virtual void spawn(pf_char_dir dir) = 0;
 	virtual void attack() = 0;
 	virtual void take_damage() = 0;
 
@@ -35,6 +38,7 @@ public:
 	// setter
 	void set_hp(uint8_t hp) { hp_ = hp; }
 	void set_st(pf_enemy_st st) { st_ = st; }
+	void set_weapon(pf_weapon *weapon) { weapon_ = weapon; }
 
 protected:
 	uint8_t hp_;
@@ -42,6 +46,7 @@ protected:
 	uint8_t atk_st_;
 	uint8_t anim_duration_tick_;
 	pf_enemy_st st_;
+	pf_weapon *weapon_;
 };
 
 #endif // __PF_ENEMY_H__

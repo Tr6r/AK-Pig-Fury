@@ -4,15 +4,14 @@
 #include "pf_axe.h"
 #include "pf_wolf_basic.h"
 
-void pf_axe::init(pf_char_dir dir) {
-	st_ = PF_WEAPON_ST_ATTACH;
+void pf_axe::init() {
+	st_ = PF_WEAPON_ST_IDLE;
 	width_ = PF_AXE_WIDTH;
 	height_ = PF_AXE_HEIGHT;
 	pos_x_ = 0;
 	pos_y_ = 0;
 	rotation_ = 0;
-	dir_ = dir;
-	is_visible_ = true;
+	is_visible_ = false;
 }
 
 void pf_axe::update() {

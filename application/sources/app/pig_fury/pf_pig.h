@@ -45,7 +45,7 @@ public:
 
 	void update() override;
 	void render() override;
-	void init(pf_char_dir dir) override;
+	void init() override;
 	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 
 	// input
