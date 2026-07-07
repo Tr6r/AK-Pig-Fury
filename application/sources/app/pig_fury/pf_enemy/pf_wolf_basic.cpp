@@ -56,7 +56,6 @@ void pf_wolf_basic::update_attack() {
 void pf_wolf_basic::update_dead() {
 	if (anim_duration_tick_ <= 0) {
 		st_ = PF_ENEMY_ST_DELETE;
-		weapon_->set_st(PF_WEAPON_ST_DELETE);
 		return;
 	}
 	if (anim_duration_tick_ >= PF_WOLF_BASIC_DEAD_FRAME_TICK /2)
@@ -240,6 +239,7 @@ void pf_wolf_basic::take_damage() {
 	hp_ --;
 	if (hp_ == 0) {
 		anim_duration_tick_ = PF_WOLF_BASIC_KNOCKBACK_FRAME_TICK;
+        weapon_->set_st(PF_WEAPON_ST_DETACH);
 		st_ = PF_ENEMY_ST_KNOCKBACK;
 		return;
 	}
@@ -291,6 +291,7 @@ void pf_wolf_basic::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 
 void pf_wolf_basic::update_weapon()
 {
+    if (weapon_->get_st() != PF_WEAPON_ST_ATTACH) return;
 	int8_t hand_pos_x, hand_pos_y;
 	get_hand_pos(hand_pos_x, hand_pos_y);
 	weapon_->set_anchor(hand_pos_x, hand_pos_y);

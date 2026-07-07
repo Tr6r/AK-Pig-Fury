@@ -10,6 +10,7 @@ enum pf_weapon_st : uint8_t {
 	PF_WEAPON_ST_ATTACH,
 	PF_WEAPON_ST_DETACH,
 	PF_WEAPON_ST_FLY,
+	PF_WEAPON_ST_FALL,
 	PF_WEAPON_ST_DELETE,
 };
 

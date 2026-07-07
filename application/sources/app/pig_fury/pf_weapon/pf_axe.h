@@ -6,6 +6,8 @@
 #define PF_AXE_WIDTH 13
 #define PF_AXE_HEIGHT 6
 #define PF_AXE_ATK_FRAME_TICK 6
+#define PF_AXE_UPDATE_STEP_PIXEL 2
+#define PF_AXE_FLY_MAX_HEIGHT 30
 
 class pf_axe : public pf_weapon {
 public:
@@ -20,6 +22,10 @@ public:
 private:
 	void update_attach();
 	void update_fly();
+	void update_fall();
+	void update_detach_rotation() {
+		rotation_ = (rotation_ + 45) % 360;
+	}
 };
 
 static const uint8_t axe_left[] = {
