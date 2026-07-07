@@ -21,14 +21,15 @@ public:
 	void update();
 	void render();
 
-	pf_weapon *spawn_weapon(pf_weapon_type type);
-	pf_weapon *spawn_axe();
-
+	pf_weapon *spawn_weapon(pf_weapon_type type, pf_char_dir dir);
 	void remove_weapon(uint8_t index);
 
+	// Gettter
+	uint8_t get_weapon_count() { return weapon_count_; }
+	
 private:
+	pf_weapon *spawn_axe(pf_char_dir dir);
 	pf_axe axes_[PF_GAME_MAX_WEAPON];
-
 	pf_weapon *weapons_[PF_GAME_MAX_WEAPON];
 	uint8_t weapon_count_;
 };
