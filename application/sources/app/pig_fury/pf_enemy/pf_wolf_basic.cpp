@@ -264,6 +264,9 @@ void pf_wolf_basic::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 			}
 			case  PF_WOLF_BASIC_ATK_2: 
 			case  PF_WOLF_BASIC_ATK_4: {
+				pos_x = pos_x_ + ((dir_ == PF_CHAR_DIR_LEFT) ? PF_WOLF_BASIC_ATK_2_LEFT_HAND_OFFSET_X : PF_WOLF_BASIC_ATK_2_RIGHT_HAND_OFFSET_X );
+				pos_y = pos_y_ + PF_WOLF_BASIC_ATK_2_HAND_OFFSET_Y;
+				axe_.set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PF_WOLF_BASIC_ATK_2_LEFT_WEAPON_ROTATION : PF_WOLF_BASIC_ATK_2_RIGHT_WEAPON_ROTATION));
 				break;
 			}
 			case  PF_WOLF_BASIC_ATK_3: {
