@@ -67,13 +67,17 @@ void pig_fury_game::check_pig_attack_hit() {
 		switch (pig_.get_dir())
 		{
 		case PF_CHAR_DIR_LEFT: {
-			if (enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() - PIG_ATK_RANGE && enemy->get_pos_x() <= pig_.get_pos_x())
+			if (enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() - PIG_ATK_RANGE && enemy->get_pos_x() <= pig_.get_pos_x()) {
 				enemy->take_damage();
+				return;
+			}
 			break;
 		}
 		case PF_CHAR_DIR_RIGHT: {
-			if (enemy->get_pos_x() <= pig_.get_pos_x() + PIG_WIDTH + PIG_ATK_RANGE && enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() + PIG_WIDTH)
+			if (enemy->get_pos_x() <= pig_.get_pos_x() + PIG_WIDTH + PIG_ATK_RANGE && enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() + PIG_WIDTH) {
 				enemy->take_damage();
+				return;
+			}
 			break;
 		}
 		default:
