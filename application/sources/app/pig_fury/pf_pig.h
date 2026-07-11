@@ -18,6 +18,15 @@
 #define PIG_JUMP_MAX_HEIGHT 30
 #define PIG_ATK_FRAME_TICK 6
 #define PIG_ATK_RANGE 2
+#define PIG_COLLECT_WEAPON_RANGE 10
+
+// idle weapon
+#define PIG_HOLD_WEAPON_LEFT_ROTATION 215
+#define PIG_HOLD_WEAPON_LEFT_POS_X 67
+#define PIG_HOLD_WEAPON_RIGHT_ROTATION 360 - PIG_HOLD_WEAPON_LEFT_ROTATION
+#define PIG_HOLD_WEAPON_RIGHT_POS_X 44
+#define PIG_HOLD_WEAPON_POS_Y 55
+
 
 enum pf_pig_st : uint8_t
 {
@@ -34,7 +43,10 @@ enum pf_atk_st : uint8_t
 	PF_PIG_ATTACK_PUNCH_2,
 	PF_PIG_ATTACK_PUNCH_3,
 	PF_PIG_ATTACK_ST_SQUAT_PUNCH,
-	PF_PIG_ATTACK_ST_JUMP_KICK
+	PF_PIG_ATTACK_ST_JUMP_KICK,
+	PF_PIG_ATTACK_WEAPON_PICKUP,
+	PF_PIG_ATTACK_WEAPON_MELEE,
+	PF_PIG_ATTACK_WEAPON_THROW,
 };
 
 class pf_pig : public pf_char
@@ -47,6 +59,7 @@ public:
 	void render() override;
 	void init() override;
 	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
+	void set_weapon(pf_weapon *weapon) override;
 
 	// input
 	void jump();
@@ -70,6 +83,11 @@ private:
 	void render_st();
 	void update_atk();
 	void render_atk();
+	void render_weapon_atk();
+	void render_unarmed_atk();
+	void attack_no_weapon(pf_char_dir dir);
+	void attack_with_weapon(pf_char_dir dir);
+	void update_weapon_attach_pose();
 
 	uint8_t hp_;
 	pf_pig_st pig_st_;

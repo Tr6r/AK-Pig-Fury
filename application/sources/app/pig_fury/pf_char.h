@@ -28,6 +28,8 @@ public:
 	virtual void render() = 0;
 	virtual void init() = 0;
 	virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) = 0;
+	virtual void set_weapon(pf_weapon *weapon) { weapon_ = weapon; };
+
 	// getter
 	uint8_t get_pos_x() { return pos_x_; }
 	uint8_t get_pos_y() { return pos_y_; }
@@ -43,7 +45,7 @@ public:
 	void set_height(uint8_t h) { height_ = h; }
 	void set_st(pf_char_st st) { char_st_ = st; }
 	void set_dir(pf_char_dir dir) { dir_ = dir; }
-	void set_weapon(pf_weapon *weapon) { weapon_ = weapon; }
+	void set_atk_dur_tick(uint8_t tick) { atk_dur_tick_ = tick; }
 
 protected:
 	uint8_t pos_x_;

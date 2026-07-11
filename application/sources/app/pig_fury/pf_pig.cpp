@@ -1,6 +1,7 @@
 #include "view_render.h"
 
 #include "pf_pig.h"
+#include "pf_weapon.h"
 
 static const uint8_t pig_idle_right_bitmap[] = {
 	0xF7, 0xF9, 0xC0, 0x88, 0x06, 0x40, 0x90, 0x02, 0x40, 0x60, 0x49, 0x80,
@@ -125,6 +126,7 @@ void pf_pig::init() {
 	atk_dur_tick_ = 0;
 	char_st_ = PF_CHAR_ST_IDLE;
 	dir_ = PF_CHAR_DIR_RIGHT;
+	weapon_ = NULL;
 }
 
 void pf_pig::update() {
@@ -135,6 +137,17 @@ void pf_pig::update() {
 void pf_pig::render() {
 	render_atk();
 	render_st();
+}
+
+void pf_pig::set_weapon(pf_weapon *weapon) {
+	weapon_ = weapon;
+}
+
+void pf_pig::update_weapon_attach_pose() {
+	if (!weapon_) return;
+	weapon_->set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PIG_HOLD_WEAPON_LEFT_ROTATION : PIG_HOLD_WEAPON_RIGHT_ROTATION));
+	weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_HOLD_WEAPON_LEFT_POS_X : PIG_HOLD_WEAPON_RIGHT_POS_X), PIG_HOLD_WEAPON_POS_Y);
+	weapon_->set_dir (dir_);
 }
 
 void pf_pig::attack(pf_char_dir dir) {
@@ -170,7 +183,60 @@ void pf_pig::attack(pf_char_dir dir) {
 	}
 }
 
+void pf_pig::attack_with_weapon(pf_char_dir dir) {
+	weapon_->set_dir(dir_);
+	pf_pig_weapon_action action = weapon_->get_pig_action();
+	atk_dur_tick_ = PIG_ATK_FRAME_TICK;
+	switch (action)
+	{
+	case PF_PIG_WEAPON_ACTION_MELEE: {
+		atk_st_ = PF_PIG_ATTACK_WEAPON_MELEE;
+		break;
+	}
+	case PF_PIG_WEAPON_ACTION_THROW: {
+		atk_st_ = PF_PIG_ATTACK_WEAPON_THROW;
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void pf_pig::attack_no_weapon(pf_char_dir dir) {
+
+}
+
 void pf_pig::render_atk() {
+	if (weapon_) render_weapon_atk();
+	else render_unarmed_atk();
+}
+
+void pf_pig::render_weapon_atk() {
+	switch (atk_st_) {
+		case PF_PIG_ATTACK_NONE: {
+			if (pig_st_ != PF_PIG_ST_NONE) break;
+			const uint8_t *bitmap = (dir_ == PF_CHAR_DIR_LEFT ? pig_idle_left_bitmap: pig_idle_right_bitmap);
+			view_render.drawBitmap(pos_x_, pos_y_,bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+			break;
+		}
+		case PF_PIG_ATTACK_WEAPON_MELEE: {
+			break;
+		}
+		case PF_PIG_ATTACK_WEAPON_THROW: {
+			break;
+		}
+		case PF_PIG_ATTACK_WEAPON_PICKUP: {
+			const uint8_t *bitmap = (dir_ == PF_CHAR_DIR_LEFT ? pig_atk_3_left_bitmap: pig_atk_3_right_bitmap);
+			view_render.drawBitmap(pos_x_, pos_y_, bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
+			break;
+		}
+		
+		default:
+			break;
+	}
+}
+
+void pf_pig::render_unarmed_atk() {
 	switch (atk_st_) {
 		case PF_PIG_ATTACK_NONE: {
 			if (pig_st_ != PF_PIG_ST_NONE) break;
@@ -214,18 +280,23 @@ void pf_pig::render_atk() {
 }
 
 void pf_pig::update_atk() {
+	if (atk_st_ == PF_PIG_ATTACK_WEAPON_PICKUP)
+	{
+		if (atk_dur_tick_ == 0)
+		{
+			weapon_->set_st(PF_WEAPON_ST_ATTACH);
+			update_weapon_attach_pose();
+		}
+	}
 	if (atk_st_ != PF_PIG_ATTACK_NONE) {
 		if (atk_dur_tick_ > 0) atk_dur_tick_--;
 		else atk_st_ = PF_PIG_ATTACK_NONE;
 	}
 }
 
-void pf_pig::update_st()
-{
-	switch (pig_st_)
-	{
-		case PF_PIG_ST_JUMP:
-		{
+void pf_pig::update_st() {
+	switch (pig_st_) {
+		case PF_PIG_ST_JUMP: {
 			pos_y_ -= PIG_UPDATE_STEP_PIXEL;
 
 			if (pos_y_ <= (PIG_POS_Y - PIG_JUMP_MAX_HEIGHT))
@@ -235,13 +306,9 @@ void pf_pig::update_st()
 			}
 			break;
 		}
-
-		case PF_PIG_ST_FALL:
-		{
+		case PF_PIG_ST_FALL: {
 			pos_y_ += PIG_UPDATE_STEP_PIXEL;
-
-			if (pos_y_ >= PIG_POS_Y)
-			{
+			if (pos_y_ >= PIG_POS_Y) {
 				pos_y_ = PIG_POS_Y;
 				pig_st_ = PF_PIG_ST_NONE;
 				atk_st_ = PF_PIG_ATTACK_NONE;
@@ -254,8 +321,7 @@ void pf_pig::update_st()
 	}
 }
 
-void pf_pig::render_st()
-{
+void pf_pig::render_st() {
 	if (atk_st_ == PF_PIG_ATTACK_NONE)
 	{
 		switch (pig_st_)
@@ -272,14 +338,13 @@ void pf_pig::render_st()
 	}
 }
 
-void pf_pig::jump()
-{
+void pf_pig::jump() {
 	if (pig_st_ == PF_PIG_ST_FALL) return;
 	pig_st_ = PF_PIG_ST_JUMP;
 }
 
 bool pf_pig::is_attack_hit_frame() {
-	if (atk_st_ != PF_PIG_ATTACK_NONE && atk_dur_tick_ + 3 > PIG_ATK_FRAME_TICK) return true;
+	if (atk_st_ != PF_PIG_ATTACK_NONE && PIG_ATK_FRAME_TICK - atk_dur_tick_ == 1) return true;
 	return false;
 }
 
