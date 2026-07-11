@@ -19,6 +19,8 @@ void task_pf_game(ak_msg_t *msg) {
 		}
 		case AC_PF_PIG_ATK: {
 			pf_char_dir dir = *(pf_char_dir*)get_data_common_msg(msg);
+			if (pf_pig_try_pickup_weapon(dir))
+				break;
 			pf_pig_atk(dir);
 			break;
 		}
