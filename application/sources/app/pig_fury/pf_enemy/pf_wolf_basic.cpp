@@ -242,6 +242,7 @@ void pf_wolf_basic::take_damage() {
 		anim_duration_tick_ = PF_WOLF_BASIC_KNOCKBACK_FRAME_TICK;
 		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? weapon_->get_pos_x() + 10 : weapon_->get_pos_x() - 10 ), get_pos_y());
 		weapon_->set_st(PF_WEAPON_ST_DETACH);
+		set_weapon(nullptr);
 		st_ = PF_ENEMY_ST_KNOCKBACK;
 		return;
 	}
