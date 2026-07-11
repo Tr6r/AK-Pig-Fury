@@ -6,7 +6,6 @@
 #include "app.h"
 
 #include "pf_char.h"
-#include "pf_weapon.h"
 
 enum pf_enemy_st : uint8_t {
 	PF_ENEMY_ST_IDLE,
@@ -38,7 +37,6 @@ public:
 	// setter
 	void set_hp(uint8_t hp) { hp_ = hp; }
 	void set_st(pf_enemy_st st) { st_ = st; }
-	void set_weapon(pf_weapon *weapon) { weapon_ = weapon; }
 
 protected:
 	uint8_t hp_;
@@ -46,7 +44,6 @@ protected:
 	uint8_t atk_st_;
 	uint8_t anim_duration_tick_;
 	pf_enemy_st st_;
-	pf_weapon *weapon_;
 };
 
 #endif // __PF_ENEMY_H__

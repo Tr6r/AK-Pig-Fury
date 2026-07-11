@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "app.h"
 
+class pf_weapon;
 enum pf_char_dir : uint8_t
 {
 	PF_CHAR_DIR_LEFT,
@@ -42,6 +43,7 @@ public:
 	void set_height(uint8_t h) { height_ = h; }
 	void set_st(pf_char_st st) { char_st_ = st; }
 	void set_dir(pf_char_dir dir) { dir_ = dir; }
+	void set_weapon(pf_weapon *weapon) { weapon_ = weapon; }
 
 protected:
 	uint8_t pos_x_;
@@ -51,6 +53,7 @@ protected:
 	pf_char_st char_st_;
 	pf_char_dir dir_;
 	uint8_t atk_dur_tick_;
+	pf_weapon *weapon_;
 };
 
 #endif //__PF_CHAR_H__

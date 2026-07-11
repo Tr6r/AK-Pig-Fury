@@ -1,4 +1,5 @@
 #include "pf_wolf_basic.h"
+#include "pf_weapon.h"
 
 void pf_wolf_basic::init() {
 	hp_ = PF_WOLF_BASIC_MAX_HP;
@@ -239,7 +240,8 @@ void pf_wolf_basic::take_damage() {
 	hp_ --;
 	if (hp_ == 0) {
 		anim_duration_tick_ = PF_WOLF_BASIC_KNOCKBACK_FRAME_TICK;
-        weapon_->set_st(PF_WEAPON_ST_DETACH);
+		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? weapon_->get_pos_x() + 10 : weapon_->get_pos_x() - 10 ), get_pos_y());
+		weapon_->set_st(PF_WEAPON_ST_DETACH);
 		st_ = PF_ENEMY_ST_KNOCKBACK;
 		return;
 	}
@@ -291,7 +293,7 @@ void pf_wolf_basic::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 
 void pf_wolf_basic::update_weapon()
 {
-    if (weapon_->get_st() != PF_WEAPON_ST_ATTACH) return;
+	if (weapon_->get_st() != PF_WEAPON_ST_ATTACH) return;
 	int8_t hand_pos_x, hand_pos_y;
 	get_hand_pos(hand_pos_x, hand_pos_y);
 	weapon_->set_anchor(hand_pos_x, hand_pos_y);

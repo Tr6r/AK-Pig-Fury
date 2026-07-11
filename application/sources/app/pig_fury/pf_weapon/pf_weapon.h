@@ -27,6 +27,8 @@ public:
 	// getter
 	pf_weapon_st get_st() const { return st_; }
 	pf_char_dir get_dir() const { return dir_; }
+	int8_t get_pos_x() { return pos_x_; }
+	int8_t get_pos_y() { return pos_y_; }
 
 	// setter
 	void set_st(pf_weapon_st st) { st_ = st; }
