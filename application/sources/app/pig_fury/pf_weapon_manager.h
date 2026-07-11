@@ -26,7 +26,7 @@ public:
 
 	// Gettter
 	uint8_t get_weapon_count() { return weapon_count_; }
-	
+	pf_weapon* get_weapon(uint8_t index) {return weapons_[index]; }
 private:
 	pf_weapon *spawn_axe(pf_char_dir dir);
 	pf_axe axes_[PF_GAME_MAX_WEAPON];

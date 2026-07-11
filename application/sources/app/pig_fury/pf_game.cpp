@@ -23,6 +23,10 @@ void pf_game_update() {
 	game.update();
 }
 
+bool pf_pig_try_pickup_weapon(pf_char_dir dir) {
+	return game.check_pig_attack_weapon();
+}
+
 void pig_fury_game::init() {
 	pig_.init();
 	enemy_mng_.init();
@@ -41,6 +45,40 @@ void pig_fury_game::update() {
 	enemy_mng_.update();
 	weapon_mng_.update();
 	check_pig_attack_hit();
+}
+
+bool pig_fury_game::check_pig_attack_weapon()
+{
+	for (uint8_t i = 0; i < weapon_mng_.get_weapon_count(); i++)
+	{
+		pf_weapon *weapon = weapon_mng_.get_weapon(i);
+		if (weapon->get_st() != PF_WEAPON_ST_FALL && weapon->get_st() != PF_WEAPON_ST_FLY)
+			continue;
+		switch (pig_.get_dir())
+		{
+			case PF_CHAR_DIR_LEFT:
+				if (weapon->get_pos_x() + weapon->get_width() >= pig_.get_pos_x() - PIG_COLLECT_WEAPON_RANGE && weapon->get_pos_x() <= pig_.get_pos_x()) {
+					pig_.set_weapon(weapon);
+					pig_.set_atk_st(PF_PIG_ATTACK_WEAPON_PICKUP);
+					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
+					weapon->set_dir(PF_CHAR_DIR_LEFT);
+					weapon->set_st(PF_WEAPON_ST_PENDING_ATTACH);
+					return true;
+				}
+				break;
+			case PF_CHAR_DIR_RIGHT:
+				if (weapon->get_pos_x() <= pig_.get_pos_x() + PIG_WIDTH + PIG_COLLECT_WEAPON_RANGE && weapon->get_pos_x() + weapon->get_width() >= pig_.get_pos_x() + PIG_WIDTH) {
+					pig_.set_weapon(weapon);
+					pig_.set_atk_st(PF_PIG_ATTACK_WEAPON_PICKUP);
+					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
+					weapon->set_dir(PF_CHAR_DIR_RIGHT);
+					weapon->set_st(PF_WEAPON_ST_PENDING_ATTACH);
+					return true;
+				}
+				break;
+		}
+	}
+	return false;
 }
 
 void pig_fury_game::update_spawn() {

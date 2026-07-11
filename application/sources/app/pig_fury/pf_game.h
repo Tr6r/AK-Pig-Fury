@@ -22,6 +22,7 @@ public:
 	void check_pig_attack_hit();
 	void update_spawn();
 	bool should_spawn();
+	bool check_pig_attack_weapon();
 	
 private:
 	pf_pig pig_;
@@ -34,5 +35,6 @@ void pf_game_update();
 void pf_game_render();
 void pf_pig_atk(pf_char_dir dir);
 void pf_pig_jump();
+bool pf_pig_try_pickup_weapon(pf_char_dir dir);
 
 #endif //__PF_GAME_H__
