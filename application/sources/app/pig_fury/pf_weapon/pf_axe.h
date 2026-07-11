@@ -9,6 +9,10 @@
 #define PF_AXE_UPDATE_STEP_PIXEL 2
 #define PF_AXE_FLY_MAX_HEIGHT 30
 
+static const pf_pig_weapon_action axe_actions[] = {
+	PF_PIG_WEAPON_ACTION_THROW
+};
+
 class pf_axe : public pf_weapon {
 public:
 	pf_axe() = default;
@@ -18,6 +22,8 @@ public:
 	void update() override;
 	void render() override;
 	void attack() override;
+	pf_pig_weapon_action get_pig_action() const override { return axe_actions[action_count_]; };
+	void next_action() override { action_count_++; }
 
 private:
 	void update_attach();

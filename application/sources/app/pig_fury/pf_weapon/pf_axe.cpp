@@ -12,6 +12,8 @@ void pf_axe::init() {
 	pos_y_ = 0;
 	rotation_ = 0;
 	is_visible_ = false;
+	action_count_ = 0;
+	action_ = axe_actions;
 }
 
 void pf_axe::update() {
@@ -57,6 +59,7 @@ void pf_axe::render() {
 	if (!is_visible_) return; 
 	switch (st_)
 	{
+		case PF_WEAPON_ST_PENDING_ATTACH:
 		case PF_WEAPON_ST_DETACH:
 		case PF_WEAPON_ST_FLY:
 		case PF_WEAPON_ST_FALL:
