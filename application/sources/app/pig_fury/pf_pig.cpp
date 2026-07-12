@@ -115,6 +115,26 @@ static const uint8_t pig_kick_left_bitmap[] = {
 	0xa8, 0x08, 0xbf, 0x10, 0xe4, 0xbf, 0xce, 0x03, 0x3f
 };
 
+static const uint8_t pig_atk_melee_left_bitmap[] = {
+	0x00, 0xff, 0xff, 0x01, 0x01, 0x7f, 0x02, 0x00, 0xff, 0x02, 0x9e, 0x7f,
+	0x04, 0xa1, 0x7f, 0x04, 0x02, 0x7f, 0x04, 0x0c, 0x7f, 0x04, 0x00, 0x7f,
+	0x02, 0x00, 0xbf, 0x01, 0x01, 0x3f, 0x00, 0xfe, 0x3f, 0x03, 0x01, 0xbf,
+	0x04, 0x00, 0x7f, 0x38, 0x00, 0x7f, 0x41, 0x00, 0x7f, 0x43, 0x01, 0x7f,
+	0x3d, 0x01, 0xbf, 0x01, 0x01, 0x3f, 0x01, 0xff, 0x3f, 0x01, 0x01, 0x3f,
+	0x01, 0x01, 0x3f, 0x01, 0x01, 0x3f, 0x01, 0x10, 0xbf, 0x03, 0x28, 0x7f,
+	0x04, 0x24, 0x7f, 0x08, 0x22, 0x7f, 0x0f, 0xe3, 0xff
+};
+
+static const uint8_t pig_atk_melee_right_bitmap[] = {
+	0xFF, 0xC0, 0x3F, 0xA0, 0x20, 0x3F, 0xC0, 0x10, 0x3F, 0x9E, 0x50, 0x3F,
+	0xA1, 0x48, 0x3F, 0x90, 0x08, 0x3F, 0x8C, 0x08, 0x3F, 0x80, 0x08, 0x3F,
+	0x40, 0x10, 0x3F, 0x20, 0x20, 0x3F, 0x1F, 0xC0, 0x3F, 0x60, 0x30, 0x3F,
+	0x80, 0x08, 0x3F, 0x80, 0x07, 0x3F, 0x80, 0x20, 0xBF, 0xA0, 0x30, 0xBF,
+	0x60, 0x2F, 0x3F, 0x20, 0x20, 0x3F, 0x3F, 0xE0, 0x3F, 0x20, 0x20, 0x3F,
+	0x20, 0x20, 0x3F, 0x20, 0x20, 0x3F, 0x42, 0x20, 0x3F, 0x85, 0x30, 0x3F,
+	0x89, 0x08, 0x3F, 0x91, 0x04, 0x3F, 0xF1, 0xFC, 0x3F
+};
+
 void pf_pig::init() {
 	hp_ = MAX_HP;
 	pig_st_ = PF_PIG_ST_NONE;
@@ -152,6 +172,33 @@ void pf_pig::update_weapon_attach_pose() {
 
 void pf_pig::attack(pf_char_dir dir) {
 	dir_ = dir;
+	if (weapon_) attack_with_weapon(dir);
+	else attack_no_weapon(dir);
+
+}
+
+void pf_pig::attack_with_weapon(pf_char_dir dir) {
+	weapon_->set_dir(dir_);
+	pf_pig_weapon_action action = weapon_->get_pig_action();
+	atk_dur_tick_ = PIG_ATK_FRAME_TICK;
+	switch (action)
+	{
+	case PF_PIG_WEAPON_ACTION_MELEE: {
+		atk_st_ = PF_PIG_ATTACK_WEAPON_MELEE;
+		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_LEFT_POS_X :PIG_ATK_WEAPON_MELEE_RIGHT_POS_X),PIG_ATK_WEAPON_MELEE_POS_Y);
+		weapon_->set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_LEFT_ROTATION :PIG_ATK_WEAPON_MELEE_RIGHT_ROTATION));
+ 		break;
+	}
+	case PF_PIG_WEAPON_ACTION_THROW: {
+		atk_st_ = PF_PIG_ATTACK_WEAPON_THROW;
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void pf_pig::attack_no_weapon(pf_char_dir dir) {
 	if (pig_st_ == PF_PIG_ST_JUMP || pig_st_ == PF_PIG_ST_FALL) {
 		atk_st_ = PF_PIG_ATTACK_ST_JUMP_KICK;
 		atk_dur_tick_ = PIG_ATK_FRAME_TICK;
@@ -183,29 +230,6 @@ void pf_pig::attack(pf_char_dir dir) {
 	}
 }
 
-void pf_pig::attack_with_weapon(pf_char_dir dir) {
-	weapon_->set_dir(dir_);
-	pf_pig_weapon_action action = weapon_->get_pig_action();
-	atk_dur_tick_ = PIG_ATK_FRAME_TICK;
-	switch (action)
-	{
-	case PF_PIG_WEAPON_ACTION_MELEE: {
-		atk_st_ = PF_PIG_ATTACK_WEAPON_MELEE;
-		break;
-	}
-	case PF_PIG_WEAPON_ACTION_THROW: {
-		atk_st_ = PF_PIG_ATTACK_WEAPON_THROW;
-		break;
-	}
-	default:
-		break;
-	}
-}
-
-void pf_pig::attack_no_weapon(pf_char_dir dir) {
-
-}
-
 void pf_pig::render_atk() {
 	if (weapon_) render_weapon_atk();
 	else render_unarmed_atk();
@@ -220,6 +244,8 @@ void pf_pig::render_weapon_atk() {
 			break;
 		}
 		case PF_PIG_ATTACK_WEAPON_MELEE: {
+			const uint8_t *bitmap = (dir_ == PF_CHAR_DIR_LEFT ? pig_atk_melee_left_bitmap: pig_atk_melee_right_bitmap);
+			view_render.drawBitmap(pos_x_, pos_y_,bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
 		case PF_PIG_ATTACK_WEAPON_THROW: {
@@ -230,7 +256,6 @@ void pf_pig::render_weapon_atk() {
 			view_render.drawBitmap(pos_x_, pos_y_, bitmap, PIG_WIDTH, PIG_HEIGHT, WHITE);
 			break;
 		}
-		
 		default:
 			break;
 	}
@@ -290,7 +315,10 @@ void pf_pig::update_atk() {
 	}
 	if (atk_st_ != PF_PIG_ATTACK_NONE) {
 		if (atk_dur_tick_ > 0) atk_dur_tick_--;
-		else atk_st_ = PF_PIG_ATTACK_NONE;
+		else {
+			atk_st_ = PF_PIG_ATTACK_NONE;
+			if (weapon_) update_weapon_attach_pose();
+		}
 	}
 }
 
