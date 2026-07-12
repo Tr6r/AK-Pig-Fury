@@ -12,6 +12,7 @@ enum pf_weapon_st : uint8_t {
 	PF_WEAPON_ST_DETACH,
 	PF_WEAPON_ST_FLY,
 	PF_WEAPON_ST_FALL,
+	PF_WEAPON_ST_THROW,
 	PF_WEAPON_ST_DELETE,
 };
 
@@ -39,6 +40,8 @@ public:
 	int8_t get_pos_y() { return pos_y_; }
 	uint8_t get_width() { return width_; }
 	uint8_t get_height() { return height_; }
+	uint8_t get_weapon_damege() { return damage_; }
+
 
 	// setter
 	void set_st(pf_weapon_st st) { st_ = st; }
@@ -48,9 +51,10 @@ public:
 	void set_anchor(uint8_t x, uint8_t y) { pos_x_ = x; pos_y_ = y; }
 
 protected:
+	uint8_t damage_;
 	pf_weapon_st st_;
-	int8_t pos_x_;
-	int8_t pos_y_;
+	int16_t pos_x_;
+	int16_t pos_y_;
 	uint16_t rotation_;
 	uint8_t width_;
 	uint8_t height_;

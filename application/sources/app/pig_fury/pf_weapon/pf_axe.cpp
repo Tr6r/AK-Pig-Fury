@@ -14,6 +14,7 @@ void pf_axe::init() {
 	is_visible_ = false;
 	action_count_ = 0;
 	action_ = axe_actions;
+	damage_ = PF_AXE_DAMAGE;
 }
 
 void pf_axe::update() {
@@ -32,16 +33,27 @@ void pf_axe::update() {
 			update_fall();
 			break;
 		}
+		case PF_WEAPON_ST_THROW: {
+			update_throw();
+			break;
+		}
 		default:
 			break;
+	}
+}
+
+void pf_axe::update_throw() {
+	if (pos_x_ <= -10 || pos_x_>= LCD_WIDTH + 10) {
+		st_ = PF_WEAPON_ST_DELETE;
+	} else {
+		pos_x_ += (dir_ == PF_CHAR_DIR_LEFT ? PF_AXE_UPDATE_STEP_PIXEL : (-1) * PF_AXE_UPDATE_STEP_PIXEL);
 	}
 }
 
 void pf_axe::update_fall() {
 	update_detach_rotation();
 	pos_y_ += PF_AXE_UPDATE_STEP_PIXEL;
-	if (pos_y_ >= LCD_HEIGHT) {
-		pos_y_ = LCD_HEIGHT;
+	if (pos_y_ >= LCD_HEIGHT+13) {
 		st_ = PF_WEAPON_ST_DELETE;
 	}
 }
@@ -59,6 +71,7 @@ void pf_axe::render() {
 	if (!is_visible_) return; 
 	switch (st_)
 	{
+		case PF_WEAPON_ST_THROW:
 		case PF_WEAPON_ST_PENDING_ATTACH:
 		case PF_WEAPON_ST_DETACH:
 		case PF_WEAPON_ST_FLY:

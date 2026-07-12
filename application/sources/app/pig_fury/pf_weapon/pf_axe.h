@@ -3,6 +3,7 @@
 
 #include "pf_weapon.h"
 
+#define PF_AXE_DAMAGE 2
 #define PF_AXE_WIDTH 13
 #define PF_AXE_HEIGHT 6
 #define PF_AXE_ATK_FRAME_TICK 6
@@ -10,7 +11,8 @@
 #define PF_AXE_FLY_MAX_HEIGHT 30
 
 static const pf_pig_weapon_action axe_actions[] = {
-	PF_PIG_WEAPON_ACTION_THROW
+	PF_PIG_WEAPON_ACTION_MELEE,
+	PF_PIG_WEAPON_ACTION_THROW,
 };
 
 class pf_axe : public pf_weapon {
@@ -28,6 +30,7 @@ public:
 private:
 	void update_attach();
 	void update_fly();
+	void update_throw();
 	void update_fall();
 	void update_detach_rotation() {
 		rotation_ = (rotation_ + 45) % 360;
