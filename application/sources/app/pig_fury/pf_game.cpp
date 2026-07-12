@@ -58,6 +58,7 @@ bool pig_fury_game::check_pig_attack_weapon()
 		{
 			case PF_CHAR_DIR_LEFT:
 				if (weapon->get_pos_x() + weapon->get_width() >= pig_.get_pos_x() - PIG_COLLECT_WEAPON_RANGE && weapon->get_pos_x() <= pig_.get_pos_x()) {
+					if (pig_.get_weapon()) pig_.get_weapon()->set_st(PF_WEAPON_ST_FALL);
 					pig_.set_weapon(weapon);
 					pig_.set_atk_st(PF_PIG_ATTACK_WEAPON_PICKUP);
 					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
@@ -68,6 +69,7 @@ bool pig_fury_game::check_pig_attack_weapon()
 				break;
 			case PF_CHAR_DIR_RIGHT:
 				if (weapon->get_pos_x() <= pig_.get_pos_x() + PIG_WIDTH + PIG_COLLECT_WEAPON_RANGE && weapon->get_pos_x() + weapon->get_width() >= pig_.get_pos_x() + PIG_WIDTH) {
+					if (pig_.get_weapon()) pig_.get_weapon()->set_st(PF_WEAPON_ST_FALL);
 					pig_.set_weapon(weapon);
 					pig_.set_atk_st(PF_PIG_ATTACK_WEAPON_PICKUP);
 					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);

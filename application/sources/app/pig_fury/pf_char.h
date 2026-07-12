@@ -37,6 +37,7 @@ public:
 	uint8_t get_height() { return height_; }
 	pf_char_st get_st() { return char_st_; }
 	pf_char_dir get_dir() { return dir_; }
+	pf_weapon* get_weapon() { return weapon_; }
 
 	// setter
 	void set_pos_x(uint8_t x) { pos_x_ = x; }
