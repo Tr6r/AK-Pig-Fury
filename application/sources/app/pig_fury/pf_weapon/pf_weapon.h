@@ -40,7 +40,7 @@ public:
 	int8_t get_pos_y() { return pos_y_; }
 	uint8_t get_width() { return width_; }
 	uint8_t get_height() { return height_; }
-	uint8_t get_weapon_damege() { return damage_; }
+	uint8_t get_damage() { return damage_; }
 
 
 	// setter

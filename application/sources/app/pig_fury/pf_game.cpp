@@ -45,6 +45,7 @@ void pig_fury_game::update() {
 	enemy_mng_.update();
 	weapon_mng_.update();
 	check_pig_attack_hit();
+	check_throw_weapon_attack_hit();
 }
 
 bool pig_fury_game::check_pig_attack_weapon()
@@ -108,14 +109,14 @@ void pig_fury_game::check_pig_attack_hit() {
 		{
 		case PF_CHAR_DIR_LEFT: {
 			if (enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() - PIG_ATK_RANGE && enemy->get_pos_x() <= pig_.get_pos_x()) {
-				enemy->take_damage();
+				enemy->take_damage(PIG_ATK_DAMAGE);
 				return;
 			}
 			break;
 		}
 		case PF_CHAR_DIR_RIGHT: {
 			if (enemy->get_pos_x() <= pig_.get_pos_x() + PIG_WIDTH + PIG_ATK_RANGE && enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() + PIG_WIDTH) {
-				enemy->take_damage();
+				enemy->take_damage(PIG_ATK_DAMAGE);
 				return;
 			}
 			break;
@@ -124,4 +125,34 @@ void pig_fury_game::check_pig_attack_hit() {
 			break;
 		 }
 	}
+}
+
+void pig_fury_game::check_throw_weapon_attack_hit()
+{
+	for (uint8_t i = 0; i < weapon_mng_.get_weapon_count(); i++)
+	{
+		pf_weapon *weapon = weapon_mng_.get_weapon(i);
+		if (weapon->get_st() != PF_WEAPON_ST_THROW)
+			continue;
+		for (uint8_t j = 0; j < enemy_mng_.get_enemy_count(); j++)
+		{
+			pf_enemy *enemy = enemy_mng_.get_enemy(j);
+			if (!check_weapon_hit_enemy(weapon, enemy)||enemy->get_st() == PF_ENEMY_ST_DEAD||enemy->get_st() == PF_ENEMY_ST_DELETE||enemy->get_st() == PF_ENEMY_ST_KNOCKBACK)
+				continue;
+			enemy->take_damage(weapon->get_damage());
+			weapon->set_st(PF_WEAPON_ST_FALL);
+			return;
+		}
+	}
+}
+
+bool pig_fury_game::check_weapon_hit_enemy(pf_weapon *weapon,
+										   pf_enemy *enemy)
+{
+	return (
+		weapon->get_pos_x() < enemy->get_pos_x() + enemy->get_width() &&
+		weapon->get_pos_x() + weapon->get_width() > enemy->get_pos_x() &&
+		weapon->get_pos_y() < enemy->get_pos_y() + enemy->get_height() &&
+		weapon->get_pos_y() + weapon->get_height() > enemy->get_pos_y()
+	);
 }
