@@ -109,14 +109,22 @@ void pig_fury_game::check_pig_attack_hit() {
 		{
 		case PF_CHAR_DIR_LEFT: {
 			if (enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() - PIG_ATK_RANGE && enemy->get_pos_x() <= pig_.get_pos_x()) {
-				enemy->take_damage(PIG_ATK_DAMAGE);
+				if (pig_.get_weapon()) {
+					pig_.get_weapon()->next_action();
+					enemy->take_damage(pig_.get_weapon()->get_damage());
+				}
+				else enemy->take_damage(PIG_ATK_DAMAGE);
 				return;
 			}
 			break;
 		}
 		case PF_CHAR_DIR_RIGHT: {
 			if (enemy->get_pos_x() <= pig_.get_pos_x() + PIG_WIDTH + PIG_ATK_RANGE && enemy->get_pos_x() + enemy->get_width() >= pig_.get_pos_x() + PIG_WIDTH) {
-				enemy->take_damage(PIG_ATK_DAMAGE);
+				if (pig_.get_weapon()) {
+					pig_.get_weapon()->next_action();
+					enemy->take_damage(pig_.get_weapon()->get_damage());
+				}
+				else enemy->take_damage(PIG_ATK_DAMAGE);
 				return;
 			}
 			break;
