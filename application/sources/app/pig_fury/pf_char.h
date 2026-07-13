@@ -29,8 +29,10 @@ public:
 	virtual void init() = 0;
 	virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) = 0;
 	virtual void set_weapon(pf_weapon *weapon) { weapon_ = weapon; };
+	virtual void take_damage(uint8_t damage) = 0;
 
 	// getter
+	uint8_t get_hp() { return hp_; }
 	uint8_t get_pos_x() { return pos_x_; }
 	uint8_t get_pos_y() { return pos_y_; }
 	uint8_t get_width() { return width_; }
@@ -49,6 +51,7 @@ public:
 	void set_atk_dur_tick(uint8_t tick) { atk_dur_tick_ = tick; }
 
 protected:
+	int8_t hp_;
 	uint8_t pos_x_;
 	uint8_t pos_y_;
 	uint8_t width_;

@@ -234,11 +234,11 @@ void pf_wolf_basic::attack() {
 
 }
 
-void pf_wolf_basic::take_damage() {
+void pf_wolf_basic::take_damage(uint8_t damage) {
 	if (st_ == PF_ENEMY_ST_HIT || st_ == PF_ENEMY_ST_KNOCKBACK)
 		return;
-	hp_ --;
-	if (hp_ == 0) {
+	hp_ -= damage;
+	if (hp_ <= 0) {
 		anim_duration_tick_ = PF_WOLF_BASIC_KNOCKBACK_FRAME_TICK;
 		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? weapon_->get_pos_x() + 10 : weapon_->get_pos_x() - 10 ), get_pos_y());
 		weapon_->set_st(PF_WEAPON_ST_DETACH);

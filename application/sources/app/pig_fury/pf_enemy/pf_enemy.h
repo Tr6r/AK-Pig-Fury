@@ -28,18 +28,15 @@ public:
 
 	virtual void spawn(pf_char_dir dir) = 0;
 	virtual void attack() = 0;
-	virtual void take_damage() = 0;
+	virtual void take_damage(uint8_t damage) override = 0;
 
 	// getter
-	uint8_t get_hp() const { return hp_; }
 	pf_enemy_st get_st() const { return st_; }
 
 	// setter
-	void set_hp(uint8_t hp) { hp_ = hp; }
 	void set_st(pf_enemy_st st) { st_ = st; }
 
 protected:
-	uint8_t hp_;
 	uint8_t move_st_;
 	uint8_t atk_st_;
 	uint8_t anim_duration_tick_;

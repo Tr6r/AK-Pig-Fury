@@ -18,6 +18,7 @@
 #define PIG_JUMP_MAX_HEIGHT 30
 #define PIG_ATK_FRAME_TICK 6
 #define PIG_ATK_RANGE 2
+#define PIG_ATK_DAMAGE 1
 #define PIG_COLLECT_WEAPON_RANGE 10
 
 // idle weapon
@@ -80,15 +81,14 @@ public:
 	void init() override;
 	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 	void set_weapon(pf_weapon *weapon) override;
+	void take_damage(uint8_t damage) override;
 
 	// input
 	void jump();
 	void squat();
 	void attack(pf_char_dir dir);
-	void take_damage();
 	
 	// getter
-	uint8_t get_hp() { return hp_;}
 	pf_pig_st get_st() { return pig_st_;}
 	pf_atk_st get_atk_st() { return atk_st_;}
 	bool is_attack_hit_frame();
@@ -109,7 +109,6 @@ private:
 	void attack_with_weapon(pf_char_dir dir);
 	void update_weapon_attach_pose();
 
-	uint8_t hp_;
 	pf_pig_st pig_st_;
 	pf_atk_st atk_st_;
 };

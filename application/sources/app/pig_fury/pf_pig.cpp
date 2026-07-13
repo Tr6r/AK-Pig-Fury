@@ -444,3 +444,7 @@ bool pf_pig::is_attack_hit_frame() {
 void pf_pig::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 
 }
+
+void pf_pig::take_damage(uint8_t damage) {
+
+}

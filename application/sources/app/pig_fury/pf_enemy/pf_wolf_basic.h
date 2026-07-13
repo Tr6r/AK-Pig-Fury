@@ -9,7 +9,7 @@
 #include "pf_pig.h"
 #include "pf_enemy.h"
 
-#define PF_WOLF_BASIC_MAX_HP 3
+#define PF_WOLF_BASIC_MAX_HP 1
 #define PF_WOLF_BASIC_WIDTH 18
 #define PF_WOLF_BASIC_HEIGHT 27
 #define PF_WOLF_BASIC_UPDATE_STEP_PIXEL 2
@@ -84,7 +84,7 @@ public:
 	void update() override;
 	void render() override;
 	void attack() override;
-	void take_damage() override;
+	void take_damage(uint8_t damage) override;
 
 	// Helper
 	inline void update_move_state() {
