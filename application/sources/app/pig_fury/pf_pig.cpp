@@ -206,7 +206,7 @@ void pf_pig::set_weapon(pf_weapon *weapon) {
 void pf_pig::update_weapon_attach_pose() {
 	if (!weapon_) return;
 	weapon_->set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PIG_HOLD_WEAPON_LEFT_ROTATION : PIG_HOLD_WEAPON_RIGHT_ROTATION));
-	weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_HOLD_WEAPON_LEFT_POS_X : PIG_HOLD_WEAPON_RIGHT_POS_X), PIG_HOLD_WEAPON_POS_Y);
+	weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_HOLD_WEAPON_LEFT_POS_X : PIG_HOLD_WEAPON_RIGHT_POS_X),pos_y_ + PIG_HOLD_WEAPON_POS_OFFSET_Y);
 	weapon_->set_dir (dir_);
 }
 
@@ -223,12 +223,12 @@ void pf_pig::attack_with_weapon(pf_char_dir dir) {
 	if (atk_st_ == PF_PIG_ATTACK_WEAPON_MELEE_1) {
 		weapon_->set_dir((pf_char_dir)(dir_ ^ 1));
 		atk_st_ = PF_PIG_ATTACK_WEAPON_MELEE_2;
-		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_2_LEFT_POS_X :PIG_ATK_WEAPON_MELEE_2_RIGHT_POS_X),PIG_ATK_WEAPON_MELEE_2_POS_Y);
+		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_2_LEFT_POS_X :PIG_ATK_WEAPON_MELEE_2_RIGHT_POS_X), pos_y_ + PIG_ATK_WEAPON_MELEE_2_POS_OFFSET_Y);
 		weapon_->set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_2_LEFT_ROTATION :PIG_ATK_WEAPON_MELEE_2_RIGHT_ROTATION));
 		return;
 	} else if (atk_st_ == PF_PIG_ATTACK_WEAPON_MELEE_2) {
 		atk_st_ = PF_PIG_ATTACK_WEAPON_MELEE_1;
-		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_1_LEFT_POS_X :PIG_ATK_WEAPON_MELEE_1_RIGHT_POS_X),PIG_ATK_WEAPON_MELEE_1_POS_Y);
+		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_1_LEFT_POS_X :PIG_ATK_WEAPON_MELEE_1_RIGHT_POS_X),pos_y_ + PIG_ATK_WEAPON_MELEE_1_POS_OFFSET_Y);
 		weapon_->set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_1_LEFT_ROTATION :PIG_ATK_WEAPON_MELEE_1_RIGHT_ROTATION));
 		return;
 	}
@@ -237,14 +237,14 @@ void pf_pig::attack_with_weapon(pf_char_dir dir) {
 	{
 	case PF_PIG_WEAPON_ACTION_MELEE: {
 		atk_st_ = PF_PIG_ATTACK_WEAPON_MELEE_1;
-		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_1_LEFT_POS_X :PIG_ATK_WEAPON_MELEE_1_RIGHT_POS_X),PIG_ATK_WEAPON_MELEE_1_POS_Y);
+		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_1_LEFT_POS_X :PIG_ATK_WEAPON_MELEE_1_RIGHT_POS_X),pos_y_ + PIG_ATK_WEAPON_MELEE_1_POS_OFFSET_Y);
 		weapon_->set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_MELEE_1_LEFT_ROTATION :PIG_ATK_WEAPON_MELEE_1_RIGHT_ROTATION));
 		break;
 	}
 	case PF_PIG_WEAPON_ACTION_THROW: {
 		weapon_->set_dir((pf_char_dir)(dir_ ^ 1));
 		atk_st_ = PF_PIG_ATTACK_WEAPON_THROW;
-		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_THROW_LEFT_POS_X :PIG_ATK_WEAPON_THROW_RIGHT_POS_X),PIG_ATK_WEAPON_THROW_POS_Y);
+		weapon_->set_anchor((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_THROW_LEFT_POS_X :PIG_ATK_WEAPON_THROW_RIGHT_POS_X),pos_y_ + PIG_ATK_WEAPON_THROW_POS_OFFSET_Y);
 		weapon_->set_rotation((dir_ == PF_CHAR_DIR_LEFT ? PIG_ATK_WEAPON_THROW_LEFT_ROTATION :PIG_ATK_WEAPON_THROW_RIGHT_ROTATION));
 		weapon_->set_st(PF_WEAPON_ST_THROW);
 		weapon_ = NULL;
@@ -390,12 +390,12 @@ void pf_pig::update_st() {
 	switch (pig_st_) {
 		case PF_PIG_ST_JUMP: {
 			pos_y_ -= PIG_UPDATE_STEP_PIXEL;
-
 			if (pos_y_ <= (PIG_POS_Y - PIG_JUMP_MAX_HEIGHT))
 			{
 				pos_y_ = PIG_POS_Y - PIG_JUMP_MAX_HEIGHT;
 				pig_st_ = PF_PIG_ST_FALL;
 			}
+			weapon_->set_anchor(weapon_->get_pos_x(), pos_y_ + PIG_HOLD_WEAPON_POS_OFFSET_Y);
 			break;
 		}
 		case PF_PIG_ST_FALL: {
@@ -405,6 +405,7 @@ void pf_pig::update_st() {
 				pig_st_ = PF_PIG_ST_NONE;
 				atk_st_ = PF_PIG_ATTACK_NONE;
 			}
+			weapon_->set_anchor(weapon_->get_pos_x(), pos_y_ + PIG_HOLD_WEAPON_POS_OFFSET_Y);
 			break;
 		}
 
