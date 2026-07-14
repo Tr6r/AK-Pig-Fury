@@ -187,14 +187,17 @@ void pf_pig::init() {
 	char_st_ = PF_CHAR_ST_IDLE;
 	dir_ = PF_CHAR_DIR_RIGHT;
 	weapon_ = NULL;
+	hit_duration_frame = 0;
 }
 
 void pf_pig::update() {
+	if (hit_duration_frame > 0) hit_duration_frame--;
 	update_atk();
 	update_st();
 }
 
 void pf_pig::render() {
+	if (hit_duration_frame > 0 && hit_duration_frame % 2 == 0) return;
 	render_atk();
 	render_st();
 }
@@ -408,7 +411,6 @@ void pf_pig::update_st() {
 			weapon_->set_anchor(weapon_->get_pos_x(), pos_y_ + PIG_HOLD_WEAPON_POS_OFFSET_Y);
 			break;
 		}
-
 		default:
 			break;
 	}
@@ -447,5 +449,6 @@ void pf_pig::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 }
 
 void pf_pig::take_damage(uint8_t damage) {
-
+	hit_duration_frame = PIG_HIT_FRAME_TICK;
+	// hp_ -= damage; // stop game if it under 1
 }

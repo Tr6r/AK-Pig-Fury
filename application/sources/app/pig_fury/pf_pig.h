@@ -17,6 +17,7 @@
 #define PIG_UPDATE_STEP_PIXEL 5
 #define PIG_JUMP_MAX_HEIGHT 30
 #define PIG_ATK_FRAME_TICK 6
+#define PIG_HIT_FRAME_TICK 8
 #define PIG_ATK_RANGE 2
 #define PIG_ATK_DAMAGE 1
 #define PIG_COLLECT_WEAPON_RANGE 10
@@ -92,6 +93,8 @@ public:
 	pf_pig_st get_st() { return pig_st_;}
 	pf_atk_st get_atk_st() { return atk_st_;}
 	bool is_attack_hit_frame();
+	uint8_t get_hit_duration_frame() { return hit_duration_frame;}
+
 
 	// setter
 	void set_st(pf_pig_st st) { pig_st_ = st;}
@@ -111,6 +114,7 @@ private:
 
 	pf_pig_st pig_st_;
 	pf_atk_st atk_st_;
+	uint8_t hit_duration_frame;
 };
 
 #endif //__PF_PIG_H__
