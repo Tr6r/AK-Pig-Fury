@@ -4,8 +4,8 @@
 #include "pf_enemy.h"
 #include "pf_wolf_basic.h"
 
-#define PF_GAME_MAX_ENEMY 2
-#define PF_GAME_MAX_WOLF_BASIC 2
+#define PF_GAME_MAX_ENEMY 4
+#define PF_GAME_MAX_WOLF_BASIC 4
 
 enum pf_enemy_type : uint8_t {
 	PF_ENEMY_TYPE_WOLF_BASIC = 0,

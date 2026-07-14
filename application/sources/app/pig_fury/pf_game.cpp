@@ -1,3 +1,5 @@
+#include "sys_ctrl.h"
+
 #include "pf_game.h"
 #include "pf_wolf_basic.h"
 
@@ -93,6 +95,7 @@ void pig_fury_game::update_spawn() {
 	pf_enemy *enemy = enemy_mng_.spawn_random_enemy();
 	pf_weapon *weapon = weapon_mng_.spawn_weapon(PF_WEAPON_TYPE_AXE, enemy->get_dir());
 	enemy->set_weapon(weapon);
+	sys_ctrl_delay_us(2);
 }
 
 bool pig_fury_game::should_spawn() {
