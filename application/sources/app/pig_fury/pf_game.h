@@ -25,6 +25,8 @@ public:
 	bool check_pig_attach_weapon();
 	bool check_weapon_hit_enemy(pf_weapon *weapon, pf_enemy *enemy);
 	void check_throw_weapon_attack_hit();
+	void check_enemy_attack_hit();
+
 private:
 	pf_pig pig_;
 	pf_enemy_manager enemy_mng_;

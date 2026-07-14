@@ -48,6 +48,22 @@ void pig_fury_game::update() {
 	weapon_mng_.update();
 	check_throw_weapon_attack_hit();
 	check_pig_attack_hit();
+	check_enemy_attack_hit();
+}
+
+void pig_fury_game::check_enemy_attack_hit() {
+    if (pig_.get_hit_duration_frame() > 0)
+        return;
+
+    for (int i = 0; i < enemy_mng_.get_enemy_count(); i++) {
+        pf_enemy *enemy = enemy_mng_.get_enemy(i);
+
+        if (!enemy->is_attack_hit_frame())
+            continue;
+        pig_.take_damage(enemy->get_damage());
+        break;
+        
+    }
 }
 
 bool pig_fury_game::check_pig_attach_weapon()
