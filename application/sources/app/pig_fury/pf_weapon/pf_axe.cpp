@@ -15,6 +15,7 @@ void pf_axe::init() {
 	action_count_ = 0;
 	action_ = axe_actions;
 	damage_ = PF_AXE_DAMAGE;
+	is_pickup_ = false;
 }
 
 void pf_axe::update() {

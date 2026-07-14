@@ -41,7 +41,7 @@ public:
 	uint8_t get_width() { return width_; }
 	uint8_t get_height() { return height_; }
 	uint8_t get_damage() { return damage_; }
-
+	bool is_pickup() { return is_pickup_; }
 
 	// setter
 	void set_st(pf_weapon_st st) { st_ = st; }
@@ -49,6 +49,7 @@ public:
 	void set_rotation(uint16_t degree) {rotation_ = degree; }
 	void set_visible(bool flag) { is_visible_ = flag; }
 	void set_anchor(uint8_t x, uint8_t y) { pos_x_ = x; pos_y_ = y; }
+	void set_pickup(bool flag) { is_pickup_ = flag; }
 
 protected:
 	uint8_t damage_;
@@ -60,6 +61,7 @@ protected:
 	uint8_t height_;
 	pf_char_dir dir_;
 	bool is_visible_;
+	bool is_pickup_;
 	uint8_t anim_duration_tick_;
 	const pf_pig_weapon_action *action_;
 	uint8_t action_count_;

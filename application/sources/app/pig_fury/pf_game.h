@@ -22,7 +22,7 @@ public:
 	void check_pig_attack_hit();
 	void update_spawn();
 	bool should_spawn();
-	bool check_pig_attack_weapon();
+	bool check_pig_attach_weapon();
 	bool check_weapon_hit_enemy(pf_weapon *weapon, pf_enemy *enemy);
 	void check_throw_weapon_attack_hit();
 private:

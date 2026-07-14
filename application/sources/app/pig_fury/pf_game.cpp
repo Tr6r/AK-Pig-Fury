@@ -24,7 +24,7 @@ void pf_game_update() {
 }
 
 bool pf_pig_try_pickup_weapon(pf_char_dir dir) {
-	return game.check_pig_attack_weapon();
+	return game.check_pig_attach_weapon();
 }
 
 void pig_fury_game::init() {
@@ -44,16 +44,17 @@ void pig_fury_game::update() {
 	pig_.update();
 	enemy_mng_.update();
 	weapon_mng_.update();
-	check_pig_attack_hit();
 	check_throw_weapon_attack_hit();
+	check_pig_attack_hit();
 }
 
-bool pig_fury_game::check_pig_attack_weapon()
+bool pig_fury_game::check_pig_attach_weapon()
 {
+	if (pig_.get_weapon()) return false;
 	for (uint8_t i = 0; i < weapon_mng_.get_weapon_count(); i++)
 	{
 		pf_weapon *weapon = weapon_mng_.get_weapon(i);
-		if (weapon->get_st() != PF_WEAPON_ST_FALL && weapon->get_st() != PF_WEAPON_ST_FLY)
+		if ((weapon->get_st() != PF_WEAPON_ST_FALL && weapon->get_st() != PF_WEAPON_ST_FLY) || weapon->is_pickup())
 			continue;
 		switch (pig_.get_dir())
 		{
@@ -65,6 +66,7 @@ bool pig_fury_game::check_pig_attack_weapon()
 					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
 					weapon->set_dir(PF_CHAR_DIR_LEFT);
 					weapon->set_st(PF_WEAPON_ST_PENDING_ATTACH);
+					weapon->set_pickup(true);
 					return true;
 				}
 				break;
@@ -76,6 +78,7 @@ bool pig_fury_game::check_pig_attack_weapon()
 					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
 					weapon->set_dir(PF_CHAR_DIR_RIGHT);
 					weapon->set_st(PF_WEAPON_ST_PENDING_ATTACH);
+					weapon->set_pickup(true);
 					return true;
 				}
 				break;
@@ -135,8 +138,7 @@ void pig_fury_game::check_pig_attack_hit() {
 	}
 }
 
-void pig_fury_game::check_throw_weapon_attack_hit()
-{
+void pig_fury_game::check_throw_weapon_attack_hit() {
 	for (uint8_t i = 0; i < weapon_mng_.get_weapon_count(); i++)
 	{
 		pf_weapon *weapon = weapon_mng_.get_weapon(i);
@@ -154,9 +156,7 @@ void pig_fury_game::check_throw_weapon_attack_hit()
 	}
 }
 
-bool pig_fury_game::check_weapon_hit_enemy(pf_weapon *weapon,
-										   pf_enemy *enemy)
-{
+bool pig_fury_game::check_weapon_hit_enemy(pf_weapon *weapon, pf_enemy *enemy) {
 	return (
 		weapon->get_pos_x() < enemy->get_pos_x() + enemy->get_width() &&
 		weapon->get_pos_x() + weapon->get_width() > enemy->get_pos_x() &&
