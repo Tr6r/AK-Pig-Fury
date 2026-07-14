@@ -52,8 +52,8 @@ public:
 
 protected:
 	int8_t hp_;
-	uint8_t pos_x_;
-	uint8_t pos_y_;
+	int16_t pos_x_;
+	int16_t pos_y_;
 	uint8_t width_;
 	uint8_t height_;
 	pf_char_st char_st_;
