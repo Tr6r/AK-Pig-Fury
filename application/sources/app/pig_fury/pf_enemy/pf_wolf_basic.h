@@ -9,9 +9,10 @@
 #include "pf_pig.h"
 #include "pf_enemy.h"
 
-#define PF_WOLF_BASIC_MAX_HP 3
+#define PF_WOLF_BASIC_MAX_HP 2
 #define PF_WOLF_BASIC_WIDTH 18
 #define PF_WOLF_BASIC_HEIGHT 27
+#define PF_WOLF_BASIC_ATK_DAMAGE 1
 #define PF_WOLF_BASIC_UPDATE_STEP_PIXEL 2
 #define PF_WOLF_BASIC_SPAWN_LEFT_X - PF_WOLF_BASIC_WIDTH
 #define PF_WOLF_BASIC_SPAWN_RIGHT_X (LCD_WIDTH + PF_WOLF_BASIC_WIDTH)
@@ -80,11 +81,14 @@ public:
 
 	void init() override;
 	void spawn(pf_char_dir dir) override;
-    void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
+	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 	void update() override;
 	void render() override;
 	void attack() override;
 	void take_damage(uint8_t damage) override;
+	uint8_t get_damage() override { return PF_WOLF_BASIC_ATK_DAMAGE; }
+	bool is_atk() override { return atk_st_ == PF_WOLF_BASIC_ATK_3;}
+	bool is_attack_hit_frame() override;
 
 	// Helper
 	inline void update_move_state() {

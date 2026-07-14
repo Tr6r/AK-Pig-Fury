@@ -29,6 +29,9 @@ public:
 	virtual void spawn(pf_char_dir dir) = 0;
 	virtual void attack() = 0;
 	virtual void take_damage(uint8_t damage) override = 0;
+	virtual uint8_t get_damage() = 0;
+	virtual bool is_atk() = 0;
+	virtual bool is_attack_hit_frame() = 0;
 
 	// getter
 	pf_enemy_st get_st() const { return st_; }

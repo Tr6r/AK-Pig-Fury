@@ -299,3 +299,10 @@ void pf_wolf_basic::update_weapon()
 	get_hand_pos(hand_pos_x, hand_pos_y);
 	weapon_->set_anchor(hand_pos_x, hand_pos_y);
 }
+
+bool pf_wolf_basic::is_attack_hit_frame()
+{
+	if (st_ != PF_ENEMY_ST_ATTACK || atk_st_ != PF_WOLF_BASIC_ATK_3)
+		return false;
+	return PF_WOLF_BASIC_ATK_COOLDOWN_FRAME_TICK - anim_duration_tick_ <= 2;
+}
