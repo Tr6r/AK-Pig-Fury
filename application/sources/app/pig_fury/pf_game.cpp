@@ -30,6 +30,7 @@ bool pf_pig_try_pickup_weapon(pf_char_dir dir) {
 }
 
 void pig_fury_game::init() {
+	menu_.init();
 	pig_.init();
 	enemy_mng_.init();
 	weapon_mng_.init();
@@ -52,18 +53,18 @@ void pig_fury_game::update() {
 }
 
 void pig_fury_game::check_enemy_attack_hit() {
-    if (pig_.get_hit_duration_frame() > 0)
-        return;
+	if (pig_.get_hit_duration_frame() > 0)
+		return;
 
-    for (int i = 0; i < enemy_mng_.get_enemy_count(); i++) {
-        pf_enemy *enemy = enemy_mng_.get_enemy(i);
+	for (int i = 0; i < enemy_mng_.get_enemy_count(); i++) {
+		pf_enemy *enemy = enemy_mng_.get_enemy(i);
 
-        if (!enemy->is_attack_hit_frame())
-            continue;
-        pig_.take_damage(enemy->get_damage());
-        break;
-        
-    }
+		if (!enemy->is_attack_hit_frame())
+			continue;
+		pig_.take_damage(enemy->get_damage());
+		break;
+		
+	}
 }
 
 bool pig_fury_game::check_pig_attach_weapon()

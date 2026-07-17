@@ -4,9 +4,11 @@
 #include <stdint.h>
 #include "app.h"
 
+#include "pf_menu.h"
 #include "pf_pig.h"
 #include "pf_enemy_manager.h"
 #include "pf_weapon_manager.h"
+
 class pig_fury_game
 {
 public:
@@ -28,6 +30,7 @@ public:
 	void check_enemy_attack_hit();
 
 private:
+	pf_menu menu_;
 	pf_pig pig_;
 	pf_enemy_manager enemy_mng_;
 	pf_weapon_manager weapon_mng_;
