@@ -1,3 +1,4 @@
+#include "pf_game.h"
 #include "scr_pf_menu.h"
 
 static void view_scr_pf_menu();
@@ -17,11 +18,7 @@ view_screen_t scr_pf_menu = {
 };
 
 void view_scr_pf_menu() {
-	view_render.clear();
-	view_render.setTextSize(1);
-	view_render.setTextColor(WHITE);
-	view_render.setCursor(10,10);
-	view_render.println("Menu");
+	pf_menu_render();
 }
 
 void scr_pf_menu_handle(ak_msg_t *msg) {

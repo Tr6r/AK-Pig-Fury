@@ -16,8 +16,10 @@ public:
 	~pig_fury_game() = default;
 
 	void init();
-	void update();
-	void render();
+	void menu_update();
+	void menu_render();
+	void game_play_update();
+	void game_play_render();
 
 	void pig_attack(pf_char_dir dir) {pig_.attack(dir);}
 	void pig_jump() {pig_.jump();}
@@ -37,6 +39,8 @@ private:
 };
 
 void pf_game_init();
+void pf_menu_render();
+void pf_menu_update();
 void pf_game_update();
 void pf_game_render();
 void pf_pig_atk(pf_char_dir dir);

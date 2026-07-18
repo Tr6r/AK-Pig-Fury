@@ -18,11 +18,19 @@ void pf_pig_jump()
 }
 
 void pf_game_render() {
-	game.render();
+	game.game_play_render();
 }
 
 void pf_game_update() {
-	game.update();
+	game.game_play_update();
+}
+
+void pf_menu_render() {
+	game.menu_render();
+}
+
+void pf_menu_update() {
+	game.menu_update();
 }
 
 bool pf_pig_try_pickup_weapon(pf_char_dir dir) {
@@ -36,13 +44,21 @@ void pig_fury_game::init() {
 	weapon_mng_.init();
 }
 
-void pig_fury_game::render() {
+void pig_fury_game::menu_update() {
+	menu_.update();
+}
+
+void pig_fury_game::menu_render() {
+	menu_.render();
+}
+
+void pig_fury_game::game_play_render() {
 	pig_.render();
 	enemy_mng_.render();
 	weapon_mng_.render();
 }
 
-void pig_fury_game::update() {
+void pig_fury_game::game_play_update() {
 	update_spawn();
 	pig_.update();
 	enemy_mng_.update();
