@@ -12,46 +12,6 @@
 #define PF_MENU_SCROLL_DISTANCE (LCD_WIDTH - PF_MENU_INIT_POS_X)
 #define PF_MENU_SCROLL_SPEED 8
 
-enum pf_menu_anim_dir : uint8_t {
-	PF_MENU_ANIM_LEFT,
-	PF_MENU_ANIM_RIGHT,
-};
-
-enum pf_menu_item : uint8_t {
-	PF_MENU_GAMEPLAY,
-	PF_MENU_CONFIG,
-	PF_MENU_ITEM_COUNT,
-};
-
-class pf_menu {
-public:
-	pf_menu() = default;
-	~pf_menu() = default;
-	void init();
-	void update();
-	void render();
-	void move_next_item();
-	void move_pre_item();
-
-	// Setter
-	void set_dir(pf_menu_anim_dir dir) { dir_ = dir; };
-
-	// Getter
-	bool is_animating() {return animating_;}
-
-private:
-	void get_render_pos(int16_t &cur_x, int16_t &target_x) const;
-	const uint8_t* get_bitmap(pf_menu_item item) const;
-
-	int16_t pos_x_;
-	int16_t pos_y_;
-	pf_menu_item cur_menu_item_;
-	pf_menu_item target_menu_item_;
-	int16_t anim_offset_;
-	pf_menu_anim_dir dir_;
-	bool animating_;
-};
-
 static const uint8_t menu_gameplay_bitmap[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f,
@@ -96,6 +56,55 @@ static const uint8_t menu_config_bitmap[] = {
 	0x00, 0x06, 0x4c, 0x9b, 0x4d, 0x0c, 0x4c, 0x8f, 0x00, 0x03, 0x87, 0x0d, 0x86, 0x07, 0x87, 0x0f,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f
+};
+
+enum pf_menu_anim_dir : uint8_t {
+	PF_MENU_ANIM_LEFT,
+	PF_MENU_ANIM_RIGHT,
+};
+
+enum pf_menu_item_st : uint8_t {
+	PF_MENU_GAMEPLAY,
+	PF_MENU_CONFIG,
+	PF_MENU_ITEM_COUNT,
+};
+
+struct pf_menu_item {
+	const uint8_t *bitmap;
+};
+
+class pf_menu {
+public:
+	pf_menu() = default;
+	~pf_menu() = default;
+	void init();
+	void update();
+	void render();
+	void move_next_item();
+	void move_pre_item();
+
+	// Setter
+	void set_dir(pf_menu_anim_dir dir) { dir_ = dir; };
+
+	// Getter
+	bool is_animating() {return animating_;}
+
+private:
+	void get_render_pos(int16_t &cur_x, int16_t &target_x) const;
+
+	int16_t pos_x_;
+	int16_t pos_y_;
+	pf_menu_item menu_items_[PF_MENU_ITEM_COUNT] = {
+		{ .bitmap = menu_gameplay_bitmap,},
+		{ .bitmap = menu_config_bitmap,}
+	};
+	pf_menu_item *cur_menu_item_;
+	pf_menu_item *target_menu_item_;
+	uint8_t cur_index_;
+	uint8_t target_index_;
+	int16_t anim_offset_;
+	pf_menu_anim_dir dir_;
+	bool animating_;
 };
 
 #endif //__PF_MENU_H__
