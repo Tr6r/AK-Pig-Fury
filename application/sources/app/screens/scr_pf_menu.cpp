@@ -29,7 +29,18 @@ void scr_pf_menu_handle(ak_msg_t *msg) {
 		break;
 	}
 	case AC_DISPLAY_MENU_UPDATE: {
-			scr_mng_invalidate();
+		scr_mng_invalidate();
+		pf_menu_update();
+		break;
+	}
+	case AC_DISPLAY_BUTON_UP_PRESSED: {
+		pf_menu_anim_dir dir = PF_MENU_ANIM_RIGHT;
+		task_post_common_msg(AC_TASK_PF_GAME_ID, AC_PF_MENU_NEXT_ITEM, (uint8_t*)&dir, sizeof(dir));
+		break;
+	}
+	case AC_DISPLAY_BUTON_DOWN_PRESSED: {
+		pf_menu_anim_dir dir = PF_MENU_ANIM_LEFT;
+		task_post_common_msg(AC_TASK_PF_GAME_ID, AC_PF_MENU_NEXT_ITEM, (uint8_t*)&dir, sizeof(dir));
 		break;
 	}
 	default:
