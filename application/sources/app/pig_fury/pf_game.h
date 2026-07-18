@@ -18,6 +18,7 @@ public:
 	void init();
 	void menu_update();
 	void menu_render();
+	void menu_move_next_item(pf_menu_anim_dir dir);
 	void game_play_update();
 	void game_play_render();
 
@@ -41,6 +42,7 @@ private:
 void pf_game_init();
 void pf_menu_render();
 void pf_menu_update();
+void pf_menu_move_next_item(pf_menu_anim_dir dir);
 void pf_game_update();
 void pf_game_render();
 void pf_pig_atk(pf_char_dir dir);

@@ -37,6 +37,14 @@ bool pf_pig_try_pickup_weapon(pf_char_dir dir) {
 	return game.check_pig_attach_weapon();
 }
 
+void pf_menu_move_next_item(pf_menu_anim_dir dir) {
+	game.menu_move_next_item(dir);
+}
+
+void pig_fury_game::menu_move_next_item(pf_menu_anim_dir dir) {
+	(dir == PF_MENU_ANIM_LEFT ? menu_.move_pre_item() : menu_.move_next_item());
+}
+
 void pig_fury_game::init() {
 	menu_.init();
 	pig_.init();
@@ -71,15 +79,12 @@ void pig_fury_game::game_play_update() {
 void pig_fury_game::check_enemy_attack_hit() {
 	if (pig_.get_hit_duration_frame() > 0)
 		return;
-
 	for (int i = 0; i < enemy_mng_.get_enemy_count(); i++) {
 		pf_enemy *enemy = enemy_mng_.get_enemy(i);
-
 		if (!enemy->is_attack_hit_frame())
 			continue;
 		pig_.take_damage(enemy->get_damage());
 		break;
-		
 	}
 }
 
