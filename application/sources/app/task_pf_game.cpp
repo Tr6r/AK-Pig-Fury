@@ -17,6 +17,11 @@ void task_pf_game(ak_msg_t *msg) {
 			pf_game_init();
 			break;
 		}
+		case AC_PF_MENU_NEXT_ITEM: {
+			pf_menu_anim_dir dir = *(pf_menu_anim_dir*)get_data_common_msg(msg);
+			pf_menu_move_next_item(dir);
+			break;
+		}
 		case AC_PF_PIG_ATK: {
 			pf_char_dir dir = *(pf_char_dir*)get_data_common_msg(msg);
 			if (pf_pig_try_pickup_weapon(dir))
