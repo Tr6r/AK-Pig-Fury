@@ -51,8 +51,12 @@ void pf_menu::get_render_pos(int16_t &cur_x, int16_t &target_x) const {
 }
 
 void pf_menu::update() {
-	if (!is_animating())
+	if (!is_animating()) {
+		cur_menu_item_->icon->update();
 		return;
+	}
+	cur_menu_item_->icon->update();
+	target_menu_item_->icon->update();
 	anim_offset_ += PF_MENU_SCROLL_SPEED;
 	if (anim_offset_ >= PF_MENU_SCROLL_DISTANCE) {
 		anim_offset_ = 0;
