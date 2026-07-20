@@ -91,6 +91,7 @@ public:
 	void set_dir(pf_menu_anim_dir dir) { dir_ = dir; };
 
 	// Getter
+	pf_menu_item_st get_menu_st() { return (pf_menu_item_st)cur_index_; }
 	bool is_animating() {return animating_;}
 
 private:

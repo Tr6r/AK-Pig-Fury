@@ -31,6 +31,7 @@ public:
 	bool check_weapon_hit_enemy(pf_weapon *weapon, pf_enemy *enemy);
 	void check_throw_weapon_attack_hit();
 	void check_enemy_attack_hit();
+	pf_menu_item_st get_menu_st();
 
 private:
 	pf_menu menu_;
@@ -48,5 +49,6 @@ void pf_game_render();
 void pf_pig_atk(pf_char_dir dir);
 void pf_pig_jump();
 bool pf_pig_try_pickup_weapon(pf_char_dir dir);
+pf_menu_item_st pf_get_menu_st();
 
 #endif //__PF_GAME_H__

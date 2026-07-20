@@ -33,6 +33,14 @@ void pf_menu_update() {
 	game.menu_update();
 }
 
+pf_menu_item_st pf_get_menu_st() {
+	return game.get_menu_st();
+}
+
+pf_menu_item_st pig_fury_game::get_menu_st() {
+	return menu_.get_menu_st();
+}
+
 bool pf_pig_try_pickup_weapon(pf_char_dir dir) {
 	return game.check_pig_attach_weapon();
 }
