@@ -53,4 +53,9 @@ extern view_dynamic_t dyn_view_pf_menu;
 extern view_screen_t scr_pf_menu;
 extern void scr_pf_menu_handle(ak_msg_t* msg);
 
+// scr_pf_config
+extern view_dynamic_t dyn_view_pf_config;
+extern view_screen_t scr_pf_config;
+extern void scr_pf_config_handle(ak_msg_t* msg);
+
 #endif //__SCREENS_H__

@@ -47,13 +47,14 @@ void scr_pf_menu_handle(ak_msg_t *msg) {
 			pf_menu_item_st st = pf_get_menu_st();
 			switch (st)
 			{
-			case PF_MENU_GAMEPLAY:
-				SCREEN_TRAN(scr_pf_gameplay_handle, &scr_pf_gameplay);
-				break;
-			case PF_MENU_CONFIG:
-				break;
-			default:
-				break;
+				case PF_MENU_GAMEPLAY:
+					SCREEN_TRAN(scr_pf_gameplay_handle, &scr_pf_gameplay);
+					break;
+				case PF_MENU_CONFIG:
+					SCREEN_TRAN(scr_pf_config_handle, &scr_pf_config);
+					break;
+				default:
+					break;
 			}
 			
 			break;
