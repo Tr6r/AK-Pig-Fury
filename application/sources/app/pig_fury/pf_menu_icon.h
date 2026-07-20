@@ -7,7 +7,8 @@
 #define PF_MENU_HEART_ICON_HEIGHT 6
 #define PF_MENU_HEART_ICON_GAP 10
 #define PF_MENU_HEART_ICON_COUNT 3
-#define PF_MENU_HEART_ICON_FRAME 10
+#define PF_MENU_HEART_ICON_ACT_FRAME 4
+#define PF_MENU_HEART_ICON_IDLE_FRAME 10
 #define PF_MENU_HEART_ICON_OFFSET_X -2
 #define PF_MENU_HEART_ICON_OFFSET_Y -8
 
@@ -44,6 +45,7 @@ private:
 	pf_menu_heart_icon heart_icons_[PF_MENU_HEART_ICON_COUNT];
 	uint8_t anim_phase;
 	uint8_t anim_duration_tick_;
+	bool is_idle_ = false;
 };
 
 class pf_config_icon : public pf_menu_icon {
