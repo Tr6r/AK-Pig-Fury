@@ -56,7 +56,6 @@ void scr_pf_menu_handle(ak_msg_t *msg) {
 				default:
 					break;
 			}
-			
 			break;
 		}
 		default:

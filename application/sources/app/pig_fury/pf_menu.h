@@ -75,7 +75,38 @@ struct pf_menu_item {
 	const uint8_t *bitmap;
 	pf_menu_icon *icon;
 };
+#define PF_MENU_ARROW_WIDTH 7
+#define PF_MENU_ARROW_HEIGHT 11
+#define PF_MENU_ARROW_BLINK_FRAME 8
+#define PF_MENU_ARROW_LEFT_POS_X 120
+#define PF_MENU_ARROW_RIGHT_POS_X 0
+#define PF_MENU_ARROW_POS_Y LCD_HEIGHT/2
 
+static const uint8_t menu_arrow_left_bitmap[] = {
+	0xC1, 0xE1, 0xF1, 0xF9, 0xFD, 0xFF, 0xFD, 0xF9, 0xF1, 0xE1, 0xC1
+};
+
+static const uint8_t menu_arrow_right_bitmap[] = {
+	0x07, 0x0F, 0x1F, 0x3F, 0x7F, 0xFF, 0x7F, 0x3F, 0x1F, 0x0F, 0x07
+};
+
+class pf_menu_arrow {
+public:
+	void init(uint8_t index);
+	void update();
+	void render();
+
+	// setter
+	void set_enable_(bool flag) { enable_ = flag; }
+
+private:
+	pf_menu_anim_dir dir_;
+	uint8_t pos_x_;
+	uint8_t pos_y_;
+	bool visible_;
+	bool enable_;
+	uint8_t blink_tick_;
+};
 
 class pf_menu {
 public:
@@ -104,6 +135,7 @@ private:
 		{ .bitmap = menu_gameplay_bitmap, .icon = &gameplay_icon_},
 		{ .bitmap = menu_config_bitmap, .icon = &config_icon_}
 	};
+	pf_menu_arrow menu_arrow_[2];
 	pf_menu_item *cur_menu_item_;
 	pf_menu_item *target_menu_item_;
 	uint8_t cur_index_;
