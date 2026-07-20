@@ -5,6 +5,8 @@
 
 #include "task_display.h"
 
+#include "pf_menu_icon.h"
+
 #define PF_MENU_ICON_W     60
 #define PF_MENU_ICON_H     40
 #define PF_MENU_INIT_POS_X (LCD_WIDTH - PF_MENU_ICON_W)/2
@@ -71,7 +73,9 @@ enum pf_menu_item_st : uint8_t {
 
 struct pf_menu_item {
 	const uint8_t *bitmap;
+	pf_menu_icon *icon;
 };
+
 
 class pf_menu {
 public:
@@ -91,12 +95,13 @@ public:
 
 private:
 	void get_render_pos(int16_t &cur_x, int16_t &target_x) const;
-
+	pf_gameplay_icon gameplay_icon_;
+	pf_config_icon config_icon_;
 	int16_t pos_x_;
 	int16_t pos_y_;
 	pf_menu_item menu_items_[PF_MENU_ITEM_COUNT] = {
-		{ .bitmap = menu_gameplay_bitmap,},
-		{ .bitmap = menu_config_bitmap,}
+		{ .bitmap = menu_gameplay_bitmap, .icon = &gameplay_icon_},
+		{ .bitmap = menu_config_bitmap, .icon = &config_icon_}
 	};
 	pf_menu_item *cur_menu_item_;
 	pf_menu_item *target_menu_item_;

@@ -7,18 +7,27 @@ void pf_menu::init() {
 	target_index_ = PF_MENU_GAMEPLAY;
 	cur_menu_item_ = &menu_items_[cur_index_];
 	target_menu_item_ = &menu_items_[target_index_];
+	for (uint8_t i = 0; i < PF_MENU_ITEM_COUNT; i++) {
+		menu_items_[i].icon->init(pos_x_, pos_y_);
+	}
 }
 
 void pf_menu::render() {
 	if (!is_animating()) {
 		view_render.drawBitmap(pos_x_, pos_y_, cur_menu_item_->bitmap, PF_MENU_ICON_W, PF_MENU_ICON_H, WHITE);
+		cur_menu_item_->icon->render(pos_x_, pos_y_);
 		return;
 	}
 	int16_t cur_x;
 	int16_t target_x;
 	get_render_pos(cur_x, target_x);
+	// cur item
 	view_render.drawBitmap(cur_x, pos_y_, cur_menu_item_->bitmap, PF_MENU_ICON_W, PF_MENU_ICON_H, WHITE);
+	cur_menu_item_->icon->render(cur_x, pos_y_);
+	
+	// target item
 	view_render.drawBitmap(target_x, pos_y_, target_menu_item_->bitmap, PF_MENU_ICON_W, PF_MENU_ICON_H, WHITE);
+	target_menu_item_->icon->render(target_x, pos_y_);
 }
 
 void pf_menu::get_render_pos(int16_t &cur_x, int16_t &target_x) const {
