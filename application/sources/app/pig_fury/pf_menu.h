@@ -97,7 +97,11 @@ public:
 	void render();
 
 	// setter
-	void set_enable_(bool flag) { enable_ = flag; }
+	void set_enable_(bool flag) { 
+		enable_ = flag;
+		blink_tick_ = PF_MENU_ARROW_BLINK_FRAME;
+		visible_ = true;
+	}
 
 private:
 	pf_menu_anim_dir dir_;
