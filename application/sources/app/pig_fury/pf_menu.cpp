@@ -3,8 +3,10 @@
 void pf_menu::init() {
 	pos_x_ = PF_MENU_INIT_POS_X;
 	pos_y_ = PF_MENU_INIT_POS_Y;
-	cur_index_ = PF_MENU_GAMEPLAY;
-	target_index_ = PF_MENU_GAMEPLAY;
+	// cur_index_ = PF_MENU_GAMEPLAY;
+	// target_index_ = PF_MENU_GAMEPLAY;
+    cur_index_ = PF_MENU_CONFIG;
+	target_index_ = PF_MENU_CONFIG;
 	cur_menu_item_ = &menu_items_[cur_index_];
 	target_menu_item_ = &menu_items_[target_index_];
 	menu_arrow_[0].init(0);

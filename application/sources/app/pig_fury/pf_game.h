@@ -5,6 +5,7 @@
 #include "app.h"
 
 #include "pf_menu.h"
+#include "pf_config.h"
 #include "pf_pig.h"
 #include "pf_enemy_manager.h"
 #include "pf_weapon_manager.h"
@@ -18,7 +19,10 @@ public:
 	void init();
 	void menu_update();
 	void menu_render();
+	void config_update();
+	void config_render();
 	void menu_move_next_item(pf_menu_anim_dir dir);
+	void config_move_next_item(pf_menu_anim_dir dir);
 	void game_play_update();
 	void game_play_render();
 
@@ -35,6 +39,7 @@ public:
 
 private:
 	pf_menu menu_;
+	pf_config conf_;
 	pf_pig pig_;
 	pf_enemy_manager enemy_mng_;
 	pf_weapon_manager weapon_mng_;
@@ -43,7 +48,10 @@ private:
 void pf_game_init();
 void pf_menu_render();
 void pf_menu_update();
+void pf_config_render();
+void pf_config_update();
 void pf_menu_move_next_item(pf_menu_anim_dir dir);
+void pf_config_move_next_item(pf_menu_anim_dir dir);
 void pf_game_update();
 void pf_game_render();
 void pf_pig_atk(pf_char_dir dir);
