@@ -1,5 +1,5 @@
+#include "pf_game.h"
 #include "scr_pf_config.h"
-
 static void view_scr_pf_config();
 
 view_dynamic_t dyn_view_pf_config = {
@@ -17,12 +17,7 @@ view_screen_t scr_pf_config = {
 };
 
 void view_scr_pf_config() {
-	// pf_menu_render();
-    view_render.clear();
-    view_render.setCursor(0, 0);
-    view_render.setTextSize(1);
-    view_render.setTextColor(WHITE);
-    view_render.println("config");
+	pf_config_render();
 }
 
 void scr_pf_config_handle(ak_msg_t *msg) {
@@ -33,13 +28,15 @@ void scr_pf_config_handle(ak_msg_t *msg) {
 		}
 		case AC_DISPLAY_MENU_UPDATE: {
 			scr_mng_invalidate();
-			// pf_menu_update();
+			pf_config_update();
 			break;
 		}
 		case AC_DISPLAY_BUTON_UP_PRESSED: {
+			pf_config_move_next_item(PF_MENU_ANIM_RIGHT);
 			break;
 		}
 		case AC_DISPLAY_BUTON_DOWN_PRESSED: {
+			pf_config_move_next_item(PF_MENU_ANIM_LEFT);
 			break;
 		}
 		case AC_DISPLAY_BUTON_MODE_PRESSED: {
