@@ -70,7 +70,7 @@ static const uint8_t menu_config_exit_white_bitmap[] = {
 	0xff, 0xff, 0xf0, 0xc0, 0x1f, 0xf0, 0xbf, 0xed,
 	0xf0, 0xbf, 0xec, 0xf0, 0xbf, 0xfc, 0x70, 0xbf,
 	0x00, 0x30, 0xbf, 0x00, 0x10, 0xbf, 0x00, 0x30,
-	0xbf, 0xfc, 0x70, 0xbf, 0xec, 0xf0, 0xbf, 0xed, 
+	0xbf, 0xfc, 0x70, 0xbf, 0xec, 0xf0, 0xbf, 0xed,
 	0xf0, 0xc0, 0x1f, 0xf0, 0xff, 0xff, 0xf0
 };
 
@@ -165,7 +165,13 @@ enum pf_config_item : uint8_t {
 
 enum pf_game_mpde : uint8_t {
 	PF_GAME_MODE_NORMAL,
-	PF_GAME_MODE_HARD
+	PF_GAME_MODE_HARD,
+	PF_GAME_MODE_COUNT
+};
+
+struct pf_config_data {
+	pf_game_mpde game_mode;
+	bool sound;
 };
 
 class pf_config
@@ -180,14 +186,17 @@ public:
 	void move_down();
 	void move_up();
 	void change_config();
+	void save_config();
+	void load_config();
 
 	// getter
 	pf_config_item get_cur_item() { return cur_item_; }
+	pf_config_data get_config_data() { return data_; }
+
 
 private:
  	pf_config_item cur_item_;
-	pf_game_mpde game_mode_;
-	bool sound_;
+	pf_config_data data_;
 	bool is_visible_;
 	uint8_t anim_duration_ticks;
 };
