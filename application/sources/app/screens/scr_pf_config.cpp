@@ -40,6 +40,8 @@ void scr_pf_config_handle(ak_msg_t *msg) {
 			break;
 		}
 		case AC_DISPLAY_BUTON_MODE_PRESSED: {
+			pf_change_config();
+			if (pf_get_cur_config_item() == PF_CONFIG_EXIT) SCREEN_TRAN(scr_pf_menu_handle, &scr_pf_menu);
 			break;
 		}
 		default:
