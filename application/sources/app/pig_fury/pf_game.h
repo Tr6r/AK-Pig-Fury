@@ -45,6 +45,7 @@ private:
 	pf_pig pig_;
 	pf_enemy_manager enemy_mng_;
 	pf_weapon_manager weapon_mng_;
+	bool is_initialized_;
 };
 
 void pf_game_init();

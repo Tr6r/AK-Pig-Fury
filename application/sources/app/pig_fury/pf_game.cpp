@@ -78,10 +78,13 @@ void pig_fury_game::config_move_next_item(pf_menu_anim_dir dir) {
 }
 
 void pig_fury_game::init() {
+	if (is_initialized_) return;
+	is_initialized_ = true;
 	menu_.init();
 	conf_.init();
-	pig_.init();
-	enemy_mng_.init();
+	pf_config_data data = conf_.get_config_data();
+	pig_.init(data);
+	enemy_mng_.init(data);
 	weapon_mng_.init();
 }
 

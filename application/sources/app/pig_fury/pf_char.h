@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include "app.h"
 
+#include "pf_config.h"
+
 class pf_weapon;
 enum pf_char_dir : uint8_t
 {
@@ -23,10 +25,10 @@ class pf_char
 public:
 	pf_char() = default;
 	virtual ~pf_char() = default;
-
+    
+	virtual void init(pf_config_data data) = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;
-	virtual void init() = 0;
 	virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) = 0;
 	virtual void set_weapon(pf_weapon *weapon) { weapon_ = weapon; };
 	virtual void take_damage(uint8_t damage) = 0;

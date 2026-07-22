@@ -2,6 +2,7 @@
 
 #include "pf_pig.h"
 #include "pf_weapon.h"
+#include "pf_config.h"
 
 static const uint8_t pig_idle_right_bitmap[] = {
 	0xF7, 0xF9, 0xC0, 0x88, 0x06, 0x40, 0x90, 0x02, 0x40, 0x60, 0x49, 0x80,
@@ -175,8 +176,8 @@ static const uint8_t pig_atk_throw_right_bitmap[] = {
 	0x89, 0x08, 0x3f, 0x91, 0x04, 0x3f, 0xf1, 0xfc, 0x3f
 };
 
-void pf_pig::init() {
-	hp_ = MAX_HP;
+void pf_pig::init(pf_config_data data) {
+	hp_ = (data.game_mode == PF_GAME_MODE_NORMAL ? MAX_HP_NORMAL_MODE : MAX_HP_HARD_MODE);
 	pig_st_ = PF_PIG_ST_NONE;
 	atk_st_ = PF_PIG_ATTACK_NONE;
 	pos_x_ = PIG_POS_X;

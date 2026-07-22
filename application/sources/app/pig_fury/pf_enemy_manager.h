@@ -3,6 +3,7 @@
 
 #include "pf_enemy.h"
 #include "pf_wolf_basic.h"
+#include "pf_config.h"
 
 #define PF_GAME_MAX_ENEMY 4
 #define PF_GAME_MAX_WOLF_BASIC 4
@@ -17,7 +18,7 @@ public:
 	pf_enemy_manager() = default;
 	~pf_enemy_manager() = default;
 
-	void init();
+	void init(pf_config_data data);
 	void update();
 	void render();
 

@@ -9,7 +9,8 @@
 
 #include "pf_char.h"
 
-#define MAX_HP 3
+#define MAX_HP_NORMAL_MODE 5
+#define MAX_HP_HARD_MODE 3
 #define PIG_WIDTH 18
 #define PIG_HEIGHT 27
 #define PIG_POS_X (LCD_WIDTH - PIG_WIDTH)/2
@@ -79,7 +80,7 @@ public:
 
 	void update() override;
 	void render() override;
-	void init() override;
+	void init(pf_config_data data) override;
 	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 	void set_weapon(pf_weapon *weapon) override;
 	void take_damage(uint8_t damage) override;

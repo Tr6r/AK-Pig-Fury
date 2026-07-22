@@ -24,7 +24,7 @@ public:
 	virtual void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override = 0;
 	virtual void update() override = 0;
 	virtual void render() override = 0;
-	virtual void init() override = 0;
+	virtual void init(pf_config_data data) override = 0;
 
 	virtual void spawn(pf_char_dir dir) = 0;
 	virtual void attack() = 0;

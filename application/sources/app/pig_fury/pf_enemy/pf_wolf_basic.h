@@ -9,7 +9,8 @@
 #include "pf_pig.h"
 #include "pf_enemy.h"
 
-#define PF_WOLF_BASIC_MAX_HP 2
+#define PF_WOLF_BASIC_MAX_HP_NORMAL_MODE 2
+#define PF_WOLF_BASIC_MAX_HP_HARD_MODE 3
 #define PF_WOLF_BASIC_WIDTH 18
 #define PF_WOLF_BASIC_HEIGHT 27
 #define PF_WOLF_BASIC_ATK_DAMAGE 1
@@ -79,7 +80,7 @@ public:
 	pf_wolf_basic() {hp_ = 0; st_ = PF_ENEMY_ST_DEAD;}
 	~pf_wolf_basic() override = default;
 
-	void init() override;
+	void init(pf_config_data data) override;
 	void spawn(pf_char_dir dir) override;
 	void get_hand_pos(int8_t &pos_x, int8_t &pos_y) override;
 	void update() override;

@@ -1,8 +1,8 @@
 #include "pf_wolf_basic.h"
 #include "pf_weapon.h"
-
-void pf_wolf_basic::init() {
-	hp_ = PF_WOLF_BASIC_MAX_HP;
+#include "pf_config.h"
+void pf_wolf_basic::init(pf_config_data data) {
+	hp_ = (data.game_mode == PF_GAME_MODE_NORMAL) ? PF_WOLF_BASIC_MAX_HP_NORMAL_MODE : PF_WOLF_BASIC_MAX_HP_HARD_MODE;
 	st_ = PF_ENEMY_ST_IDLE;
 	width_ = PF_WOLF_BASIC_WIDTH;
 	height_ = PF_WOLF_BASIC_HEIGHT;

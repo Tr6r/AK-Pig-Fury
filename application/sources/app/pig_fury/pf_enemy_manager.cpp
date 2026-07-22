@@ -1,11 +1,11 @@
 #include "pf_enemy_manager.h"
 
-void pf_enemy_manager::init() {
+void pf_enemy_manager::init(pf_config_data data) {
 	enemy_count_ = 0;
 	for (uint8_t i = 0; i < PF_GAME_MAX_ENEMY; i++)
 		enemies_[i] = nullptr;
 	for (uint8_t i = 0; i < PF_GAME_MAX_WOLF_BASIC; i++)
-		wolves_[i].init();
+		wolves_[i].init(data);
 }
 
 void pf_enemy_manager::update() {
@@ -50,7 +50,8 @@ pf_wolf_basic *pf_enemy_manager::spawn_wolf_basic() {
 void pf_enemy_manager::remove_enemy(uint8_t index) {
 	if (index >= enemy_count_)
 		return;
-	enemies_[index]->init();
+    pf_config_data dummy_data;
+	enemies_[index]->init(dummy_data);
 	for (uint8_t i = index; i < enemy_count_ - 1; i++)
 		enemies_[i] = enemies_[i + 1];
 	enemies_[enemy_count_ - 1] = nullptr;
