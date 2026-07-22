@@ -73,6 +73,10 @@ void pf_config_move_next_item(pf_menu_anim_dir dir) {
 	game.config_move_next_item(dir);
 }
 
+bool pf_check_pig_dead() {
+	return game.check_pig_dead();
+}
+
 void pig_fury_game::menu_move_next_item(pf_menu_anim_dir dir) {
 	(dir == PF_MENU_ANIM_LEFT ? menu_.move_pre_item() : menu_.move_next_item());
 }
@@ -128,7 +132,7 @@ void pig_fury_game::game_play_render() {
 
 void pig_fury_game::game_play_update() {
 	update_spawn();
-    pf_config_data data = conf_.get_config_data();
+	pf_config_data data = conf_.get_config_data();
 	pig_.update();
 	enemy_mng_.update(data);
 	weapon_mng_.update();

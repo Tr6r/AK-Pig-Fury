@@ -95,7 +95,7 @@ public:
 	pf_atk_st get_atk_st() { return atk_st_;}
 	bool is_attack_hit_frame();
 	uint8_t get_hit_duration_frame() { return hit_duration_frame;}
-
+	bool is_dead() { return char_st_ == PF_CHAR_ST_DEAD; }
 
 	// setter
 	void set_st(pf_pig_st st) { pig_st_ = st;}
@@ -107,6 +107,7 @@ private:
 	void render_st();
 	void update_atk();
 	void render_atk();
+	void render_hp();
 	void render_weapon_atk();
 	void render_unarmed_atk();
 	void attack_no_weapon(pf_char_dir dir);

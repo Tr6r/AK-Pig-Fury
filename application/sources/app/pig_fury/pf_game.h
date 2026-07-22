@@ -39,6 +39,7 @@ public:
 	void check_throw_weapon_attack_hit();
 	void check_enemy_attack_hit();
 	pf_menu_item_st get_menu_st();
+	bool check_pig_dead() {return pig_.is_dead();}
 
 private:
 	pf_menu menu_;
@@ -59,6 +60,7 @@ void pf_change_config();
 pf_config_item pf_get_cur_config_item();
 void pf_menu_move_next_item(pf_menu_anim_dir dir);
 void pf_config_move_next_item(pf_menu_anim_dir dir);
+bool pf_check_pig_dead();
 void pf_game_update();
 void pf_game_render();
 void pf_pig_atk(pf_char_dir dir);

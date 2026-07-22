@@ -3,6 +3,7 @@
 #include "pf_pig.h"
 #include "pf_weapon.h"
 #include "pf_config.h"
+#include "pf_menu.h"
 
 static const uint8_t pig_idle_right_bitmap[] = {
 	0xF7, 0xF9, 0xC0, 0x88, 0x06, 0x40, 0x90, 0x02, 0x40, 0x60, 0x49, 0x80,
@@ -193,6 +194,8 @@ void pf_pig::init(pf_config_data data) {
 
 void pf_pig::update() {
 	if (hit_duration_frame > 0) hit_duration_frame--;
+	if (hit_duration_frame <= 0)char_st_ = PF_CHAR_ST_IDLE;
+
 	update_atk();
 	update_st();
 }
@@ -201,6 +204,15 @@ void pf_pig::render() {
 	if (hit_duration_frame > 0 && hit_duration_frame % 2 == 0) return;
 	render_atk();
 	render_st();
+	render_hp();
+}
+
+void pf_pig::render_hp() {
+	uint8_t heart_pos_x = 2;
+	for (uint8_t i = 0; i < hp_; i++) {
+		view_render.drawBitmap(heart_pos_x, 0, heart_icon_bitmap, PF_MENU_HEART_ICON_WIDTH, PF_MENU_HEART_ICON_HEIGHT, WHITE);
+		heart_pos_x += PF_MENU_HEART_ICON_WIDTH + 1;
+	}
 }
 
 void pf_pig::set_weapon(pf_weapon *weapon) {
@@ -451,5 +463,11 @@ void pf_pig::get_hand_pos(int8_t &pos_x, int8_t &pos_y) {
 
 void pf_pig::take_damage(uint8_t damage) {
 	hit_duration_frame = PIG_HIT_FRAME_TICK;
-	// hp_ -= damage; // stop game if it under 1
+	if (char_st_ == PF_CHAR_ST_HIT) return;
+	char_st_ = PF_CHAR_ST_HIT;
+	hp_ -= damage;
+	if (hp_ <= 0) {
+		hp_ = 0;
+		char_st_ = PF_CHAR_ST_DEAD;
+	}
 }
