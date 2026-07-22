@@ -9,14 +9,17 @@ void pf_enemy_manager::init(pf_config_data data) {
 		wolves_[i].init(data);
 }
 
-void pf_enemy_manager::update(pf_config_data data) {
+uint8_t pf_enemy_manager::update(pf_config_data data) {
+	uint8_t enemy_dead_count =0;
 	for (uint8_t i = 0; i < enemy_count_; i++) {
 		enemies_[i]->update();
 		if (enemies_[i]->get_st() == PF_ENEMY_ST_DELETE) {
 			remove_enemy(i, data);
+			enemy_dead_count++;
 			i--;
 		}
 	}
+	return enemy_dead_count;
 }
 
 void pf_enemy_manager::render() {

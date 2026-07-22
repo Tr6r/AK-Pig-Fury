@@ -23,6 +23,7 @@ public:
 	void config_update();
 	void config_render();
 	void change_config();
+	void score_render();
 	pf_config_item get_cur_config_item();
 	void menu_move_next_item(pf_menu_anim_dir dir);
 	void config_move_next_item(pf_menu_anim_dir dir);
@@ -48,6 +49,7 @@ private:
 	pf_enemy_manager enemy_mng_;
 	pf_weapon_manager weapon_mng_;
 	bool is_initialized_;
+	uint16_t score_;
 };
 
 void pf_game_init();

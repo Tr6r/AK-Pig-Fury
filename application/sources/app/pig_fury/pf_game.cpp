@@ -97,6 +97,7 @@ void pig_fury_game::gameplay_init() {
 	pig_.init(data);
 	enemy_mng_.init(data);
 	weapon_mng_.init();
+	score_ = 0;
 }
 
 void pig_fury_game::menu_update() {
@@ -128,13 +129,23 @@ void pig_fury_game::game_play_render() {
 	pig_.render();
 	enemy_mng_.render();
 	weapon_mng_.render();
+	score_render();
+}
+
+void pig_fury_game::score_render() {
+	view_render.setCursor(60,-1);
+	view_render.setTextSize(1);
+	view_render.print("scrore: ");
+	view_render.setCursor(102,0);
+	view_render.setTextSize(1);
+	view_render.print(score_);
 }
 
 void pig_fury_game::game_play_update() {
 	update_spawn();
 	pf_config_data data = conf_.get_config_data();
 	pig_.update();
-	enemy_mng_.update(data);
+	score_ += enemy_mng_.update(data);
 	weapon_mng_.update();
 	check_throw_weapon_attack_hit();
 	check_pig_attack_hit();

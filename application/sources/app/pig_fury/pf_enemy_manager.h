@@ -19,7 +19,7 @@ public:
 	~pf_enemy_manager() = default;
 
 	void init(pf_config_data data);
-	void update(pf_config_data data);
+	uint8_t update(pf_config_data data);
 	void render();
 
 	pf_enemy *spawn_random_enemy();
