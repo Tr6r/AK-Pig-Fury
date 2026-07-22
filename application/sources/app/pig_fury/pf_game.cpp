@@ -29,6 +29,22 @@ void pf_menu_render() {
 	game.menu_render();
 }
 
+void pf_config_render() {
+	game.config_render();
+}
+
+void pf_config_update() {
+	game.config_update();
+}
+
+void pf_change_config() {
+	game.change_config();
+}
+
+pf_config_item pf_get_cur_config_item() {
+	return game.get_cur_config_item();
+}
+
 void pf_menu_update() {
 	game.menu_update();
 }
@@ -49,12 +65,21 @@ void pf_menu_move_next_item(pf_menu_anim_dir dir) {
 	game.menu_move_next_item(dir);
 }
 
+void pf_config_move_next_item(pf_menu_anim_dir dir) {
+	game.config_move_next_item(dir);
+}
+
 void pig_fury_game::menu_move_next_item(pf_menu_anim_dir dir) {
 	(dir == PF_MENU_ANIM_LEFT ? menu_.move_pre_item() : menu_.move_next_item());
 }
 
+void pig_fury_game::config_move_next_item(pf_menu_anim_dir dir) {
+	(dir == PF_MENU_ANIM_LEFT ? conf_.move_down() : conf_.move_up());
+}
+
 void pig_fury_game::init() {
 	menu_.init();
+	conf_.init();
 	pig_.init();
 	enemy_mng_.init();
 	weapon_mng_.init();
@@ -67,6 +92,23 @@ void pig_fury_game::menu_update() {
 void pig_fury_game::menu_render() {
 	menu_.render();
 }
+
+void pig_fury_game::config_render() {
+	conf_.render();
+}
+
+void pig_fury_game::config_update() {
+	conf_.update();
+}
+
+void pig_fury_game::change_config() {
+	conf_.change_config();
+}
+
+pf_config_item pig_fury_game::get_cur_config_item() {
+	return conf_.get_cur_item();
+}
+
 
 void pig_fury_game::game_play_render() {
 	pig_.render();

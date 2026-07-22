@@ -21,6 +21,8 @@ public:
 	void menu_render();
 	void config_update();
 	void config_render();
+	void change_config();
+	pf_config_item get_cur_config_item();
 	void menu_move_next_item(pf_menu_anim_dir dir);
 	void config_move_next_item(pf_menu_anim_dir dir);
 	void game_play_update();
@@ -50,6 +52,8 @@ void pf_menu_render();
 void pf_menu_update();
 void pf_config_render();
 void pf_config_update();
+void pf_change_config();
+pf_config_item pf_get_cur_config_item();
 void pf_menu_move_next_item(pf_menu_anim_dir dir);
 void pf_config_move_next_item(pf_menu_anim_dir dir);
 void pf_game_update();
