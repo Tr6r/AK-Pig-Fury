@@ -1,4 +1,5 @@
 #include "pf_enemy_manager.h"
+#include "pf_config.h"
 
 void pf_enemy_manager::init(pf_config_data data) {
 	enemy_count_ = 0;
@@ -8,11 +9,11 @@ void pf_enemy_manager::init(pf_config_data data) {
 		wolves_[i].init(data);
 }
 
-void pf_enemy_manager::update() {
+void pf_enemy_manager::update(pf_config_data data) {
 	for (uint8_t i = 0; i < enemy_count_; i++) {
 		enemies_[i]->update();
 		if (enemies_[i]->get_st() == PF_ENEMY_ST_DELETE) {
-			remove_enemy(i);
+			remove_enemy(i, data);
 			i--;
 		}
 	}
@@ -47,11 +48,10 @@ pf_wolf_basic *pf_enemy_manager::spawn_wolf_basic() {
 	return nullptr;
 }
 
-void pf_enemy_manager::remove_enemy(uint8_t index) {
+void pf_enemy_manager::remove_enemy(uint8_t index, pf_config_data data) {
 	if (index >= enemy_count_)
 		return;
-    pf_config_data dummy_data;
-	enemies_[index]->init(dummy_data);
+	enemies_[index]->init(data);
 	for (uint8_t i = index; i < enemy_count_ - 1; i++)
 		enemies_[i] = enemies_[i + 1];
 	enemies_[enemy_count_ - 1] = nullptr;
