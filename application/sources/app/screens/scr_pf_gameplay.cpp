@@ -25,6 +25,7 @@ void scr_pf_gameplay_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY: {
 			APP_DBG_SIG("PF_GAMEPLAY\n");
+			task_post_pure_msg(AC_TASK_PF_GAME_ID, AC_PF_GAMEPLAY_INIT);
 			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEPLAY_UPDATE,AC_DISPLAY_GAMEPLAY_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
 			break;
 		}

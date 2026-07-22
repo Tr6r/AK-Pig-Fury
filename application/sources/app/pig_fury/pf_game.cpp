@@ -8,6 +8,10 @@ void pf_game_init() {
 	game.init();
 }
 
+void pf_gameplay_init() {
+	game.gameplay_init();
+}
+
 void pf_pig_atk(pf_char_dir dir) {
 	game.pig_attack(dir);
 }
@@ -82,6 +86,9 @@ void pig_fury_game::init() {
 	is_initialized_ = true;
 	menu_.init();
 	conf_.init();
+}
+
+void pig_fury_game::gameplay_init() {
 	pf_config_data data = conf_.get_config_data();
 	pig_.init(data);
 	enemy_mng_.init(data);
@@ -121,8 +128,9 @@ void pig_fury_game::game_play_render() {
 
 void pig_fury_game::game_play_update() {
 	update_spawn();
+    pf_config_data data = conf_.get_config_data();
 	pig_.update();
-	enemy_mng_.update();
+	enemy_mng_.update(data);
 	weapon_mng_.update();
 	check_throw_weapon_attack_hit();
 	check_pig_attack_hit();

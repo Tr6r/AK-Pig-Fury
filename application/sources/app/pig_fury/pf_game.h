@@ -17,6 +17,7 @@ public:
 	~pig_fury_game() = default;
 
 	void init();
+	void gameplay_init();
 	void menu_update();
 	void menu_render();
 	void config_update();
@@ -49,6 +50,7 @@ private:
 };
 
 void pf_game_init();
+void pf_gameplay_init();
 void pf_menu_render();
 void pf_menu_update();
 void pf_config_render();
