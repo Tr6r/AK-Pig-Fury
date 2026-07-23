@@ -32,7 +32,7 @@ void scr_pf_gameplay_handle(ak_msg_t *msg) {
 		case AC_DISPLAY_GAMEPLAY_UPDATE: {
 			scr_mng_invalidate();
 			pf_game_update();
-			if (pf_check_pig_dead()) SCREEN_TRAN(scr_pf_menu_handle, &scr_pf_menu);
+			if (pf_check_pig_dead()) SCREEN_TRAN(scr_pf_gameover_handle, &scr_pf_gameover);
 			break;
 		}
 		case AC_DISPLAY_BUTON_MODE_PRESSED: {

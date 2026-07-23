@@ -77,6 +77,10 @@ bool pf_check_pig_dead() {
 	return game.check_pig_dead();
 }
 
+uint16_t pf_get_game_score() {
+	return game.get_score_();
+}
+
 void pig_fury_game::menu_move_next_item(pf_menu_anim_dir dir) {
 	(dir == PF_MENU_ANIM_LEFT ? menu_.move_pre_item() : menu_.move_next_item());
 }

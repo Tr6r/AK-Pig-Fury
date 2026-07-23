@@ -12,3 +12,4 @@ SOURCES_CPP += sources/app/screens/scr_welcome.cpp
 SOURCES_CPP += sources/app/screens/scr_pf_gameplay.cpp
 SOURCES_CPP += sources/app/screens/scr_pf_menu.cpp
 SOURCES_CPP += sources/app/screens/scr_pf_config.cpp
+SOURCES_CPP += sources/app/screens/scr_pf_gameover.cpp

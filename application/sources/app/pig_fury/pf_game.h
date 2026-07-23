@@ -41,6 +41,7 @@ public:
 	void check_enemy_attack_hit();
 	pf_menu_item_st get_menu_st();
 	bool check_pig_dead() {return pig_.is_dead();}
+	uint16_t get_score_() { return score_; }
 
 private:
 	pf_menu menu_;
@@ -69,5 +70,6 @@ void pf_pig_atk(pf_char_dir dir);
 void pf_pig_jump();
 bool pf_pig_try_pickup_weapon(pf_char_dir dir);
 pf_menu_item_st pf_get_menu_st();
+uint16_t pf_get_game_score();
 
 #endif //__PF_GAME_H__
