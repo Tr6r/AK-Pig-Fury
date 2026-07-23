@@ -210,7 +210,7 @@ void pf_pig::render() {
 void pf_pig::render_hp() {
 	uint8_t heart_pos_x = 2;
 	for (uint8_t i = 0; i < hp_; i++) {
-		view_render.drawBitmap(heart_pos_x, 0, heart_icon_bitmap, PF_MENU_HEART_ICON_WIDTH, PF_MENU_HEART_ICON_HEIGHT, WHITE);
+		view_render.drawBitmap(heart_pos_x, 1, heart_icon_bitmap, PF_MENU_HEART_ICON_WIDTH, PF_MENU_HEART_ICON_HEIGHT, WHITE);
 		heart_pos_x += PF_MENU_HEART_ICON_WIDTH + 1;
 	}
 }
