@@ -48,7 +48,6 @@
 #include "SPI.h"
 #include "WString.h"
 #include "HardwareSerial.h"
-#include "ArduinoJson.h"
 
 /* common include */
 #include "screen_manager.h"
