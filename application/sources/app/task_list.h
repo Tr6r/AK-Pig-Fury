@@ -18,19 +18,10 @@ enum {
 
 	/* APP TASKS */
 	AC_TASK_SYSTEM_ID,
-	AC_TASK_FW_ID,
 	AC_TASK_LIFE_ID,
-	AC_TASK_IF_ID,
 	AC_TASK_UART_IF_ID,
 	AC_TASK_DBG_ID,
 	AC_TASK_DISPLAY_ID,
-
-	/* LINK */
-#if defined (IF_LINK_UART_EN)
-	AC_LINK_PHY_ID,
-	AC_LINK_MAC_ID,
-	AC_LINK_ID,
-#endif
 
 	/* PIG FURY GAME ID*/
 	AC_TASK_PF_GAME_ID,
@@ -55,17 +46,10 @@ enum {
 /*****************************************************************************/
 /* APP TASKS */
 extern void task_system(ak_msg_t*);
-extern void task_fw(ak_msg_t*);
 extern void task_life(ak_msg_t*);
-extern void task_if(ak_msg_t*);
 extern void task_uart_if(ak_msg_t*);
 extern void task_dbg(ak_msg_t*);
 extern void task_display(ak_msg_t*);
-
-/* LINK TASK */
-extern void task_link_phy(ak_msg_t*);
-extern void task_link_mac(ak_msg_t*);
-extern void task_link(ak_msg_t*);
 
 /* PIG FURY GAME TASK */
 extern void task_pf_game(ak_msg_t*);

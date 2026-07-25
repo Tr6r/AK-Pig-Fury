@@ -58,7 +58,7 @@ IRQ_DEBUG_OPTION = -UAK_IO_IRQ_ANALYZER
 USB_OPTION = -UUSING_USB_MOD
 
 # Interface compile option.
-IF_LINK_OPTION = -DIF_LINK_UART_EN
+
 
 # Include sources file
 include sources/ak/Makefile.mk
@@ -152,7 +152,7 @@ CPU = -mthumb -march=armv7-m
 FPU = -mfloat-abi=soft
 
 # Interface option
-IF_OPTION +=	$(IF_LINK_OPTION)		\
+
 
 # Hardware option
 #Ver 2.1 (Oled 1.3" driver SH1106)

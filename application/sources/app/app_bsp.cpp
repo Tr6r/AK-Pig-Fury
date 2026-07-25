@@ -8,7 +8,6 @@
 #include "app_if.h"
 
 #include "task_list.h"
-#include "task_list_if.h"
 #include "timer.h"
 
 button_t btn_mode;
