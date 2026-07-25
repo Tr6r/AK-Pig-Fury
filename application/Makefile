@@ -63,7 +63,6 @@ IF_NETWORK_NRF24_OPTION = -UIF_NETWORK_NRF24_EN
 
 # Task compile option.
 TASK_ZIGBEE_OPTION = -UTASK_ZIGBEE_EN
-TASK_MBMASTER_OPTION = -DTASK_MBMASTER_EN
 
 # Include sources file
 include sources/ak/Makefile.mk
@@ -162,7 +161,6 @@ IF_OPTION +=	$(IF_LINK_OPTION)		\
 
 # App option
 TASK_OPTION +=	$(TASK_ZIGBEE_OPTION)
-TASK_OPTION +=	$(TASK_MBMASTER_OPTION)
 
 # Hardware option
 #Ver 2.1 (Oled 1.3" driver SH1106)
