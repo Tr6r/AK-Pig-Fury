@@ -47,7 +47,6 @@
 /* arduino include */
 #include "SPI.h"
 #include "WString.h"
-#include "HardwareSerial.h"
 
 /* common include */
 #include "screen_manager.h"
@@ -105,12 +104,6 @@ int main_app() {
 	sys_ctrl_soft_watchdog_init(200);		/* 20s */
 
 	SPI.begin();
-
-	/* adc peripheral configure */
-	io_cfg_adc1();			/* configure adc for thermistor and CT sensor */
-
-	/* adc configure for ct sensor */
-	adc_bat_io_cfg();
 
 	/* flash io init */
 	flash_io_ctrl_init();
