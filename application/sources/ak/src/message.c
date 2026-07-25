@@ -6,11 +6,8 @@
 **/
 
 #include "ak.h"
-#include "ak_dbg.h"
 #include "message.h"
 #include "task.h"
-
-#include "sys_dbg.h"
 
 /* pure pool memory */
 static ak_msg_pure_t msg_pure_pool[AK_PURE_MSG_POOL_SIZE];
@@ -67,7 +64,6 @@ void msg_free(ak_msg_t* msg) {
 			break;
 
 		default:
-			FATAL("MF", 0x20);
 			break;
 		}
 	}
@@ -90,7 +86,6 @@ void msg_force_free(ak_msg_t* msg) {
 		break;
 
 	default:
-		FATAL("MF", 0x27);
 		break;
 	}
 }
@@ -100,7 +95,6 @@ void msg_inc_ref_count(ak_msg_t* msg) {
 		msg->ref_count++;
 	}
 	else {
-		FATAL("MF", 0x61);
 	}
 }
 
@@ -109,7 +103,6 @@ void msg_dec_ref_count(ak_msg_t* msg) {
 		msg->ref_count--;
 	}
 	else {
-		FATAL("MF", 0x28);
 	}
 }
 
@@ -119,14 +112,12 @@ void* ak_malloc(size_t size) {
 
 	if (ak_heap != NULL) {
 		if (((uint32_t)ak_heap + size + __AK_MALLOC_CTRL_SIZE) > ((uint32_t)&__heap_end__)) {
-			FATAL("ak_malloc", 0x01);
 		}
 	}
 
 	ak_heap = malloc(size);
 
 	if (ak_heap == NULL) {
-		FATAL("ak_malloc", 0x02);
 	}
 
 	return ak_heap;
@@ -178,7 +169,6 @@ ak_msg_t* get_pure_msg() {
 	allocate_message = free_list_pure_msg_pool;
 
 	if (allocate_message == AK_MSG_NULL) {
-		FATAL("MF", 0x31);
 	}
 	else {
 		free_list_pure_msg_pool = allocate_message->next;
@@ -253,7 +243,6 @@ ak_msg_t* get_common_msg() {
 	allocate_message = free_list_common_msg_pool;
 
 	if (allocate_message == AK_MSG_NULL) {
-		FATAL("MF", 0x21);
 	}
 	else {
 		free_list_common_msg_pool = allocate_message->next;
@@ -290,11 +279,9 @@ void free_common_msg(ak_msg_t* msg) {
 
 uint8_t set_data_common_msg(ak_msg_t* msg, uint8_t* data, uint8_t size) {
 	if (get_msg_type(msg) != COMMON_MSG_TYPE) {
-		FATAL("MF", 0x23);
 	}
 
 	if (size > AK_COMMON_MSG_DATA_SIZE) {
-		FATAL("MF", 0x24);
 	}
 
 	((ak_msg_common_t*)msg)->len = size;
@@ -306,7 +293,6 @@ uint8_t set_data_common_msg(ak_msg_t* msg, uint8_t* data, uint8_t size) {
 uint8_t* get_data_common_msg(ak_msg_t* msg) {
 
 	if (get_msg_type(msg) != COMMON_MSG_TYPE) {
-		FATAL("MF", 0x26);
 	}
 
 	return ((ak_msg_common_t*)msg)->data;
@@ -315,7 +301,6 @@ uint8_t* get_data_common_msg(ak_msg_t* msg) {
 uint8_t get_data_len_common_msg(ak_msg_t* msg) {
 
 	if (get_msg_type(msg) != COMMON_MSG_TYPE) {
-		FATAL("MF", 0x38);
 	}
 
 	return ((ak_msg_common_t*)msg)->len;
@@ -377,7 +362,6 @@ ak_msg_t* get_dynamic_msg() {
 	allocate_message = free_list_dynamic_msg_pool;
 
 	if (allocate_message == AK_MSG_NULL) {
-		FATAL("MF", 0x41);
 	}
 	else {
 		free_list_dynamic_msg_pool = allocate_message->next;
@@ -403,7 +387,6 @@ ak_msg_t* get_dynamic_msg() {
 
 uint8_t set_data_dynamic_msg(ak_msg_t* msg, uint8_t* data, uint32_t size) {
 	if (get_msg_type(msg) != DYNAMIC_MSG_TYPE) {
-		FATAL("MF", 0x43);
 	}
 
 	((ak_msg_dynamic_t*)msg)->len = size;
@@ -415,7 +398,6 @@ uint8_t set_data_dynamic_msg(ak_msg_t* msg, uint8_t* data, uint32_t size) {
 
 uint8_t* get_data_dynamic_msg(ak_msg_t* msg) {
 	if (get_msg_type(msg) != DYNAMIC_MSG_TYPE) {
-		FATAL("MF", 0x46);
 	}
 
 	return ((ak_msg_dynamic_t*)msg)->data;
@@ -423,21 +405,4 @@ uint8_t* get_data_dynamic_msg(ak_msg_t* msg) {
 
 uint32_t get_data_len_dynamic_msg(ak_msg_t* msg) {
 	return ((ak_msg_dynamic_t*)msg)->len;
-}
-
-/*****************************************************************************
- * debug message function define.
- *****************************************************************************/
-void msg_dbg_dum(ak_msg_t* msg) {
-	xprintf("stid:%d dtid:%d rfc:%02X sig:%d Istid:%d Idtid:%d Ist:%d Idt:%d Isig:%d\n",	\
-			msg->src_task_id,	\
-			msg->des_task_id,	\
-			msg->ref_count,		\
-			msg->sig,			\
-			msg->if_src_task_id,\
-			msg->if_des_task_id,\
-			msg->if_src_type,	\
-			msg->if_des_type,	\
-			msg->if_sig			\
-			);
 }

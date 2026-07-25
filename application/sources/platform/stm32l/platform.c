@@ -8,8 +8,6 @@
 
 #include "platform.h"
 
-#include "sys_dbg.h"
-
 #include "stm32l1xx.h"
 #include "core_cm3.h"
 #include "core_cmFunc.h"
@@ -40,7 +38,6 @@ void exit_critical() {
 		__enable_irq();
 	}
 	else if (nest_entry_critical_counter < 0) {
-		FATAL("ITR", 0x01);
 	}
 }
 

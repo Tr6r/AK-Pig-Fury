@@ -21,11 +21,6 @@ extern "C"
 #include "port.h"
 #include "message.h"
 
-#include "log_queue.h"
-
-#define LOG_QUEUE_OBJECT_SIZE			(512)
-#define LOG_QUEUE_IRQ_SIZE				(128)
-
 typedef uint8_t	task_pri_t;
 typedef uint8_t	task_id_t;
 typedef void (*pf_task)(ak_msg_t*);
@@ -47,16 +42,6 @@ typedef struct {
 	uint32_t except_number;
 	uint32_t timestamp;
 } exception_info_t;
-
-/* active object queue */
-#if defined(AK_TASK_OBJ_LOG_ENABLE)
-extern log_queue_t log_task_dbg_object_queue;
-#endif
-
-/* exception log queue */
-#if defined(AK_IRQ_OBJ_LOG_ENABLE)
-extern log_queue_t log_irq_queue;
-#endif
 
 extern void task_create(task_t* task_tbl);
 extern void task_post(task_id_t des_task_id, ak_msg_t* msg);

@@ -2,7 +2,6 @@
 
 #include "sys_boot.h"
 #include "sys_io.h"
-#include "sys_dbg.h"
 
 static sys_boot_t sys_boot_obj;
 

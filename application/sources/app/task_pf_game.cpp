@@ -3,10 +3,8 @@
 #include "port.h"
 
 #include "sys_ctrl.h"
-#include "sys_dbg.h"
 
 #include "app.h"
-#include "app_dbg.h"
 
 #include "task_list.h"
 #include "task_pf_game.h"

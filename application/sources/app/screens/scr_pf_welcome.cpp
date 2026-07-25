@@ -61,7 +61,6 @@ void view_scr_pf_welcome() {
 void scr_pf_welcome_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY: {
-			APP_DBG_SIG("PF_GAMEPLAY\n");
 			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEPLAY_UPDATE,AC_DISPLAY_GAMEPLAY_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_MENU,AC_DISPLAY_WELCOME_INTERVAL_MS,TIMER_ONE_SHOT);
 			break;

@@ -7,17 +7,14 @@
 **/
 
 #include "ak.h"
-#include "ak_dbg.h"
 
 #include "task.h"
 #include "timer.h"
 #include "message.h"
 
-#include "sys_dbg.h"
 #include "sys_ctrl.h"
 
 #include "utils.h"
-#include "log_queue.h"
 
 #include "task_list.h"
 
@@ -32,16 +29,6 @@ static task_id_t current_task_id;
 static task_t current_task_info;
 static ak_msg_t current_active_object;
 
-#if defined(AK_TASK_OBJ_LOG_ENABLE)
-log_queue_t log_task_dbg_object_queue;
-static uint8_t task_dbg_active_obj_queue[LOG_QUEUE_OBJECT_SIZE];
-#endif
-
-#if defined(AK_IRQ_OBJ_LOG_ENABLE)
-log_queue_t log_irq_queue;
-static uint8_t irq_queue[LOG_QUEUE_IRQ_SIZE];
-#endif
-
 static tcb_t	task_pri_queue[TASK_PRI_MAX_SIZE];
 static task_t*	task_table = (task_t*)0;
 static uint8_t	task_table_size = 0;
@@ -55,16 +42,12 @@ static void task_sheduler();
 
 /* function MUST-BE redefine */
 __AK_WEAK void task_irq_io_entry_trigger() {
-#if defined(AK_IO_IRQ_ANALYZER)
-	FATAL("TK", 0x03);
-#endif
+
 }
 
 /* function MUST-BE redefine */
 __AK_WEAK void task_irq_io_exit_trigger() {
-#if defined(AK_IO_IRQ_ANALYZER)
-	FATAL("TK", 0x04);
-#endif
+
 }
 
 void task_create(task_t* task_tbl) {
@@ -75,9 +58,6 @@ void task_create(task_t* task_tbl) {
 			idx++;
 		}
 		task_table_size = idx;
-	}
-	else {
-		FATAL("TK", 0x01);
 	}
 }
 
@@ -90,16 +70,12 @@ void task_polling_create(task_polling_t* task_polling_tbl) {
 		}
 		task_polling_table_size = idx;
 	}
-	else {
-		FATAL("TK", 0x06);
-	}
 }
 
 void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 	tcb_t* t_tcb;
 
 	if (des_task_id >= task_table_size) {
-		FATAL("TK", 0x02);
 	}
 
 	t_tcb = &task_pri_queue[task_table[des_task_id].pri - 1];
@@ -108,14 +84,6 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 
 	msg->next = AK_MSG_NULL;
 	msg->des_task_id = des_task_id;
-
-#if defined(AK_TASK_OBJ_LOG_ENABLE)
-	if (get_msg_ref_count(msg) <= 1) {
-		msg->dbg_handler.start_exe = 0;
-		msg->dbg_handler.stop_exe = 0;
-		msg->dbg_handler.start_post = sys_ctrl_millis();
-	}
-#endif
 
 	if (t_tcb->qtail == AK_MSG_NULL) {
 		/* put message to queue */
@@ -144,7 +112,6 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 
 
 	if (task_id >= AK_TASK_EOT_ID) {
-		FATAL("TK", 0x05);
 	}
 
 	ENTRY_CRITICAL();
@@ -232,14 +199,6 @@ void task_entry_interrupt() {
 	task_irq_io_entry_trigger();
 	current_task_id = AK_TASK_INTERRUPT_ID;
 
-#if defined(AK_IRQ_OBJ_LOG_ENABLE)
-	exception_info_t exception_info;
-	exception_info.except_number = sys_ctr_get_exception_number();
-	exception_info.timestamp = sys_ctrl_millis();
-
-	log_queue_put(&log_irq_queue, &exception_info);
-#endif
-
 	EXIT_CRITICAL();
 }
 
@@ -279,28 +238,6 @@ int task_init() {
 }
 
 int task_run() {
-	/* init active object log queue */
-#if defined(AK_TASK_OBJ_LOG_ENABLE)
-	log_queue_init(&log_task_dbg_object_queue \
-				   , (uint32_t)task_dbg_active_obj_queue \
-				   , (LOG_QUEUE_OBJECT_SIZE / sizeof(ak_msg_t)) \
-				   , sizeof(ak_msg_t) \
-				   , mem_write \
-				   , mem_read);
-#endif
-
-	/* init irq log queue */
-#if defined(AK_IRQ_OBJ_LOG_ENABLE)
-	log_queue_init(&log_irq_queue \
-				   , (uint32_t)irq_queue \
-				   , (LOG_QUEUE_IRQ_SIZE / sizeof(exception_info_t)) \
-				   , sizeof(exception_info_t) \
-				   , mem_write \
-				   , mem_read);
-#endif
-
-	SYS_PRINT("[task_run] Active Objects is ready\n\n");
-
 	for (;;) {
 		task_sheduler();
 		task_polling_run();
@@ -327,7 +264,6 @@ void task_polling_set_ability(task_id_t task_polling_id, uint8_t ability) {
 	}
 
 	if (__task_polling_table->id == AK_TASK_POLLING_EOT_ID) {
-		FATAL("TK", 0x07);
 	}
 }
 
@@ -374,10 +310,6 @@ void task_sheduler() {
 		/* update current task */
 		task_current = t_task_new;
 
-		/* start task debug */
-#if defined(AK_TASK_OBJ_LOG_ENABLE) || defined(AK_TASK_LOG_CONSOLE_ENABLE)
-		t_msg->dbg_handler.start_exe = sys_ctrl_millis();
-#endif
 		/* update current ak object */
 		memcpy(&current_task_info, &task_table[t_msg->des_task_id], sizeof(task_t));
 		memcpy(&current_active_object, t_msg, sizeof(ak_msg_t));
@@ -391,54 +323,6 @@ void task_sheduler() {
 		task_table[t_msg->des_task_id].task(t_msg);
 
 		ENTRY_CRITICAL();
-
-#if defined(AK_TASK_OBJ_LOG_ENABLE) || defined(AK_TASK_LOG_CONSOLE_ENABLE)
-		/* reject msg of timer task */
-		if (current_active_object.des_task_id > 0) {
-			current_active_object.dbg_handler.stop_exe = sys_ctrl_millis();
-
-			/* put current object to log queue */
-			log_queue_put(&log_task_dbg_object_queue, &current_active_object);
-
-#if defined(AK_TASK_LOG_CONSOLE_ENABLE)
-			{
-				uint32_t exe_time;
-				uint32_t wait_time;
-				if (current_active_object.dbg_handler.start_exe >= current_active_object.dbg_handler.start_post) {
-					wait_time = current_active_object.dbg_handler.start_exe - current_active_object.dbg_handler.start_post;
-				}
-				else {
-					wait_time = current_active_object.dbg_handler.start_exe + ((uint32_t)0xFFFFFFFF - current_active_object.dbg_handler.start_post);
-				}
-
-				if (current_active_object.dbg_handler.stop_exe >= current_active_object.dbg_handler.start_exe) {
-					exe_time = current_active_object.dbg_handler.stop_exe - current_active_object.dbg_handler.start_exe;
-				}
-				else {
-					exe_time = current_active_object.dbg_handler.stop_exe + ((uint32_t)0xFFFFFFFF - current_active_object.dbg_handler.start_exe);
-				}
-
-				xprintf("taskID: %d\tmsgType:0x%x\trefCnt:%d\tsig:%d\t\twaitTime:%d\texeTime:%d\n"\
-						, current_active_object.des_task_id								\
-						, (current_active_object.ref_count & AK_MSG_TYPE_MASK)		\
-						, (current_active_object.ref_count & AK_MSG_REF_COUNT_MASK)	\
-						, current_active_object.sig									\
-						, (wait_time)	\
-						, (exe_time));
-			}
-#endif
-		}
-
-		if (get_msg_ref_count(t_msg) > 1) {
-			t_msg->dbg_handler.start_post = current_active_object.dbg_handler.stop_exe ;
-			t_msg->dbg_handler.start_exe = 0;
-			t_msg->dbg_handler.stop_exe = 0;
-		}
-
-		/* clear current active object */
-		memset(&current_active_object, 0, sizeof(ak_msg_t));
-
-#endif
 
 		/* check and free message */
 		msg_free(t_msg);
@@ -470,15 +354,6 @@ void task_pri_queue_dump() {
 			t_msg = t_tcb->qhead;
 
 			while (t_msg != AK_MSG_NULL) {
-
-				/* dump message queue */
-				xprintf("srcTaskID:%d\tdesTaskID:%d\tmsgType:0x%x\trefCnt:%d\tsig:%d\n"\
-						, t_msg->src_task_id \
-						, t_msg->des_task_id \
-						, (t_msg->ref_count & AK_MSG_TYPE_MASK) \
-						, (t_msg->ref_count & AK_MSG_REF_COUNT_MASK) \
-						, t_msg->sig);
-
 				/* consider the next message */
 				t_msg = t_msg->next;
 			}

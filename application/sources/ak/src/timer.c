@@ -5,11 +5,8 @@
  ******************************************************************************
 **/
 
-#include "ak_dbg.h"
-
 #include "timer.h"
 
-#include "sys_dbg.h"
 #include "task_list.h"
 
 /* define message data is transfered between interrupt heart beat and timer task */
@@ -65,7 +62,6 @@ ak_timer_t* get_timer_msg() {
 	allocate_timer = free_list_timer_pool;
 
 	if (allocate_timer == TIMER_MSG_NULL) {
-		FATAL("MT", 0x30);
 	}
 	else {
 		free_list_timer_pool = allocate_timer->next;

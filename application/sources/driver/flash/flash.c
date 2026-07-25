@@ -2,7 +2,6 @@
 #include "flash.h"
 #include "sys_ctrl.h"
 #include "sys_io.h"
-#include "sys_dbg.h"
 
 /* WINBOND commands */
 #define WINBOND_W_EN						0x06	//write enable
@@ -37,8 +36,6 @@
 
 #define WINBOND_DEFAULT_TIMEOUT				200
 
-/* flash enable debug */
-#define FLASH_DBG_EN						0
 
 /******************************************************************************
 * declare static function
@@ -110,10 +107,6 @@ uint8_t flash_is_connected() {
 }
 
 uint8_t flash_read(uint32_t address, uint8_t* pbuf, uint32_t len) {
-#if (FLASH_DBG_EN == 1)
-	SYS_DBG("[flash_read] add:0x%x\t%d\n", address, len);
-#endif
-
 	if (flash_is_connected() != FLASH_DRIVER_OK) {
 		return FLASH_DRIVER_NG;
 	}
@@ -140,10 +133,6 @@ uint8_t flash_read(uint32_t address, uint8_t* pbuf, uint32_t len) {
 uint8_t flash_write(uint32_t address, uint8_t* pbuf, uint32_t len) {
 	bool next_page_flag = true;
 	uint32_t pbuf_index = 0;
-
-#if (FLASH_DBG_EN == 1)
-	SYS_DBG("[flash_write] addr:0x%x\t%d\n", address, len);
-#endif
 
 	if (flash_is_connected() != FLASH_DRIVER_OK) {
 		return FLASH_DRIVER_NG;
@@ -188,10 +177,6 @@ uint8_t flash_erase_sector(uint32_t address) {
 		return FLASH_DRIVER_NG;
 	}
 
-#if (FLASH_DBG_EN == 1)
-	SYS_DBG("[flash_erase_sector] addr:0x%x\n", address);
-#endif
-
 	if (flash_is_connected() != FLASH_DRIVER_OK) {
 		return FLASH_DRIVER_NG;
 	}
@@ -216,10 +201,6 @@ uint8_t flash_erase_block_32k(uint32_t address) {
 	if (address % FLASH_BLOCK_32K_SIZE) {
 		return FLASH_DRIVER_NG;
 	}
-
-#if (FLASH_DBG_EN == 1)
-	SYS_DBG("[flash_erase_block_32k] addr:0x%x\n", address);
-#endif
 
 	if (flash_is_connected() != FLASH_DRIVER_OK) {
 		return FLASH_DRIVER_NG;
@@ -246,10 +227,6 @@ uint8_t flash_erase_block_64k(uint32_t address) {
 		return FLASH_DRIVER_NG;
 	}
 
-#if (FLASH_DBG_EN == 1)
-	SYS_DBG("[flash_erase_block_64k] addr:0x%x\n", address);
-#endif
-
 	if (flash_is_connected() != FLASH_DRIVER_OK) {
 		return FLASH_DRIVER_NG;
 	}
@@ -271,10 +248,6 @@ uint8_t flash_erase_block_64k(uint32_t address) {
 }
 
 uint8_t  flash_erase_full() {
-#if (FLASH_DBG_EN == 1)
-	SYS_DBG("[flash_erase_full]\n");
-#endif
-
 	if (flash_is_connected() != FLASH_DRIVER_OK) {
 		return FLASH_DRIVER_NG;
 	}

@@ -16,7 +16,6 @@
 #include "stm32l1xx_conf.h"
 #include "core_cm3.h"
 
-#include "sys_dbg.h"
 #include "sys_ctrl.h"
 #include "sys_irq.h"
 #include "sys_boot.h"
@@ -209,7 +208,6 @@ void _fini() {
 /* static function defination                                                */
 /*****************************************************************************/
 void default_handler() {
-	FATAL("SY", 0xEE);
 }
 
 void reset_handler() {
@@ -298,23 +296,18 @@ uint32_t sys_stack_get_size() {
 /* cortex-M processor fault exceptions */
 /***************************************/
 void nmi_handler() {
-	FATAL("SY", 0x01);
 }
 
 void hard_fault_handler() {
-	FATAL("SY", 0x02);
 }
 
 void mem_manage_handler() {
-	FATAL("SY", 0x03);
 }
 
 void bus_fault_handler() {
-	FATAL("SY", 0x04);
 }
 
 void usage_fault_handler() {
-	FATAL("SY", 0x05);
 }
 
 /*******************************************/
@@ -350,9 +343,6 @@ void systick_handler() {
 
 void svc_exe(uint32_t* svc_args) {
 	volatile uint8_t svc_number;
-
-	sys_dbg_func_stack_dump(svc_args);
-	sys_dbg_cpu_dump();
 
 	svc_number = ((uint8_t*)svc_args[6])[-2];
 

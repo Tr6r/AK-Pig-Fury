@@ -11,7 +11,6 @@
 #include "screen_manager.h"
 
 #include "sys_ctrl.h"
-#include "sys_dbg.h"
 #include "task_list.h"
 #include "timer.h"
 
@@ -63,7 +62,6 @@ void scr_mng_ctor(scr_mng_t* scr_mng, screen_f init_scr, view_screen_t* scr_obj)
 
 void scr_mng_dispatch(ak_msg_t* msg) {
 	if (screen_manager == SCREEN_MANAGER_NULL) {
-		FATAL("SCR_MNG", 0x01);
 		return;
 	}
 
@@ -76,7 +74,6 @@ void scr_mng_dispatch(ak_msg_t* msg) {
 
 void scr_mng_tran(screen_f target,  view_screen_t* scr_obj) {
 	if (screen_manager == SCREEN_MANAGER_NULL) {
-		FATAL("SCR_MNG", 0x01);
 		return;
 	}
 
@@ -97,7 +94,6 @@ void scr_mng_back() {
 	view_screen_t* scr_obj;
 
 	if (screen_manager == SCREEN_MANAGER_NULL) {
-		FATAL("SCR_MNG", 0x01);
 		return;
 	}
 

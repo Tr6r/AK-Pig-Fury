@@ -10,10 +10,7 @@
 #include "io_cfg.h"
 #include "platform.h"
 
-#include "sys_dbg.h"
 #include "sys_ctrl.h"
-
-#include "app_dbg.h"
 
 #include "eeprom.h"
 
@@ -131,7 +128,6 @@ uint8_t flash_transfer(uint8_t data) {
 	counter = system_info.cpu_clock / 1000;
 	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET) {
 		if (counter-- == 0) {
-			FATAL("spi", 0x01);
 		}
 	}
 
@@ -141,7 +137,6 @@ uint8_t flash_transfer(uint8_t data) {
 	counter = system_info.cpu_clock / 1000;
 	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET) {
 		if (counter-- == 0) {
-			FATAL("spi", 0x02);
 		}
 	}
 

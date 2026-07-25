@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "io_cfg.h"
-#include "sys_dbg.h"
 
 void pinMode(uint8_t pin, uint8_t mode) {
 	switch (pin) {
@@ -14,9 +13,6 @@ void pinMode(uint8_t pin, uint8_t mode) {
 		else if (mode == INPUT_PULLUP) {
 			oled_clk_input_mode();
 		}
-		else {
-			FATAL("AR", 0x01);
-		}
 		break;
 
 	case OLED_DATA_PIN:
@@ -28,9 +24,6 @@ void pinMode(uint8_t pin, uint8_t mode) {
 		}
 		else if (mode == INPUT_PULLUP) {
 			oled_data_input_mode();
-		}
-		else {
-			FATAL("AR", 0x01);
 		}
 		break;
 
@@ -44,13 +37,8 @@ void pinMode(uint8_t pin, uint8_t mode) {
 		else if (mode == INPUT_PULLUP) {
 			oled_res_input_mode();
 		}
-		else {
-			FATAL("AR", 0x01);
-		}
 		break;
-
 	default:
-		FATAL("AR", 0xF1);
 		break;
 	}
 }
@@ -64,9 +52,6 @@ void digitalWrite(uint8_t pin, uint8_t val) {
 		else if (val == LOW) {
 			oled_clk_digital_write_low();
 		}
-		else {
-			FATAL("AR", 0x02);
-		}
 		break;
 
 	case OLED_DATA_PIN:
@@ -75,9 +60,6 @@ void digitalWrite(uint8_t pin, uint8_t val) {
 		}
 		else if (val == LOW) {
 			oled_data_digital_write_low();
-		}
-		else {
-			FATAL("AR", 0x02);
 		}
 		break;
 
@@ -88,13 +70,9 @@ void digitalWrite(uint8_t pin, uint8_t val) {
 		else if (val == LOW) {
 			oled_res_digital_write_low();
 		}
-		else {
-			FATAL("AR", 0x02);
-		}
 		break;
 
 	default:
-		FATAL("AR", 0xF2);
 		break;
 	}
 }
@@ -117,7 +95,6 @@ int digitalRead(uint8_t pin) {
 	}
 		break;
 	default:
-		FATAL("AR", 0xF3);
 		break;
 	}
 	return val;

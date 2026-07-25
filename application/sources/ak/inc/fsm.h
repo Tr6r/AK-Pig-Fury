@@ -17,7 +17,8 @@ extern "C"
 #include <stdint.h>
 
 #include "ak.h"
-#include "message.h"
+
+typedef struct ak_msg_t ak_msg_t;
 
 #define FSM(me, init_func)		((fsm_t*)me)->state = (state_handler)init_func
 #define FSM_TRAN(me, target)	((fsm_t*)me)->state = (state_handler)target

@@ -21,7 +21,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "sys_dbg.h"
 #include "message.h"
 
 char* strdup (const char *s) {
@@ -38,7 +37,6 @@ char *dtostrf (double val, signed char width, unsigned char prec, char *sout) {
 	(void)width;
 	(void)prec;
 	(void)sout;
-	FATAL("arduino", 0x01);
 	return NULL;
 #else
 	// Handle negative numbers
@@ -64,14 +62,10 @@ char *dtostrf (double val, signed char width, unsigned char prec, char *sout) {
 		int_part = -int_part;
 
 	// Extract digits from the remainder
-	unsigned long dec_part = 0;
 	double decade = 1.0;
 	for(int i=0; i < prec; i++)
 		decade *= 10.0;
 	remainder *= decade;
-	dec_part = (int)remainder;
-
-	xsprintf(sout, "%d.%d", int_part, dec_part);
 
 	// Handle minimum field width of the output string
 	// width is signed value, negative for left adjustment.

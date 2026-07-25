@@ -4,7 +4,6 @@
 #include <stdint.h>
 
 #include "sys_boot.h"
-#include "sys_dbg.h"
 #include "app.h"
 #include "buzzer.h"
 

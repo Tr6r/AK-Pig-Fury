@@ -1,7 +1,6 @@
 #include <cstdlib>
 #include <sys/types.h>
 #include <stdio.h>
-#include "sys_dbg.h"
 #include "sys_ctrl.h"
 #include "message.h"
 
@@ -22,11 +21,9 @@ void*   __dso_handle = (void*) &__dso_handle;
  * The default pulls in about 12K of garbage
  */
 extern "C" void __cxa_pure_virtual() {
-	FATAL("C++", 0x01);
 }
 
 extern "C" void __cxa_deleted_virtual() {
-	FATAL("C++", 0x02);
 }
 
 /*

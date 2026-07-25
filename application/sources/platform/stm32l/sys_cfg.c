@@ -17,13 +17,10 @@
 #include "core_cm3.h"
 #include "core_cmFunc.h"
 
-#include "xprintf.h"
 #include "ring_buffer.h"
 
-#include "sys_dbg.h"
 #include "sys_ctrl.h"
 #include "sys_io.h"
-#include "sys_dbg.h"
 #include "ak.h"
 
 /* Private define */
@@ -329,7 +326,6 @@ void sys_ctrl_soft_watchdog_increase_counter() {
 	sys_ctrl_soft_counter++;
 	if (sys_ctrl_soft_counter >= sys_ctrl_soft_time_out) {
 		TIM_Cmd(TIM7, DISABLE);
-		FATAL("SWDG", 0x01);
 	}
 }
 

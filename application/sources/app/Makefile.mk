@@ -17,7 +17,5 @@ SOURCES_CPP += sources/app/task_life.cpp
 SOURCES_CPP += sources/app/task_list.cpp
 SOURCES_CPP += sources/app/task_display.cpp
 
-SOURCES_CPP += sources/app/task_dbg.cpp
-
 # task pf game
 SOURCES_CPP += sources/app/task_pf_game.cpp

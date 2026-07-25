@@ -1,8 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "sys_dbg.h"
-
 #include "fifo.h"
 
 void fifo_init(fifo_t* fifo, void* buffer, uint32_t buffer_size, uint32_t element_size) {
@@ -31,7 +29,6 @@ uint8_t fifo_put(fifo_t* fifo, void* data) {
 	uint32_t next_tail_index;
 
 	if (fifo->fill_size == fifo->buffer_size) {
-		FATAL("FIFO", 0x02);
 	}
 
 	if (data != NULL) {
@@ -53,7 +50,6 @@ uint8_t fifo_get(fifo_t* fifo, void* data) {
 	uint32_t next_head_index;
 
 	if (fifo_is_empty(fifo)) {
-		FATAL("FIFO", 0x03);
 	}
 
 	if (data != NULL) {

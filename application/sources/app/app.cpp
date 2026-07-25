@@ -30,7 +30,6 @@
 
 /* app include */
 #include "app.h"
-#include "app_dbg.h"
 #include "app_bsp.h"
 #include "app_flash.h"
 #include "app_non_clear_ram.h"
@@ -44,7 +43,6 @@
 #include "sys_irq.h"
 #include "sys_io.h"
 #include "sys_ctrl.h"
-#include "sys_dbg.h"
 
 /* arduino include */
 #include "SPI.h"
@@ -85,10 +83,6 @@ static void app_task_init();
  */
 /*****************************************************************************/
 int main_app() {
-	APP_PRINT("App run mode: %s, App version: %d.%d.%d.%d\n", app_run_mode, app_info.version[0] \
-			, app_info.version[1]	\
-			, app_info.version[2]	\
-			, app_info.version[3]);
 
 	sys_soft_reboot_counter++;
 
@@ -151,13 +145,6 @@ int main_app() {
 	if (boot_app_share_data.is_power_on_reset == SYS_POWER_ON_RESET) {
 		app_power_on_reset();
 	}
-
-	/* increase start time */
-	fatal_log_t app_fatal_log;
-	flash_read(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, reinterpret_cast<uint8_t*>(&app_fatal_log), sizeof(fatal_log_t));
-	app_fatal_log.restart_times ++;
-	flash_erase_sector(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR);
-	flash_write(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, reinterpret_cast<uint8_t*>(&app_fatal_log), sizeof(fatal_log_t));
 
 	EXIT_CRITICAL();
 

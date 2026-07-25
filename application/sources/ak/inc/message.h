@@ -64,13 +64,6 @@ extern "C"
 
 #define get_msg_type(x)				((((ak_msg_t*)x)->ref_count) & AK_MSG_TYPE_MASK)
 
-typedef struct {
-	/* time of message handler */
-	uint32_t	start_post;
-	uint32_t	start_exe;
-	uint32_t	stop_exe;
-} dbg_handler_t;
-
 /**************/
 /* ak_message */
 /**************/
@@ -80,14 +73,6 @@ typedef struct ak_msg_t {
 	 ******************************/
 	/* message management */
 	struct ak_msg_t*	next;
-
-	/*******************************
-	 * kernel debug.
-	 ******************************/
-	/* task debug */
-#if (AK_TASK_DEBUG == AK_ENABLE)
-	dbg_handler_t		dbg_handler;
-#endif
 
 	/* task header */
 	uint8_t				src_task_id;
@@ -237,7 +222,6 @@ extern uint32_t get_data_len_dynamic_msg(ak_msg_t* msg);
  * DEFINITION: debug message
  *
  *****************************************************************************/
-extern void msg_dbg_dum(ak_msg_t* msg);
 
 #ifdef __cplusplus
 }
