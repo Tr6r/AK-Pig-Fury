@@ -14,9 +14,6 @@ extern "C"
 #endif
 
 #include "ak.h"
-#if defined (IF_NETWORK_NRF24_EN)
-#include "nrf_nwk_sig.h"
-#endif
 
 #include "app_if.h"
 #include "app_eeprom.h"
@@ -65,21 +62,6 @@ enum {
 /* define signal */
 enum {
 	AC_LIFE_SYSTEM_CHECK = AK_USER_DEFINE_SIG,
-};
-
-/*****************************************************************************/
-/*  RF24 task define
- */
-/*****************************************************************************/
-/* private define */
-/* define timer */
-/* define signal */
-enum {
-	AC_RF24_IF_INIT_NETWORK = AK_USER_DEFINE_SIG,
-	AC_RF24_IF_PURE_MSG_OUT,
-	AC_RF24_IF_COMMON_MSG_OUT,
-	AC_RF24_IF_PURE_MSG_IN,
-	AC_RF24_IF_COMMON_MSG_IN,
 };
 
 /*****************************************************************************/

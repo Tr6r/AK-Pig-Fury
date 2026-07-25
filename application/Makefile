@@ -59,7 +59,6 @@ USB_OPTION = -UUSING_USB_MOD
 
 # Interface compile option.
 IF_LINK_OPTION = -DIF_LINK_UART_EN
-IF_NETWORK_NRF24_OPTION = -UIF_NETWORK_NRF24_EN
 
 # Task compile option.
 TASK_ZIGBEE_OPTION = -UTASK_ZIGBEE_EN
@@ -157,7 +156,6 @@ FPU = -mfloat-abi=soft
 
 # Interface option
 IF_OPTION +=	$(IF_LINK_OPTION)		\
-		$(IF_NETWORK_NRF24_OPTION)	\
 
 # App option
 TASK_OPTION +=	$(TASK_ZIGBEE_OPTION)
