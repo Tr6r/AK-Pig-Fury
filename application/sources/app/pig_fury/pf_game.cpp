@@ -168,40 +168,42 @@ void pig_fury_game::check_enemy_attack_hit() {
 	}
 }
 
-bool pig_fury_game::check_pig_attach_weapon()
-{
+bool pig_fury_game::check_pig_attach_weapon() {
 	if (pig_.get_weapon()) return false;
-	for (uint8_t i = 0; i < weapon_mng_.get_weapon_count(); i++)
-	{
+	for (uint8_t i = 0; i < weapon_mng_.get_weapon_count(); i++) {
 		pf_weapon *weapon = weapon_mng_.get_weapon(i);
 		if ((weapon->get_st() != PF_WEAPON_ST_FALL && weapon->get_st() != PF_WEAPON_ST_FLY) || weapon->is_pickup())
 			continue;
-		switch (pig_.get_dir())
-		{
+		int16_t pig_left = pig_.get_pos_x();
+		int16_t pig_right = pig_left + PIG_WIDTH;
+		int16_t pig_mid = pig_left + PIG_WIDTH / 2;
+		int16_t weapon_mid = weapon->get_pos_x() + weapon->get_width() / 2;
+		bool pickup = false;
+		pf_char_dir weapon_dir = pig_.get_dir();
+		switch (pig_.get_dir()) {
 			case PF_CHAR_DIR_LEFT:
-				if (weapon->get_pos_x() + weapon->get_width() >= pig_.get_pos_x() - PIG_COLLECT_WEAPON_RANGE && weapon->get_pos_x() <= pig_.get_pos_x()) {
-					if (pig_.get_weapon()) pig_.get_weapon()->set_st(PF_WEAPON_ST_FALL);
-					pig_.set_weapon(weapon);
-					pig_.set_atk_st(PF_PIG_ATTACK_WEAPON_PICKUP);
-					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
-					weapon->set_dir(PF_CHAR_DIR_LEFT);
-					weapon->set_st(PF_WEAPON_ST_PENDING_ATTACH);
-					weapon->set_pickup(true);
-					return true;
-				}
+				pickup =
+					weapon_mid >= pig_left - PIG_COLLECT_WEAPON_RANGE &&
+					weapon_mid <= pig_mid;
+				weapon_dir = PF_CHAR_DIR_LEFT;
 				break;
+
 			case PF_CHAR_DIR_RIGHT:
-				if (weapon->get_pos_x() <= pig_.get_pos_x() + PIG_WIDTH + PIG_COLLECT_WEAPON_RANGE && weapon->get_pos_x() + weapon->get_width() >= pig_.get_pos_x() + PIG_WIDTH) {
-					if (pig_.get_weapon()) pig_.get_weapon()->set_st(PF_WEAPON_ST_FALL);
-					pig_.set_weapon(weapon);
-					pig_.set_atk_st(PF_PIG_ATTACK_WEAPON_PICKUP);
-					pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
-					weapon->set_dir(PF_CHAR_DIR_RIGHT);
-					weapon->set_st(PF_WEAPON_ST_PENDING_ATTACH);
-					weapon->set_pickup(true);
-					return true;
-				}
+				pickup =
+					weapon_mid >= pig_mid &&
+					weapon_mid <= pig_right + PIG_COLLECT_WEAPON_RANGE;
+				weapon_dir = PF_CHAR_DIR_RIGHT;
 				break;
+		}
+		if (pickup) {
+			if (pig_.get_weapon()) pig_.get_weapon()->set_st(PF_WEAPON_ST_FALL);
+			pig_.set_weapon(weapon);
+			pig_.set_atk_st(PF_PIG_ATTACK_WEAPON_PICKUP);
+			pig_.set_atk_dur_tick(PIG_ATK_FRAME_TICK);
+			weapon->set_dir(weapon_dir);
+			weapon->set_st(PF_WEAPON_ST_PENDING_ATTACH);
+			weapon->set_pickup(true);
+			return true;
 		}
 	}
 	return false;
