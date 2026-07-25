@@ -53,7 +53,7 @@ void scr_startup_handle(ak_msg_t *msg) {
 
 	case AC_DISPLAY_SHOW_LOGO: {
 		APP_DBG_SIG("AC_DISPLAY_SHOW_LOGO\n");
-		SCREEN_TRAN(scr_pf_menu_handle, &scr_pf_menu);
+		SCREEN_TRAN(scr_pf_welcome_handle, &scr_pf_welcome);
 	} break;
 	default:
 		break;

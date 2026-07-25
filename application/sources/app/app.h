@@ -132,7 +132,7 @@ enum {
 /*****************************************************************************/
 /* define timer */
 #define AC_DISPLAY_INITIAL_INTERVAL									(100)
-#define AC_DISPLAY_STARTUP_INTERVAL									(100)
+#define AC_DISPLAY_STARTUP_INTERVAL									(1500)
 #define AC_DISPLAY_LOGO_INTERVAL									(10000)
 #define AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE_INTERAL				(150)
 #define AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SNOW_MOVING_UPDATE_INTERAL	(150)
@@ -161,6 +161,7 @@ enum {
 	AC_DISPLAY_SHOW_MODBUS_PULL_UPDATE,
 	AC_DISPLAY_SHOW_MODBUS_PULL_SLEEP,
 	AC_DISPLAY_GAMEPLAY_UPDATE,
+	AC_DISPLAY_MENU,
 	AC_DISPLAY_MENU_UPDATE,
 };
 
@@ -193,6 +194,7 @@ enum {
  */
 /*****************************************************************************/
 /* define timer */
+#define AC_DISPLAY_WELCOME_INTERVAL_MS											(1500)
 #define AC_DISPLAY_GAMEPLAY_UPDATE_INTERVAL_MS									(60)
 /* define signal */
 enum {

@@ -63,4 +63,9 @@ extern view_dynamic_t dyn_view_pf_gameover;
 extern view_screen_t scr_pf_gameover;
 extern void scr_pf_gameover_handle(ak_msg_t* msg);
 
+// scr_pf_welcome
+extern view_dynamic_t dyn_view_pf_welcome;
+extern view_screen_t scr_pf_welcome;
+extern void scr_pf_welcome_handle(ak_msg_t* msg);
+
 #endif //__SCREENS_H__
