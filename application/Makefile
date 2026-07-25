@@ -60,9 +60,6 @@ USB_OPTION = -UUSING_USB_MOD
 # Interface compile option.
 IF_LINK_OPTION = -DIF_LINK_UART_EN
 
-# Task compile option.
-TASK_ZIGBEE_OPTION = -UTASK_ZIGBEE_EN
-
 # Include sources file
 include sources/ak/Makefile.mk
 include sources/app/Makefile.mk
@@ -156,9 +153,6 @@ FPU = -mfloat-abi=soft
 
 # Interface option
 IF_OPTION +=	$(IF_LINK_OPTION)		\
-
-# App option
-TASK_OPTION +=	$(TASK_ZIGBEE_OPTION)
 
 # Hardware option
 #Ver 2.1 (Oled 1.3" driver SH1106)

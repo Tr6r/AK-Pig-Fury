@@ -25,10 +25,6 @@ enum {
 	AC_TASK_DBG_ID,
 	AC_TASK_DISPLAY_ID,
 
-#if defined(TASK_ZIGBEE_EN)
-	AC_TASK_ZIGBEE_ID,
-#endif
-
 	/* LINK */
 #if defined (IF_LINK_UART_EN)
 	AC_LINK_PHY_ID,
@@ -49,10 +45,6 @@ enum {
  */
 /*****************************************************************************/
 enum {
-	/* APP TASKS */
-	AC_TASK_POLLING_ZIGBEE_ID,
-	// AC_TASK_POLLING_CONSOLE_ID,
-
 	/* EOT polling task ID */
 	AK_TASK_POLLING_EOT_ID,
 };
@@ -69,7 +61,6 @@ extern void task_if(ak_msg_t*);
 extern void task_uart_if(ak_msg_t*);
 extern void task_dbg(ak_msg_t*);
 extern void task_display(ak_msg_t*);
-extern void task_zigbee(ak_msg_t*);
 
 /* LINK TASK */
 extern void task_link_phy(ak_msg_t*);
@@ -83,7 +74,5 @@ extern void task_pf_game(ak_msg_t*);
 /*  DECLARE: Task polling
  */
 /*****************************************************************************/
-extern void task_polling_zigbee();
-// extern void task_polling_console();
 
 #endif //__TASK_LIST_H__

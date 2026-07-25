@@ -155,15 +155,7 @@ void (* const isr_vector[])() = {
 		default_handler,						//	SPI1
 		default_handler,						//	SPI2
 		uart1_irq,								//	USART1
-
-		#if defined (TASK_ZIGBEE_EN)
 		default_handler,						//	USART2
-		#elif defined (TASK_ZIGBEE_EN)
-		uart2_irq,								//	USART2
-		#else
-		default_handler,						//	USART2
-		#endif
-
 		default_handler,						//	USART3
 		default_handler,						//	EXTI Line 15..10
 		default_handler,						//	RTC Alarm through EXTI Line
