@@ -15,42 +15,8 @@ extern "C"
 
 #include "ak.h"
 
-#include "app_if.h"
 #include "app_eeprom.h"
 #include "app_data.h"
-
-/*****************************************************************************/
-/* SYSTEM task define
- */
-/*****************************************************************************/
-/* define timer */
-/* define signal */
-enum {
-	SYSTEM_AK_FLASH_UPDATE_REQ = AK_USER_DEFINE_SIG,
-};
-
-/*****************************************************************************/
-/* FIRMWARE task define
- */
-/*****************************************************************************/
-/* define timer */
-#define FW_PACKED_TIMEOUT_INTERVAL			(5000)
-#define FW_UPDATE_REQ_INTERVAL				(5000)
-
-/* define signal */
-enum {
-	FW_CRENT_APP_FW_INFO_REQ = AK_USER_DEFINE_SIG,
-	FW_CRENT_BOOT_FW_INFO_REQ,
-	FW_UPDATE_REQ,
-	FW_UPDATE_SM_OK,
-	FW_TRANSFER_REQ,
-	FW_INTERNAL_UPDATE_APP_RES_OK,
-	FW_INTERNAL_UPDATE_BOOT_RES_OK,
-	FW_SAFE_MODE_RES_OK,
-	FW_UPDATE_SM_BUSY,
-	FW_PACKED_TIMEOUT,
-	FW_CHECKING_REQ
-};
 
 /*****************************************************************************/
 /*  LIFE task define
@@ -77,23 +43,6 @@ enum {
 	AC_IF_COMMON_MSG_OUT,
 	AC_IF_DYNAMIC_MSG_IN,
 	AC_IF_DYNAMIC_MSG_OUT,
-};
-
-/*****************************************************************************/
-/* UART_IF task define
- */
-/*****************************************************************************/
-/* timer signal */
-/* define signal */
-
-enum {
-	AC_UART_IF_INIT = AK_USER_DEFINE_SIG,
-	AC_UART_IF_PURE_MSG_OUT,
-	AC_UART_IF_COMMON_MSG_OUT,
-	AC_UART_IF_DYNAMIC_MSG_OUT,
-	AC_UART_IF_PURE_MSG_IN,
-	AC_UART_IF_COMMON_MSG_IN,
-	AC_UART_IF_DYNAMIC_MSG_IN,
 };
 
 /*****************************************************************************/
