@@ -72,18 +72,17 @@ void view_scr_pf_gameover() {
 void scr_pf_gameover_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY: {
-			APP_DBG_SIG("PF_GAMEPLAY\n");
-			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEPLAY_UPDATE,AC_DISPLAY_GAMEPLAY_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
+			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEOVER_UPDATE,AC_DISPLAY_GAMEOVER_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
+			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEOVER_ALLOW_CHANGE_SCR,AC_DISPLAY_GAMEOVER_CHANGE_SCR_INTERVAL_MS,TIMER_ONE_SHOT);
 			break;
 		}
-		case AC_DISPLAY_GAMEPLAY_UPDATE: {
-			scr_mng_invalidate();
-			break;
-		}
-		case AC_DISPLAY_BUTON_MODE_PRESSED: 
-		case AC_DISPLAY_BUTON_UP_PRESSED: 
-		case AC_DISPLAY_BUTON_DOWN_PRESSED: {
+		case AC_DISPLAY_GAMEOVER_ALLOW_CHANGE_SCR: {
+			timer_remove_attr(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEOVER_UPDATE);
 			SCREEN_TRAN(scr_pf_menu_handle, &scr_pf_menu);
+			break;
+		}
+		case AC_DISPLAY_GAMEOVER_UPDATE: {
+			scr_mng_invalidate();
 			break;
 		}
 		default:

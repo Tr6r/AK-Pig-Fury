@@ -23,10 +23,10 @@ void view_scr_pf_config() {
 void scr_pf_config_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY: {
-			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_MENU_UPDATE,AC_DISPLAY_GAMEPLAY_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
+			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_CONFIG_UPDATE,AC_DISPLAY_CONFIG_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
 			break;
 		}
-		case AC_DISPLAY_MENU_UPDATE: {
+		case AC_DISPLAY_CONFIG_UPDATE: {
 			scr_mng_invalidate();
 			pf_config_update();
 			break;
@@ -41,7 +41,10 @@ void scr_pf_config_handle(ak_msg_t *msg) {
 		}
 		case AC_DISPLAY_BUTON_MODE_PRESSED: {
 			pf_change_config();
-			if (pf_get_cur_config_item() == PF_CONFIG_EXIT) SCREEN_TRAN(scr_pf_menu_handle, &scr_pf_menu);
+			if (pf_get_cur_config_item() == PF_CONFIG_EXIT) {
+				timer_remove_attr(AC_TASK_DISPLAY_ID,AC_DISPLAY_CONFIG_UPDATE);
+				SCREEN_TRAN(scr_pf_menu_handle, &scr_pf_menu);
+			}
 			break;
 		}
 		default:

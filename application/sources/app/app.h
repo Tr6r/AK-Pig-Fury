@@ -160,9 +160,14 @@ enum {
 	AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SLEEP,
 	AC_DISPLAY_SHOW_MODBUS_PULL_UPDATE,
 	AC_DISPLAY_SHOW_MODBUS_PULL_SLEEP,
-	AC_DISPLAY_GAMEPLAY_UPDATE,
+	// PF game
+	AC_DISPLAY_WELCOME_UPDATE,
 	AC_DISPLAY_MENU,
 	AC_DISPLAY_MENU_UPDATE,
+	AC_DISPLAY_CONFIG_UPDATE,
+	AC_DISPLAY_GAMEPLAY_UPDATE,
+	AC_DISPLAY_GAMEOVER_UPDATE,
+	AC_DISPLAY_GAMEOVER_ALLOW_CHANGE_SCR,
 };
 
 /*****************************************************************************/
@@ -195,7 +200,12 @@ enum {
 /*****************************************************************************/
 /* define timer */
 #define AC_DISPLAY_WELCOME_INTERVAL_MS											(1500)
+#define AC_DISPLAY_MENU_UPDATE_INTERVAL_MS										(60)
+#define AC_DISPLAY_CONFIG_UPDATE_INTERVAL_MS									(60)
 #define AC_DISPLAY_GAMEPLAY_UPDATE_INTERVAL_MS									(60)
+#define AC_DISPLAY_GAMEOVER_UPDATE_INTERVAL_MS									(60)
+#define AC_DISPLAY_GAMEOVER_CHANGE_SCR_INTERVAL_MS								(1500)
+
 /* define signal */
 enum {
 	AC_PF_GAME_INIT = AK_USER_DEFINE_SIG,
