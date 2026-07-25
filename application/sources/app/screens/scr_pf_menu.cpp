@@ -24,7 +24,6 @@ void view_scr_pf_menu() {
 void scr_pf_menu_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY: {
-			task_post_pure_msg(AC_TASK_PF_GAME_ID, AC_PF_GAME_INIT);
 			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_MENU_UPDATE,AC_DISPLAY_MENU_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
 			break;
 		}

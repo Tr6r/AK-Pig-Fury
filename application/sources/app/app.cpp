@@ -189,7 +189,7 @@ void app_init_state_machine() {
  */
 void app_task_init() {
 	SCREEN_CTOR(&scr_mng_app, scr_startup_handle, &scr_startup);
-
+	task_post_pure_msg(AC_TASK_PF_GAME_ID, AC_PF_GAME_INIT);
 }
 
 /*****************************************************************************/
