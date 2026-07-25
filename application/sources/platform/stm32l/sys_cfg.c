@@ -26,15 +26,8 @@
 #include "sys_dbg.h"
 #include "ak.h"
 
-//#pragma GCC optimize ("O3")
-
-#define RING_BUFFER_CHAR_SHELL_SEND_BUFFER_SIZE		512
-
 /* Private define */
 static volatile uint32_t delay_coeficient = 0;
-
-static uint8_t ring_buffer_char_shell_send_buffer[RING_BUFFER_CHAR_SHELL_SEND_BUFFER_SIZE];
-ring_buffer_char_t ring_buffer_char_shell_send;
 
 /******************************************************************************
 * system configure function
@@ -68,62 +61,6 @@ void sys_cfg_tick() {
 	SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
 			SysTick_CTRL_TICKINT_Msk   |
 			SysTick_CTRL_ENABLE_Msk;                             /* Enable SysTick IRQ and SysTick Timer */
-}
-
-void sys_cfg_console() {
-	USART_InitTypeDef USART_InitStructure;
-	GPIO_InitTypeDef GPIO_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	ring_buffer_char_init(&ring_buffer_char_shell_send, ring_buffer_char_shell_send_buffer, RING_BUFFER_CHAR_SHELL_SEND_BUFFER_SIZE);
-
-	/* Enable GPIO clock */
-	RCC_AHBPeriphClockCmd(USARTx_TX_GPIO_CLK | USARTx_RX_GPIO_CLK, ENABLE);
-
-	/* Enable USART clock */
-	RCC_APB2PeriphClockCmd(USARTx_CLK, ENABLE);
-
-	/* Connect PXx to USARTx_Tx */
-	GPIO_PinAFConfig(USARTx_TX_GPIO_PORT, USARTx_TX_SOURCE, USARTx_TX_AF);
-
-	/* Connect PXx to USARTx_Rx */
-	GPIO_PinAFConfig(USARTx_RX_GPIO_PORT, USARTx_RX_SOURCE, USARTx_RX_AF);
-
-	/* Configure USART Tx and Rx as alternate function push-pull */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_InitStructure.GPIO_Pin = USARTx_TX_PIN;
-	GPIO_Init(USARTx_TX_GPIO_PORT, &GPIO_InitStructure);
-
-	GPIO_InitStructure.GPIO_Pin = USARTx_RX_PIN;
-	GPIO_Init(USARTx_RX_GPIO_PORT, &GPIO_InitStructure);
-
-	/* USARTx configuration */
-	USART_InitStructure.USART_BaudRate = SYS_CONSOLE_BAUDRATE;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No;
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(USARTx, &USART_InitStructure);
-
-	/* Enable the USARTx Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = USARTx_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = IRQ_PRIO_UART0_CONSOLE;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-
-	USART_ClearITPendingBit(USARTx, USART_IT_RXNE | USART_IT_TXE);
-	USART_ITConfig(USARTx, USART_IT_RXNE, ENABLE);
-	USART_ITConfig(USARTx, USART_IT_TXE, DISABLE);
-
-	/* Enable USART */
-	USART_Cmd(USARTx, ENABLE);
-
-	sys_ctrl_shell_sw_to_block();
 }
 
 void sys_cfg_svc() {
@@ -177,94 +114,11 @@ void sys_cfg_update_info() {
 	system_info.ram_other = system_info.ram_used - (system_info.heap_avail + system_info.stack_avail + system_info.data_non_init_size + system_info.data_init_size);
 
 	delay_coeficient = system_info.cpu_clock /1000000;
-
-	/* kernel banner */
-	SYS_PRINT("\n");
-	SYS_PRINT("   __    _  _ \n");
-	SYS_PRINT("  /__\\  ( )/ )\n");
-	SYS_PRINT(" /(__)\\ (   ( \n");
-	SYS_PRINT("(__)(__)(_)\\_)\n");
-	SYS_PRINT("Wellcome to Active Kernel %s\n", AK_VERSION);
-	SYS_PRINT("\n");
-
-#if 0
-	/* system banner */
-	SYS_PRINT("system information:\n");
-	SYS_PRINT("\tFLASH used:\t%d bytes\n", system_info.flash_used);
-	SYS_PRINT("\tSRAM used:\t%d bytes\n", system_info.ram_used);
-	SYS_PRINT("\t\tdata init size:\t\t%d bytes\n", system_info.data_init_size);
-	SYS_PRINT("\t\tdata non_init size:\t%d bytes\n", system_info.data_non_init_size);
-	SYS_PRINT("\t\tstack avail:\t\t%d bytes\n", system_info.stack_avail);
-	SYS_PRINT("\t\theap avail:\t\t%d bytes\n", system_info.heap_avail);
-	SYS_PRINT("\t\tother:\t\t\t%d bytes\n", system_info.ram_other);
-	SYS_PRINT("\n");
-	SYS_PRINT("\tcpu clock:\t%d Hz\n", system_info.cpu_clock);
-	SYS_PRINT("\ttime tick:\t%d ms\n", system_info.tick);
-	SYS_PRINT("\tconsole:\t%d bps\n", system_info.console_baudrate);
-	SYS_PRINT("\n\n");
-#endif
 }
 
 /******************************************************************************
 * system utilities function
 *******************************************************************************/
-void sys_ctrl_shell_put_char(uint8_t c) {
-	bool _flag_trigger = false;
-
-	ENTRY_CRITICAL();
-
-	if (ring_buffer_char_is_empty(&ring_buffer_char_shell_send)) {
-		_flag_trigger = true;
-	}
-
-	ring_buffer_char_put(&ring_buffer_char_shell_send, c);
-
-	EXIT_CRITICAL();
-
-	if (_flag_trigger) {
-		USART_ITConfig(USARTx, USART_IT_TXE, ENABLE);
-	}
-}
-
-void sys_ctrl_shell_put_char_block(uint8_t c) {
-	/* wait last transmission completed */
-	while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET);
-
-	/* put transnission data */
-	USART_SendData(USARTx, (uint8_t)c);
-
-	/* wait transmission completed */
-	while (USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET);
-}
-
-void sys_ctrl_shell_sw_to_block() {
-	ENTRY_CRITICAL();
-
-	xfunc_output = (void(*)(int))sys_ctrl_shell_put_char_block;
-
-	USART_ClearITPendingBit(USARTx, USART_IT_TXE);
-	USART_ITConfig(USARTx, USART_IT_TXE, DISABLE);
-
-	EXIT_CRITICAL();
-}
-
-void sys_ctrl_shell_sw_to_nonblock() {
-	ENTRY_CRITICAL();
-	xfunc_output = (void(*)(int))sys_ctrl_shell_put_char;
-	USART_ITConfig(USARTx, USART_IT_TXE, ENABLE);
-	EXIT_CRITICAL();
-}
-
-uint8_t sys_ctrl_shell_get_char() {
-	volatile uint8_t c;
-
-	if (USART_GetITStatus(USARTx, USART_IT_RXNE) == SET) {
-		c = (uint8_t)USART_ReceiveData(USARTx);
-		USART_ClearITPendingBit(USARTx, USART_IT_RXNE);
-	}
-
-	return c;
-}
 
 void sys_ctrl_reset() {
 	NVIC_SystemReset();

@@ -84,7 +84,6 @@ caddr_t _sbrk (uint32_t incr) {
 extern "C" {
 int fputc(int ch, FILE *f) {
 	(void)f;
-	sys_ctrl_shell_put_char(ch);
 	/* Your implementation of fputc(). */
 	return ch;
 }

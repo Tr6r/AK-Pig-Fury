@@ -19,7 +19,6 @@ enum {
 	/* APP TASKS */
 	AC_TASK_SYSTEM_ID,
 	AC_TASK_FW_ID,
-	AC_TASK_SHELL_ID,
 	AC_TASK_LIFE_ID,
 	AC_TASK_IF_ID,
 	AC_TASK_RF24_IF_ID,
@@ -60,7 +59,7 @@ enum {
 enum {
 	/* APP TASKS */
 	AC_TASK_POLLING_ZIGBEE_ID,
-	AC_TASK_POLLING_CONSOLE_ID,
+	// AC_TASK_POLLING_CONSOLE_ID,
 
 	/* EOT polling task ID */
 	AK_TASK_POLLING_EOT_ID,
@@ -73,7 +72,6 @@ enum {
 /* APP TASKS */
 extern void task_system(ak_msg_t*);
 extern void task_fw(ak_msg_t*);
-extern void task_shell(ak_msg_t*);
 extern void task_life(ak_msg_t*);
 extern void task_if(ak_msg_t*);
 extern void task_rf24_if(ak_msg_t*);
@@ -103,6 +101,6 @@ extern void task_pf_game(ak_msg_t*);
  */
 /*****************************************************************************/
 extern void task_polling_zigbee();
-extern void task_polling_console();
+// extern void task_polling_console();
 
 #endif //__TASK_LIST_H__

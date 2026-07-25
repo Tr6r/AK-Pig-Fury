@@ -11,7 +11,6 @@
 #define PF_AXE_FLY_MAX_HEIGHT 30
 
 static const pf_pig_weapon_action axe_actions[] = {
-	PF_PIG_WEAPON_ACTION_MELEE,
 	PF_PIG_WEAPON_ACTION_THROW,
 };
 

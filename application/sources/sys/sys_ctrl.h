@@ -51,21 +51,6 @@ extern uint32_t sys_ctrl_micros();
 /* get current 1ms system timer variable */
 extern uint32_t sys_ctrl_millis();
 
-/* get character of system console */
-extern uint8_t sys_ctrl_shell_get_char();
-
-/* put character of system console (NON-BLOCKING using interrupt) */
-extern void sys_ctrl_shell_put_char(uint8_t);
-
-/* put character of system console (BLOCKING)*/
-extern void sys_ctrl_shell_put_char_block(uint8_t);
-
-/* switch shell put char with blocking */
-extern void sys_ctrl_shell_sw_to_block();
-
-/* switch shell put char with non-blocking */
-extern void sys_ctrl_shell_sw_to_nonblock();
-
 /* get firmware info */
 extern void sys_ctrl_get_firmware_info(firmware_header_t*);
 

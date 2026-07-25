@@ -36,7 +36,6 @@
 #include "app_non_clear_ram.h"
 
 #include "task_list.h"
-#include "task_shell.h"
 #include "task_life.h"
 #include "task_if.h"
 #include "task_rf24_if.h"
@@ -153,7 +152,7 @@ int main_app() {
 	/* life led init */
 	led_init(&led_life, led_life_init, led_life_on, led_life_off);
 
-	ring_buffer_char_init(&ring_buffer_console_rev, buffer_console_rev, BUFFER_CONSOLE_REV_SIZE);
+	// ring_buffer_char_init(&ring_buffer_console_rev, buffer_console_rev, BUFFER_CONSOLE_REV_SIZE);
 
 	/* button init */
 	button_init(&btn_mode,	10,	BUTTON_MODE_ID,	io_button_mode_init,	io_button_mode_read,	btn_mode_callback);
@@ -276,9 +275,6 @@ int main_app() {
 	/******************************************************************************
 	* run applications
 	*******************************************************************************/
-#if !defined(IF_LINK_UART_EN)
-	sys_ctrl_shell_sw_to_nonblock();
-#endif
 
 	return task_run();
 }
@@ -292,53 +288,6 @@ void task_polling_zigbee() {
 #if defined(TASK_ZIGBEE_EN)
 	zigbee_network.update();
 #endif
-}
-
-void task_polling_console() {
-	volatile uint8_t c = 0;
-
-	while (ring_buffer_char_is_empty(&ring_buffer_console_rev) == false) {
-
-		ENTRY_CRITICAL();
-		c = ring_buffer_char_get(&ring_buffer_console_rev);
-		EXIT_CRITICAL();
-
-#if defined (IF_LINK_UART_EN)
-		if (plink_hal_rev_byte(c) == LINK_HAL_IGNORED) {
-#endif
-			if (shell.index < SHELL_BUFFER_LENGHT - 1) {
-
-				if (c == '\r' || c == '\n') { /* linefeed */
-
-					xputc('\r');
-					xputc('\n');
-
-					shell.data[shell.index] = c;
-					shell.data[shell.index + 1] = 0;
-					task_post_common_msg(AC_TASK_SHELL_ID, AC_SHELL_LOGIN_CMD, (uint8_t*)&shell.data[0], shell.index + 2);
-
-					shell.index = 0;
-				}
-				else {
-
-					xputc(c);
-
-					if (c == 8 && shell.index) { /* backspace */
-						shell.index--;
-					}
-					else {
-						shell.data[shell.index++] = c;
-					}
-				}
-			}
-			else {
-				LOGIN_PRINT("\nerror: cmd too long, cmd size: %d, try again !\n", SHELL_BUFFER_LENGHT);
-				shell.index = 0;
-			}
-#if defined (IF_LINK_UART_EN)
-		}
-#endif
-	}
 }
 
 /*****************************************************************************/

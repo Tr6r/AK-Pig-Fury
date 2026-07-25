@@ -325,7 +325,6 @@ uint8_t link_phy_max_retry_get() {
 }
 
 uint8_t link_phy_frame_write_byte(uint8_t byte) {
-	sys_ctrl_shell_put_char_block(byte);
 	return byte;
 }
 

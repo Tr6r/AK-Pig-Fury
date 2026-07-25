@@ -264,7 +264,6 @@ void reset_handler() {
 	sys_cfg_svc(); /* setting svc exception priority */
 	sys_cfg_pendsv(); /* setting psv exception priority */
 	sys_cfg_tick(); /* system tick 1ms */
-	sys_cfg_console(); /* system console */
 
 	/* invoke all static constructors */
 	cnt = __preinit_array_end - __preinit_array_start;
@@ -401,21 +400,6 @@ void svc_exe(uint32_t* svc_args) {
 /************************/
 void uart1_irq() {
 	task_entry_interrupt();
-
-	if (USART_GetITStatus(USARTx, USART_IT_RXNE) == SET) {
-		/* DO NOT clear pending interrupt right here ! */
-		sys_irq_shell();
-	}
-
-	if (USART_GetITStatus(USARTx, USART_IT_TXE) == SET) {
-		USART_ClearITPendingBit(USARTx, USART_IT_TXE);
-		if (ring_buffer_char_is_empty(&ring_buffer_char_shell_send)) {
-			USART_ITConfig(USARTx, USART_IT_TXE, DISABLE);
-		}
-		else {
-			USART_SendData(USARTx, ring_buffer_char_get(&ring_buffer_char_shell_send));
-		}
-	}
 
 	task_exit_interrupt();
 }
