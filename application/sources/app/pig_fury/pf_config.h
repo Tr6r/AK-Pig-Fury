@@ -192,7 +192,7 @@ public:
 	// getter
 	pf_config_item get_cur_item() { return cur_item_; }
 	pf_config_data get_config_data() { return data_; }
-
+    bool is_sound_enable() { return data_.sound; }
 
 private:
  	pf_config_item cur_item_;

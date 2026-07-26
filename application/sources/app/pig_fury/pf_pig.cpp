@@ -4,6 +4,7 @@
 #include "pf_weapon.h"
 #include "pf_config.h"
 #include "pf_menu.h"
+#include "pf_sound.h"
 
 static const uint8_t pig_idle_right_bitmap[] = {
 	0xF7, 0xF9, 0xC0, 0x88, 0x06, 0x40, 0x90, 0x02, 0x40, 0x60, 0x49, 0x80,
@@ -230,7 +231,7 @@ void pf_pig::attack(pf_char_dir dir) {
 	dir_ = dir;
 	if (weapon_) attack_with_weapon(dir);
 	else attack_no_weapon(dir);
-
+	game_sound.play(PF_SOUND_PIG_PUNCH);
 }
 
 void pf_pig::attack_with_weapon(pf_char_dir dir) {

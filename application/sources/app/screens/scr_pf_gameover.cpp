@@ -2,6 +2,7 @@
 
 #include "scr_pf_gameover.h"
 #include "pf_game.h"
+#include "pf_sound.h"
 
 #define PF_HEAD_WOLF_ICON_WIDTH 27
 #define PF_HEAD_WOLF_ICON_HEIGHT 18
@@ -72,6 +73,7 @@ void view_scr_pf_gameover() {
 void scr_pf_gameover_handle(ak_msg_t *msg) {
 	switch (msg->sig) {
 		case SCREEN_ENTRY: {
+			game_sound.play(PF_SOUND_GAME_OVER);
 			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEOVER_UPDATE,AC_DISPLAY_GAMEOVER_UPDATE_INTERVAL_MS,TIMER_PERIODIC);
 			timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_GAMEOVER_ALLOW_CHANGE_SCR,AC_DISPLAY_GAMEOVER_CHANGE_SCR_INTERVAL_MS,TIMER_ONE_SHOT);
 			break;

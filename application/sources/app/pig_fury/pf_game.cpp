@@ -2,6 +2,7 @@
 
 #include "pf_game.h"
 #include "pf_wolf_basic.h"
+#include "pf_sound.h"
 
 pig_fury_game game;
 void pf_game_init() {
@@ -94,6 +95,8 @@ void pig_fury_game::init() {
 	is_initialized_ = true;
 	menu_.init();
 	conf_.init();
+	game_sound.init(conf_.is_sound_enable());
+
 }
 
 void pig_fury_game::gameplay_init() {
@@ -163,6 +166,7 @@ void pig_fury_game::check_enemy_attack_hit() {
 		pf_enemy *enemy = enemy_mng_.get_enemy(i);
 		if (!enemy->is_attack_hit_frame())
 			continue;
+		game_sound.play(PF_SOUND_ENEMY_ATTACK);
 		pig_.take_damage(enemy->get_damage());
 		break;
 	}
@@ -272,6 +276,7 @@ void pig_fury_game::check_throw_weapon_attack_hit() {
 			pf_enemy *enemy = enemy_mng_.get_enemy(j);
 			if (!check_weapon_hit_enemy(weapon, enemy)||enemy->get_st() == PF_ENEMY_ST_DEAD||enemy->get_st() == PF_ENEMY_ST_DELETE||enemy->get_st() == PF_ENEMY_ST_KNOCKBACK)
 				continue;
+			game_sound.play(PF_SOUND_WEAPON_HIT_ENEMY);
 			enemy->take_damage(weapon->get_damage());
 			weapon->set_st(PF_WEAPON_ST_FALL);
 			return;

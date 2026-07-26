@@ -1,5 +1,6 @@
 #include "pf_game.h"
 #include "scr_pf_menu.h"
+#include "pf_sound.h"
 
 static void view_scr_pf_menu();
 
@@ -33,17 +34,20 @@ void scr_pf_menu_handle(ak_msg_t *msg) {
 			break;
 		}
 		case AC_DISPLAY_BUTON_UP_PRESSED: {
+			game_sound.play(PF_SOUND_MENU_SCROLL);
 			pf_menu_anim_dir dir = PF_MENU_ANIM_RIGHT;
 			task_post_common_msg(AC_TASK_PF_GAME_ID, AC_PF_MENU_NEXT_ITEM, (uint8_t*)&dir, sizeof(dir));
 			break;
 		}
 		case AC_DISPLAY_BUTON_DOWN_PRESSED: {
+			game_sound.play(PF_SOUND_MENU_SCROLL);
 			pf_menu_anim_dir dir = PF_MENU_ANIM_LEFT;
 			task_post_common_msg(AC_TASK_PF_GAME_ID, AC_PF_MENU_NEXT_ITEM, (uint8_t*)&dir, sizeof(dir));
 			break;
 		}
 		case AC_DISPLAY_BUTON_MODE_PRESSED: {
 			timer_remove_attr(AC_TASK_DISPLAY_ID,AC_DISPLAY_MENU_UPDATE);
+			game_sound.play(PF_SOUND_MENU_SELECT);
 			pf_menu_item_st st = pf_get_menu_st();
 			switch (st)
 			{

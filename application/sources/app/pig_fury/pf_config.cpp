@@ -4,6 +4,7 @@
 #include "app_eeprom.h"
 
 #include "pf_config.h"
+#include "pf_sound.h"
 
 void pf_config::init() {
 	load_config();
@@ -32,6 +33,7 @@ void pf_config::change_config()
 		}
 		case PF_CONFIG_GAME_SOUND: {
 			data_.sound = !data_.sound;
+			game_sound.set_enable(data_.sound);
 			anim_duration_ticks = PF_CONFIG_ITEM_FRAME;
 			is_visible_ = true;
 			break;
