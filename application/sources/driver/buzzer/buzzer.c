@@ -16,26 +16,18 @@ typedef struct {
 } buzzer_music_t;
 
 static const buzzer_music_t buzzer_music_table[] = {
-	{BUZZER_SOUND_CLICK,			tones_click},
-	{BUZZER_SOUND_BANG,				tones_bang},
-	{BUZZER_SOUND_USB_CONNECTED,	tones_usb_connected},
-	{BUZZER_SOUND_USB_DISCONNECTED,	tones_usb_disconnected},
-	{BUZZER_SOUND_LETS_GO,			tones_lets_go},
+
 	{BUZZER_SOUND_STARTUP,			tones_startup},
-	{BUZZER_SOUND_3BEEP,			tones_3beep},
-	{BUZZER_SOUND_WELCOME,			tones_welcome},
-	{BUZZER_SOUND_GOODBYE,			tones_goodbye},
-	{BUZZER_SOUND_HIGHSCORE,		tones_highscore},
-	{BUZZER_SOUND_LOWSCORE,			tones_lowscore},
-	{BUZZER_SOUND_SUPER_MARIO,		tones_supper_mario_bros},
-	{BUZZER_SOUND_MERRY_CHRISTMAS,	tones_merry_christmas},
-	{BUZZER_SOUND_TONE_1,           sTone1},
-	{BUZZER_SOUND_TONE_2,           sTone2},
-	{BUZZER_SOUND_TONE_3,           sTone3},
-	{BUZZER_SOUND_TONE_4,           sTone4},
-	{BUZZER_SOUND_TONE_5,           sTone5},
-	{BUZZER_SOUND_TONE_6,           sTone6},
-	{BUZZER_SOUND_TONE_7,           sTone7},
+	{BUZZER_SOUND_GAME_INTRO,			tones_pf_intro},
+	{BUZZER_SOUND_MENU_SCROLL,			tones_pf_menu_scroll},
+	{BUZZER_SOUND_MENU_SELECT,			tones_pf_choose_item},
+	{BUZZER_SOUND_CONFIG_SCROLL,			tones_pf_change_item},
+	{BUZZER_SOUND_CONFIG_SELECT,			tones_pf_change_config},
+	{BUZZER_SOUND_PIG_PUNCH,			tones_pf_pig_punch},
+	{BUZZER_SOUND_ENEMY_ATTACK,			tones_pf_enemy_atk},
+	{BUZZER_SOUND_GAME_OVER,			tones_pf_game_over},
+	{BUZZER_SOUND_WEAPON_HIT_ENEMY,			tones_pf_weapon_hit_enemy},
+
 	{BUZZER_SOUND_MAX,				(const Tone_TypeDef*)0}
 };
 
