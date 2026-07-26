@@ -16,3 +16,4 @@ SOURCES_CPP +=	$(DIR)/pf_game.cpp	\
 				$(DIR)/pf_pig.cpp	\
 				$(DIR)/pf_enemy_manager.cpp	\
 				$(DIR)/pf_weapon_manager.cpp	\
+				$(DIR)/pf_sound.cpp	\
