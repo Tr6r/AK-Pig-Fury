@@ -15,7 +15,11 @@
 
 <a id="software-architecture"></a>
 ## Software Architecture
+The firmware is divided into three partitions:
 
+- **Bootloader** [`0x08000000`]: System startup and firmware update
+- **Shared Data** [`0x08002000`]: Data shared between the boot and app
+- **Application** [`0x08003000`]: Main application
 
 <a id="event-driven-architecture"></a>
 ## Event-Driven Architecture
