@@ -21,6 +21,9 @@ The firmware is divided into three partitions:
 - **Shared Data** [`0x08002000`]: Data shared between the boot and app
 - **Application** [`0x08003000`]: Main application
 
+<img width="50%" alt="SW_Arch6" src="https://github.com/user-attachments/assets/68f97193-24ef-442e-a5a1-3fa1633e3013" />
+
+
 <a id="event-driven-architecture"></a>
 ## Event-Driven Architecture
 
