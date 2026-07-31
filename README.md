@@ -10,7 +10,7 @@
 |---------|:--:|
 | Quick Start | <a href="#quick-start">Jump to section</a> |
 | Software Architecture | <a href="#software-architecture">Jump to section</a> |
-| Event-Driven Architecture | <a href="#event-driven-architecture">Jump to section</a> |
+| Task Processing Flow | <a href="#task-process-flow">Jump to section</a> |
 | AK Pig Fury Game | <a href="#gameplay">Jump to section</a> |
 
 <a id="software-architecture"></a>
@@ -24,9 +24,12 @@ The firmware is divided into three partitions:
 <img width="50%" alt="SW_Arch6" src="https://github.com/user-attachments/assets/68f97193-24ef-442e-a5a1-3fa1633e3013" />
 
 
-<a id="event-driven-architecture"></a>
-## Event-Driven Architecture
+<a id="task-process-flow"></a>
+## Task Processing Flow
+Application tasks are processed using two mechanisms: one handles incoming events (Event-Driven), while the other executes continuously in every main loop iteration (Polling)
+### Event-Driven Task
 
+### Polling Task
 
 <a id="gameplay"></a>
 ## AK Pig Fury Game
