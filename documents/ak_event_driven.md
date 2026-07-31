@@ -11,3 +11,7 @@ The pattern is composed of several components that work together to provide an e
 | **Priority Queue** | Stores messages grouped by priority |
 | **Scheduler** | Gets and dispatches messages to task handlers |
 ## Event Execution Flow
+### Event Generation
+### Message Posting
+### Task Scheduling
+### Task Execution
