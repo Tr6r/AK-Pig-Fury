@@ -28,7 +28,9 @@ The firmware is divided into three partitions:
 ## Task Processing Flow
 Application tasks are processed using two mechanisms: one handles incoming events (Event-Driven), while the other executes continuously in every main loop iteration (Polling)
 ### Event-Driven Task
-
+<img width="80%" alt="event_driven_lite drawio" src="https://github.com/user-attachments/assets/d8063f1b-68dd-418d-ba20-b221a5f3f0e9" />
+</br>
+For more details, see <a href="">this section</a>.
 ### Polling Task
 
 <a id="gameplay"></a>
