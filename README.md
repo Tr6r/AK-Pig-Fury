@@ -27,11 +27,14 @@ The firmware is divided into three partitions:
 <a id="task-process-flow"></a>
 ## Task Processing Flow
 Application tasks are processed using two mechanisms: one handles incoming events (Event-Driven), while the other executes continuously in every main loop iteration (Polling)
+<img width="80%" alt="task_process_flow" src="https://github.com/user-attachments/assets/43e48daf-1882-4c20-9c15-cfb8a0cb9cef" />
+
 ### Event-Driven Task
-<img width="80%" alt="event_driven_lite drawio" src="https://github.com/user-attachments/assets/d8063f1b-68dd-418d-ba20-b221a5f3f0e9" />
+<img width="80%" alt="event_driven_dia" src="https://github.com/user-attachments/assets/80ca9e95-6621-45aa-86fa-2c9ee24ad486" />
+
 </br>
 For more details, see <a href="">this section</a>.
-### Polling Task
+</br>
 
 <a id="gameplay"></a>
 ## AK Pig Fury Game
