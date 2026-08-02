@@ -9,10 +9,17 @@
 | Content | Go |
 |---------|:--:|
 | Quick Start | <a href="#quick-start">Jump to section</a> |
+| Introduction | <a href="#introduction">Jump to section</a> |
 | Software Architecture | <a href="#software-architecture">Jump to section</a> |
 | Task Processing Flow | <a href="#task-process-flow">Jump to section</a> |
 | AK Pig Fury Game | <a href="#gameplay">Jump to section</a> |
 
+<a id="introduction"></a>
+## Introduction
+Hi guys, welcome to my project. This is a game built on the STM32 platform, following an event-driven pattern. As the main goal of this course is to develop a product engineering mindset, the project focuses on building a product with:
+ - Modular architecture
+ - Clear object relationships
+ - An extensible design that allows new features to be added without complexity
 <a id="software-architecture"></a>
 ## Software Architecture
 The firmware is divided into three partitions:
@@ -29,7 +36,7 @@ The firmware is divided into three partitions:
 Application tasks are processed using two mechanisms: one handles incoming events (Event-Driven), while the other executes continuously in every main loop iteration (Polling)
 <img width="80%" alt="task_process_flow" src="https://github.com/user-attachments/assets/43e48daf-1882-4c20-9c15-cfb8a0cb9cef" />
 
-### Event-Driven Task
+#### Event-Driven Task
 <img width="80%" alt="event_driven_dia" src="https://github.com/user-attachments/assets/80ca9e95-6621-45aa-86fa-2c9ee24ad486" />
 
 </br>
