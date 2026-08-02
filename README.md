@@ -33,7 +33,7 @@ Application tasks are processed using two mechanisms: one handles incoming event
 <img width="80%" alt="event_driven_dia" src="https://github.com/user-attachments/assets/80ca9e95-6621-45aa-86fa-2c9ee24ad486" />
 
 </br>
-For more details, see <a href="">this section</a>.
+For more details, see <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/ak_event_driven.md">this section</a>.
 </br>
 
 <a id="gameplay"></a>
