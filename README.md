@@ -34,10 +34,10 @@ The firmware is divided into three partitions:
 <a id="task-process-flow"></a>
 ## Task Processing Flow
 Application tasks are processed using two mechanisms: one handles incoming events (Event-Driven), while the other executes continuously in every main loop iteration (Polling)
-<img width="80%" alt="task_process_flow" src="https://github.com/user-attachments/assets/43e48daf-1882-4c20-9c15-cfb8a0cb9cef" />
+<img width="80%" alt="task_process_flow" src="https://github.com/user-attachments/assets/cf55e36a-6f5e-4a2c-b306-d48343141c0c" />
 
 #### Event-Driven Task
-<img width="80%" alt="event_driven_dia" src="https://github.com/user-attachments/assets/80ca9e95-6621-45aa-86fa-2c9ee24ad486" />
+<img width="80%" alt="event_driven_dia" src="https://github.com/user-attachments/assets/81862086-8254-45a9-8d1c-e710d9cecf76" />
 
 </br>
 For more details, see <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/ak_event_driven.md">this section</a>.
