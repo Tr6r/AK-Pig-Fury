@@ -16,7 +16,7 @@
 
 <a id="introduction"></a>
 ## Introduction
-Hi guys, welcome to my project. This is a game built on the STM32 platform, following an event-driven pattern. As the main goal of this course is to develop a product engineering mindset, the project focuses on building a product with:
+Hi guys, welcome to my project. This is a game built on the STM32 platform, following an event-driven pattern. The main goal of this course is to develop a product engineering mindset so I focused on building the game with:
  - Modular architecture
  - Clear object relationships
  - An extensible design that allows new features to be added without complexity
@@ -46,7 +46,18 @@ For more details, see <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/bl
 <a id="gameplay"></a>
 ## AK Pig Fury Game
 #### Game Overall
+The game is inspired by Iron Snout, a popular fighting game released many years ago. Players must carefully time their attacks to avoid enemy hits and achieve the highest score possible.
 #### Game Screens
+I divided the game into multiple screens, each designed with a different purpose to provide a more engaging gameplay experience.
+| Screen | Description |
+|--------|-------------|
+| **Start Up** | Displays the signature logo of this course |
+| **Welcome** | Just a screen for introduction|
+| **Menu** | Play the game or configure it |
+| **Gameplay** | The violent activity appears here |
+| **Configuration** | Make some settings here |
+| **Game Over** | Notifies you lost and displays score |
+
 #### Game Modules
 #### Game Flow
 
