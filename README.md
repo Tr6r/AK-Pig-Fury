@@ -58,6 +58,22 @@ I divided the game into multiple screens, each designed with a different purpose
 | **Configuration** | Make some settings here |
 | **Game Over** | Notifies you lost and displays score |
 
-#### Game Modules
+#### Game Objects
+
+
+
+
+
+
+| Game Object | Preview | Description |
+|:-----------:|:-------:|:-----------:|
+| **pf_pig** | <img width="90" height="135" alt="pf_pig" src="https://github.com/user-attachments/assets/ca174021-4606-48d8-86b3-1beeb8568de9" />| The player |
+| **pf_wolf** | <img width="90" height="135" alt="pf_wolf" src="https://github.com/user-attachments/assets/e28866f3-4907-417f-927d-7517a7c590a8" />| The enemy |
+| **pf_axe** | <img width="90" height="60" alt="pf_axe" src="https://github.com/user-attachments/assets/72bd9038-43b2-4a57-a639-0deba697cfda" />| A throwable weapon|
+| **pf_health_bar** | <img width="100" height="24" alt="pf_health" src="https://github.com/user-attachments/assets/6a565600-5138-44fc-8d7a-694673166c16" /> | The player's health |
+| **pf_menu** | <img width="122" height="82" alt="pf_menu" src="https://github.com/user-attachments/assets/38b86283-46bd-487c-a657-11d5eea431e8" /> | The interface for navigating the game |
+| **Config Item** |<img width="90" height="55" alt="pf_config_item" src="https://github.com/user-attachments/assets/e6a796fd-af91-45b1-add9-f037c8a27bd7" />| A configurable options in the settings screen. |
+| **Score** | <img src="..." width="80"> | Displays the player's current score. |
+
 #### Game Flow
 
