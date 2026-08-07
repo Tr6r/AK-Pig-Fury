@@ -40,15 +40,15 @@ Application tasks are processed using two mechanisms: one handles incoming event
 <img width="80%" alt="event_driven_dia" src="https://github.com/user-attachments/assets/81862086-8254-45a9-8d1c-e710d9cecf76" />
 
 </br>
-For more details, see <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/ak_event_driven.md">this section</a>.
+I admit this pattern is really cool. If you want to see how everything works together, <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/ak_event_driven.md">here is the complete execution flow</a>
 </br>
 
 <a id="gameplay"></a>
 ## AK Pig Fury Game
 #### Game Overall
-The game is inspired by Iron Snout, a popular fighting game released many years ago. Players must carefully time their attacks to avoid enemy hits and achieve the highest score possible.
+The game is inspired by Iron Snout, a popular fighting game released many years ago. Players must carefully time their attacks to avoid enemy hits and achieve the highest score possible
 #### Game Screens
-I divided the game into multiple screens, each designed with a different purpose to provide a more engaging gameplay experience.
+I divided the game into multiple screens, each designed with a different purpose to provide a more engaging gameplay experience
 | Screen | Description |
 |--------|-------------|
 | **Start Up** | Displays the signature logo of this course |
@@ -62,7 +62,7 @@ I divided the game into multiple screens, each designed with a different purpose
 
 #### Game Objects
 
-| Game Object | Preview | Description |
+| Game Object | Anim | Description |
 |:-----------:|:-------:|:-----------:|
 | **pf_pig** | <img width="90" height="135" alt="pf_pig" src="https://github.com/user-attachments/assets/ca174021-4606-48d8-86b3-1beeb8568de9" />| The player |
 | **pf_wolf** | <img width="90" height="135" alt="pf_wolf" src="https://github.com/user-attachments/assets/e28866f3-4907-417f-927d-7517a7c590a8" />| The enemy |
@@ -73,5 +73,10 @@ I divided the game into multiple screens, each designed with a different purpose
 | **pf_game_score** | <img width="80" height="36" alt="pf_game_score" src="https://github.com/user-attachments/assets/a8fd5842-b25c-46b0-8abe-94fab8726b9e" />| The player's kill score |
 | **pf_tone** | <img width="90" height="55" alt="pf_tone" src="https://github.com/user-attachments/assets/dfdf8e01-20a7-4ef2-8b59-9f29441c71e3" />| The game soun |
 
-#### Game Flow
-
+ #### Gameplay Flow
+ 
+ I wanna keep it really simple when someone first figures out how my game works. That's why the image below just shows the overall gameplay flow for all classes working together
+ 
+ <img width="50%" alt="overall_flow" src="https://github.com/user-attachments/assets/9d1a8371-0586-40d4-a2de-0eb7c4721788" />
+ 
+Otherwise, if you want to dive deeper, <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/ak_event_driven.md">here is my detailed game documentation</a>
