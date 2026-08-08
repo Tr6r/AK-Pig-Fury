@@ -42,9 +42,12 @@ When the gameplay starts, the Pig is created with many attributes. Some attribut
 
 ### Input Flow Chart
 When the player presses a button, all the things the game does are just changing the state. This flow below will describe how it works
-<img width="80%" alt="input_pf_pug" src="https://github.com/user-attachments/assets/266f6d48-d045-473a-8eff-cc881fdb0cbd" />
+<img width="80%" alt="pig_input_flow" src="https://github.com/user-attachments/assets/f2aa6aa1-3a46-4ed5-9718-0556bff84364" />
 
 ### Update Flow Chart
+The game updates the Pig at 60 ms intervals. The main activity during the update is to count down the tick and change the state to NONE when the tick reaches limit
+
+<img width="80%" alt="pig_update_flow" src="https://github.com/user-attachments/assets/bb42fda5-08de-4dde-b0f8-0e66c367a37b" />
 
 ### Render Flow Chart
 
