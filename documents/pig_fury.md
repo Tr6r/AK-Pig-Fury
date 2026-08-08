@@ -58,7 +58,7 @@ When I create the enemy for this game, I want to make a structure that can add m
 </br>
 Note: At this moment, I have only made one enemy type. I will update it more if I have more time
 
-### Enemy Class diagram
+### Enemy Manager Class diagram
 <img width="60%" alt="ene_mng_class" src="https://github.com/user-attachments/assets/91d6972b-f0df-480f-9a4f-5c5bebaba27a" />
 
 ### Spawm Enemy Flow
@@ -73,7 +73,7 @@ Wolf Basic is the first enemy type implemented in the game. It extends the pf_ch
 <img width="60%" alt="wolf_fsm" src="https://github.com/user-attachments/assets/1d4ec325-4fd1-4fe6-819a-3ff422a34e35" />
 
 ### Wolf Update Flow Chart
-The wolf will change state after the conditions are reached. This flow shows how the wolf state changes.
+The wolf will change state after the conditions are reached. This flow shows how the wolf state changes
 <img width="80%" alt="wolf_update_flow" src="https://github.com/user-attachments/assets/65aea94f-8ec5-492f-b326-267739ba5c6e" />
 
 ### Wolf Render Flow Chart
@@ -82,6 +82,16 @@ The wolf will change state after the conditions are reached. This flow shows how
 
 <a id="Weapon"></a>
 ## 2. Weapon
+As the enemy, the weapon also has a similar structure. The main difference is that the weapon always spawns with the enemy
+### Weapon Manager Class diagram  
+<img width="60%" alt="weapon_class_dia" src="https://github.com/user-attachments/assets/1eaaa250-9aff-49ae-b1a0-b6046ce65b78" />
+
+### Axe Class diagram
+<img width="40%" alt="axe_class" src="https://github.com/user-attachments/assets/d75ad0ff-fc4a-45db-9440-35736b7925d9" />
+
+### Axe State Machine
+### Axe Update FLow Chart
+### Axe Render FLow Chart
 
 <a id="Gameplay"></a>
 ## 3. Gameplay
