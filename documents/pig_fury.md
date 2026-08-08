@@ -14,18 +14,25 @@
 
 <a id="Character"></a>
 ## Character
+## 1. Class Hierarchy
+<img width="50%" alt="Class_Hierarchy" src="https://github.com/user-attachments/assets/0e9a3e58-c0f5-4ac6-8418-4e45270a11b2" />
+
+## 2. Character Base Class
+### 2.1 class diagram
+</a><img width="80%"  alt="char_class_dia" src="https://github.com/user-attachments/assets/b233d042-cdd0-4cf4-939f-b47b4e5a5ae7" />
 
 <a id="Weapon"></a>
-## Weapon
+## 3. Weapon
 
 <a id="Gameplay"></a>
-## Gameplay
+## 4. Gameplay
 
-<a id="Menu"></a>
-## Menu
+<a id="Menu">
+
+## 5. Menu
 
 <a id="Configuration"></a>
-## Configuration
+## 6. Configuration
 
 <a id="Sound"></a>
-## Sound
+## 7. Sound
