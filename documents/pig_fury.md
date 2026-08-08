@@ -53,6 +53,21 @@ The game updates the Pig at 60 ms intervals. The main activity during the update
 
 <img width="80%" alt="pig_flow_render" src="https://github.com/user-attachments/assets/0d4f287f-797e-4198-8036-92f6b83428b3" />
 
+## 1.4 Enemy Character
+When I create the enemy for this game, I want to make a structure that can add more enemies but without changing any existing code. Therefore I create an enemy manager and several pools for different enemy types. The game randomly selects enemies and puts them into a common pool for spawning during gameplay
+</br>
+Note: At this moment, I have only made one enemy type. I will update it more if I have more time
+
+### Class diagram
+<img width="60%" alt="ene_mng_class" src="https://github.com/user-attachments/assets/91d6972b-f0df-480f-9a4f-5c5bebaba27a" />
+
+### Spawm Enemy Flow
+<img width="20%" alt="spawm_enemy_flow" src="https://github.com/user-attachments/assets/b21ec4c9-902a-4890-b2d4-026987f636e6" />
+
+### Wolf Basic Character
+Wolf Basic is the first enemy type implemented in the game. It extends the pf_char base class and implements its own behavior and state
+### Class diagram
+<img width="60%"  alt="wolf_basic_class" src="https://github.com/user-attachments/assets/24e382ab-ad82-4d58-8bd9-486fc8601b72" />
 
 <a id="Weapon"></a>
 ## 2. Weapon
