@@ -2,11 +2,30 @@
 ## Introduction
 
 ## Table of Objects
-| Object | Description |
-|:-------|:------------|
-| **Gameplay** | Controls the gameplay lifecycle and coordinates all game systems. |
-| **Character** | Defines all playable characters and enemies. |
-| **Weapon** | Handles weapon behavior and weapon management. |
-| **Menu** | Provides the user interface for navigating the game. |
-| **Configuration** | Manages game settings and configuration options. |
-| **Sound** | Controls sound effects and audio playback. |
+
+| Object | Go |
+|:-------|:--:|
+| **Character** | <a href="#Character">Jump to section</a> |
+| **Weapon** | <a href="#Weapon">Jump to section</a> |
+| **Gameplay** | <a href="#Gameplay">Jump to section</a> |
+| **Menu** | <a href="#Menu">Jump to section</a> |
+| **Configuration** | <a href="#Configuration">Jump to section</a> |
+| **Sound** | <a href="#Sound">Jump to section</a> |
+
+<a id="Character"></a>
+## Character
+
+<a id="Weapon"></a>
+## Weapon
+
+<a id="Gameplay"></a>
+## Gameplay
+
+<a id="Menu"></a>
+## Menu
+
+<a id="Configuration"></a>
+## Configuration
+
+<a id="Sound"></a>
+## Sound
