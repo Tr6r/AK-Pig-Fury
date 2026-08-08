@@ -51,6 +51,9 @@ The game updates the Pig at 60 ms intervals. The main activity during the update
 
 ### Render Flow Chart
 
+<img width="80%" alt="pig_flow_render" src="https://github.com/user-attachments/assets/0d4f287f-797e-4198-8036-92f6b83428b3" />
+
+
 <a id="Weapon"></a>
 ## 2. Weapon
 
