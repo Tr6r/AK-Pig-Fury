@@ -79,4 +79,4 @@ I divided the game into multiple screens, each designed with a different purpose
  
  <img width="50%" alt="overall_flow" src="https://github.com/user-attachments/assets/9d1a8371-0586-40d4-a2de-0eb7c4721788" />
  
-Otherwise, if you want to dive deeper, <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/ak_event_driven.md">here is my detailed game documentation</a>
+Otherwise, if you want to dive deeper, <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/pig_fury.md">here is my detailed game documentation</a>
