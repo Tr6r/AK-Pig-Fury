@@ -1,6 +1,6 @@
 # Pig Fury Documentation
 ## Introduction
-
+This page describes the main classes, their relationships, state machines, and execution flows based on the current source code
 ## Table of Objects
 
 | Object | Go |
@@ -88,7 +88,7 @@ As the enemy, the weapon also has a similar structure. The main difference is th
 
 ### Axe State Machine
 
-<img width="60%"  alt="axe_fsm" src="https://github.com/user-attachments/assets/5733785b-d20c-4308-890e-316199d7e2d6" />
+<img width="60%" alt="axe_fsm" src="https://github.com/user-attachments/assets/5733785b-d20c-4308-890e-316199d7e2d6" />
 
 
 <a id="Gameplay"></a>
@@ -100,6 +100,6 @@ Anyway, the flow below only shows the gameplay-related class and how they work t
 
 ### Gameplay Update Flow Chart
 
-<img width="60%" alt="gameplay_flow" src="https://github.com/user-attachments/assets/ae47edac-29cc-4d73-a803-b0b8dd3e1c2f" />
+<img width="60%" alt="gameplay_flow_chart" src="https://github.com/user-attachments/assets/ffd767fe-7a80-4d4d-9273-36412eeed35c" />
 
 
