@@ -8,9 +8,6 @@
 | **Character** | <a href="#Character">Jump to section</a> |
 | **Weapon** | <a href="#Weapon">Jump to section</a> |
 | **Gameplay** | <a href="#Gameplay">Jump to section</a> |
-| **Menu** | <a href="#Menu">Jump to section</a> |
-| **Configuration** | <a href="#Configuration">Jump to section</a> |
-| **Sound** | <a href="#Sound">Jump to section</a> |
 
 <a id="Character"></a>
 ## 1. Character
@@ -90,18 +87,10 @@ As the enemy, the weapon also has a similar structure. The main difference is th
 <img width="40%" alt="axe_class" src="https://github.com/user-attachments/assets/d75ad0ff-fc4a-45db-9440-35736b7925d9" />
 
 ### Axe State Machine
-### Axe Update FLow Chart
-### Axe Render FLow Chart
+
+<img width="60%"  alt="axe_fsm" src="https://github.com/user-attachments/assets/5733785b-d20c-4308-890e-316199d7e2d6" />
+
 
 <a id="Gameplay"></a>
 ## 3. Gameplay
 
-<a id="Menu">
-
-## 4. Menu
-
-<a id="Configuration"></a>
-## 5. Configuration
-
-<a id="Sound"></a>
-## 6. Sound
