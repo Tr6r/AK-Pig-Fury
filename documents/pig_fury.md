@@ -93,4 +93,13 @@ As the enemy, the weapon also has a similar structure. The main difference is th
 
 <a id="Gameplay"></a>
 ## 3. Gameplay
+To be honest, early in the project, I made a mistake by not grouping the gameplay classes under the game class. Because of this, classes like enemy and weapon are at the same level as other classes such as menu and sound
+Anyway, the flow below only shows the gameplay-related class and how they work together
+### Game Class diagram
+<img width="40%" alt="game_class" src="https://github.com/user-attachments/assets/e2cfc169-ff1e-40b5-8e42-20581848b208" />
+
+### Gameplay Update Flow Chart
+
+<img width="60%" alt="gameplay_flow" src="https://github.com/user-attachments/assets/ae47edac-29cc-4d73-a803-b0b8dd3e1c2f" />
+
 
