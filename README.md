@@ -5,10 +5,17 @@
 ## Gameplay Demonstration
 
 
+<div align="center">
+
+https://github.com/user-attachments/assets/5e2c4728-e8e2-4118-a4af-ceafa488c9a6
+
+<div/>
+<div align="left">
+<div/>
+
 ## Table of Contents
 | Content | Go |
 |---------|:--:|
-| Quick Start | <a href="#quick-start">Jump to section</a> |
 | Introduction | <a href="#introduction">Jump to section</a> |
 | Software Architecture | <a href="#software-architecture">Jump to section</a> |
 | Task Processing Flow | <a href="#task-process-flow">Jump to section</a> |
