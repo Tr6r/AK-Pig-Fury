@@ -1,9 +1,8 @@
 # AK Pig Fury Game built on AK Embedded Base Kit
-<img width="100%" alt="background" src="https://github.com/user-attachments/assets/84fed18b-2ea0-46c8-976e-b44c34fedd62" />
+
+<img width="100%" alt="game_background" src="https://github.com/user-attachments/assets/c86a923d-c452-4957-94bf-b22dc033963f" />
 
 ## Gameplay Demonstration
-
-
 <div align="center">
 
 https://github.com/user-attachments/assets/5e2c4728-e8e2-4118-a4af-ceafa488c9a6
