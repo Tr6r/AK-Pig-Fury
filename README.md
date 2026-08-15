@@ -114,14 +114,14 @@ The player can set the game mode and game sound:
 
 | Game Object | Anim | Description |
 |:-----------:|:-------:|:-----------:|
-| **pf_pig** | <img width="90" height="135" alt="pf_pig" src="https://github.com/user-attachments/assets/ca174021-4606-48d8-86b3-1beeb8568de9" />| The player |
-| **pf_wolf** | <img width="90" height="135" alt="pf_wolf" src="https://github.com/user-attachments/assets/e28866f3-4907-417f-927d-7517a7c590a8" />| The enemy |
-| **pf_axe** | <img width="90" height="60" alt="pf_axe" src="https://github.com/user-attachments/assets/72bd9038-43b2-4a57-a639-0deba697cfda" />| A throwable weapon|
-| **pf_health_bar** | <img width="100" height="24" alt="pf_health" src="https://github.com/user-attachments/assets/6a565600-5138-44fc-8d7a-694673166c16" /> | The player's health |
-| **pf_menu** | <img width="122" height="82" alt="pf_menu" src="https://github.com/user-attachments/assets/38b86283-46bd-487c-a657-11d5eea431e8" /> | The interface for navigating the game |
+| **pf_pig** | <img width="90" height="135" alt="pf_pig" src="https://github.com/user-attachments/assets/ca174021-4606-48d8-86b3-1beeb8568de9" />| The character controlled by the player. It can attack enemies, jump and use enemy weapons |
+| **pf_wolf** | <img width="90" height="135" alt="pf_wolf" src="https://github.com/user-attachments/assets/e28866f3-4907-417f-927d-7517a7c590a8" />|The Wolves are continuously spawned during gameplay and attack pig|
+| **pf_axe** | <img width="90" height="60" alt="pf_axe" src="https://github.com/user-attachments/assets/72bd9038-43b2-4a57-a639-0deba697cfda" />| A throwable weapon that can be picked up and attack enemies |
+| **pf_health_bar** | <img width="100" height="24" alt="pf_health" src="https://github.com/user-attachments/assets/6a565600-5138-44fc-8d7a-694673166c16" /> | Displays the player's current HP during gameplay |
+| **pf_menu** | <img width="122" height="82" alt="pf_menu" src="https://github.com/user-attachments/assets/38b86283-46bd-487c-a657-11d5eea431e8" /> | Provides interface and handles navigation between menu options |
 | **pf_config_item** |<img width="90" height="55" alt="pf_config_item" src="https://github.com/user-attachments/assets/e6a796fd-af91-45b1-add9-f037c8a27bd7" />| A configurable options in the settings screen |
-| **pf_game_score** | <img width="80" height="36" alt="pf_game_score" src="https://github.com/user-attachments/assets/a8fd5842-b25c-46b0-8abe-94fab8726b9e" />| The player's kill score |
-| **pf_tone** | <img width="90" height="55" alt="pf_tone" src="https://github.com/user-attachments/assets/dfdf8e01-20a7-4ef2-8b59-9f29441c71e3" />| The game sound |
+| **pf_game_score** | <img width="80" height="36" alt="pf_game_score" src="https://github.com/user-attachments/assets/a8fd5842-b25c-46b0-8abe-94fab8726b9e" />| Displays the number of enemies killed by the player during gameplay |
+| **pf_tone** | <img width="90" height="55" alt="pf_tone" src="https://github.com/user-attachments/assets/dfdf8e01-20a7-4ef2-8b59-9f29441c71e3" />| Controls the game sound setting |
 
 <a id="game_flow"></a>
 ## Gameplay Flow
