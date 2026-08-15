@@ -131,19 +131,19 @@ I wanna keep it really simple when someone first figures out how my game works. 
  
 Otherwise, if you want to dive deeper, <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/pig_fury.md">here is my detailed game documentation</a>
 
-<a id="getting_Started"></a>
+<a id="getting_started"></a>
 ## Getting Started
 
 I prepared a game binary file for a quick start. Download it and flash it to the AK Base Kit V3
 
-### Step 1 — Clone the Repository
+### Step 1: Clone the Repository
 Clone the this repository to your local machine
 
-### Step 2 — Install the Toolchain and STM32Cube
+### Step 2: Install the Toolchain and STM32Cube
 
 Follow the [Getting Started Guide](https://epcb.vn/blogs/ak-embedded-software/ak-embedded-base-kit-stm32l151-getting-started) to install and configure the required tools
 
-### Step 3 — Build and Flash the Project
+### Step 3: Build and Flash the Project
 
 Navigate to the application directory and build and flash the project:
 
