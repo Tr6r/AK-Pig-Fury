@@ -134,8 +134,7 @@ Otherwise, if you want to dive deeper, <a href="https://github.com/Tr6r/AK-Pig-F
 <a id="getting_started"></a>
 ## Getting Started
 
-I prepared a game binary file for a quick start. [Download Game Binary](https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/hardware/bin/ak-base-kit-stm32l151-pig-fury-game.bin)
- and flash it to the **AK Base Kit V3** to run the game directly on the hardware.
+I prepared a game binary file for a quick start. [Download Game Binary](https://github.com/Tr6r/AK-Pig-Fury-Standalone/raw/refs/heads/main/hardware/bin/ak-base-kit-stm32l151-pig-fury-game.bin) and flash it to the **AK Base Kit V3** to run the game directly on the hardware.
 
 ### Step 1: Clone the Repository
 Clone the this repository to your local machine
