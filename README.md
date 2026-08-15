@@ -19,6 +19,7 @@ https://github.com/user-attachments/assets/e14b3253-f0c7-4ac7-9933-ed420052c427
 | Game Screens | <a href="#game_scr">Jump to section</a> |
 | Game Objects| <a href="#game_ob">Jump to section</a> |
 | Game Flow | <a href="#game_flow">Jump to section</a> |
+| Getting Started | <a href="#getting_started">Jump to section</a> |
 
 <a id="game_overall"></a>
 ## Introduction
@@ -129,3 +130,23 @@ I wanna keep it really simple when someone first figures out how my game works. 
 <img width="80%" alt="overall_flow" src="https://github.com/user-attachments/assets/9d1a8371-0586-40d4-a2de-0eb7c4721788" />
  
 Otherwise, if you want to dive deeper, <a href="https://github.com/Tr6r/AK-Pig-Fury-Standalone/blob/main/documents/pig_fury.md">here is my detailed game documentation</a>
+
+<a id="getting_Started"></a>
+## Getting Started
+
+I prepared a game binary file for a quick start. Download it and flash it to the AK Base Kit V3
+
+### Step 1 — Clone the Repository
+Clone the this repository to your local machine
+
+### Step 2 — Install the Toolchain and STM32Cube
+
+Follow the [Getting Started Guide](https://epcb.vn/blogs/ak-embedded-software/ak-embedded-base-kit-stm32l151-getting-started) to install and configure the required tools
+
+### Step 3 — Build and Flash the Project
+
+Navigate to the application directory and build and flash the project:
+
+```bash
+cd application/
+make clean && make flash
