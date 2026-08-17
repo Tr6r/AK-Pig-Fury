@@ -55,7 +55,7 @@ Each menu option has a dynamic icon to make the menu more lively
 
 <img width="60%"  alt="gameplay-option" src="https://github.com/user-attachments/assets/3e60b9a3-1d2f-4d99-8b14-2fb2afc73fe0" />
  
-<div><b>Figure 2: Gameplay option</b>b</div>
+<div><b>Figure 2: Gameplay Option</b></div>
 
 </br>
 <img width="60%"  alt="configurate-option"src="https://github.com/user-attachments/assets/92d329e1-1470-4376-a187-7646ee79c6eb" />
