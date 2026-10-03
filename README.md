@@ -5,9 +5,10 @@
 ## Gameplay Demonstration
 <div align="center">
 
-https://github.com/user-attachments/assets/e14b3253-f0c7-4ac7-9933-ed420052c427
+https://github.com/user-attachments/assets/c9c1d066-1b4e-484e-b68c-175beb6c0383
 
 <div/>
+
 <div align="left">
 <div/>
 
