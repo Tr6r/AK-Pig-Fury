@@ -142,7 +142,7 @@ void pig_fury_game::game_play_render() {
 void pig_fury_game::score_render() {
 	view_render.setCursor(60,-1);
 	view_render.setTextSize(1);
-	view_render.print("scrore: ");
+	view_render.print("score: ");
 	view_render.setCursor(102,0);
 	view_render.setTextSize(1);
 	view_render.print(score_);
